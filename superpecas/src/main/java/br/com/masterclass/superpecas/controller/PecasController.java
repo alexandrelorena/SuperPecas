@@ -1,45 +1,34 @@
 package br.com.masterclass.superpecas.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import br.com.masterclass.superpecas.Peca;
+import br.com.masterclass.superpecas.PecaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-
 @RequestMapping("/peca")
-
 public class PecasController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
 
-    public String buscaPeca() {
+    private PecaService pecaService;
 
-        return "teste";
-
+    @PostMapping("/")
+    public Peca cadastraPeca(@RequestBody Peca peca) {
+        return pecaService.cadastrarPeca(peca);
     }
 
-
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-
-    public String cadastraPeca() {
-
-        return "teste";
-
+    @GetMapping("/")
+    public Peca buscaPecaPorId(@PathVariable Long id) {
+        return pecaService.buscarPeca(id);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.PUT)
-
-    public String atualizaPeca() {
-
-        return "teste";
-
+    @PutMapping("/")
+    public Peca atualizaPeca(@RequestBody Peca peca) {
+        return pecaService.atualizarPeca(peca);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.DELETE)
-
-    public String deletaPeca() {
-
-        return "teste";
-
+    @DeleteMapping("/")
+    public void deletaPeca(@RequestBody Peca peca) {
+        pecaService.deletarPeca(peca);
     }
 }
