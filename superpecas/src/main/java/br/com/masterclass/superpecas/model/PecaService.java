@@ -5,15 +5,11 @@ import br.com.masterclass.superpecas.Peca;
 import br.com.masterclass.superpecas.PecaJaExistenteException;
 import br.com.masterclass.superpecas.PecaNaoEncontradaException;
 import br.com.masterclass.superpecas.repository.PecaRepository;
-//import org.hibernate.query.Page;
-
 import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,13 +52,13 @@ public class PecaService {
     }
 
     public List<Carro> listarTop10CarrosComMaisPecas() {
-        Pageable pageable = PageRequest.of(0, 10); // Obtém os top 10 registros
+        Pageable pageable = PageRequest.of(0, 10);
         Page<Object[]> carrosPage = pecaRepository.findTop10ModelosCarroComMaisPecas(pageable);
 
         List<Carro> carros = carrosPage.getContent().stream()
                 .map(objArray -> {
                     Carro carro = new Carro();
-                    carro.setNomeModelo((String) objArray[0]); // Supondo que o modelo do carro está no primeiro elemento
+                    carro.setNomeModelo((String) objArray[0]);
                     return carro;
                 })
                 .collect(Collectors.toList());

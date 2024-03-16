@@ -2,12 +2,11 @@ package br.com.masterclass.superpecas;
 
 import jakarta.persistence.*;
 
-@Entity // Anotação para marcar a classe como uma entidade JPA
-@Table(name = "Pecas") // Defina o novo nome da tabela aqui
+@Entity
+@Table(name = "Pecas")
 public class Peca {
 
-    @Id // Anotação para marcar o atributo como identificador primário
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Gerado automaticamente
+    @Id
     private Long pecaId;
     private String nome;
     private String descricao;
@@ -17,7 +16,7 @@ public class Peca {
     private String modeloCarro;
 
     @ManyToOne
-    @JoinColumn(name = "PecaID") // Mapeia a coluna da chave estrangeira
+    @JoinColumn(name = "PecaID")
     private Carro peca;
 
 

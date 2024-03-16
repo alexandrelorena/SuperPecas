@@ -3,7 +3,6 @@ package br.com.masterclass.superpecas.controller;
 import br.com.masterclass.superpecas.Carro;
 import br.com.masterclass.superpecas.Peca;
 import br.com.masterclass.superpecas.model.PecaService;
-//import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

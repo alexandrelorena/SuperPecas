@@ -1,14 +1,13 @@
 package br.com.masterclass.superpecas;
 
 import jakarta.persistence.*;
-import org.springframework.stereotype.Service;
 
-@Entity // Anotação para marcar a classe como uma entidade JPA
-@Table(name = "Carros") // Defina o novo nome da tabela aqui
+@Entity
+@Table(name = "Carros")
 public class Carro {
 
-    @Id // Anotação para marcar o atributo como identificador primário
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Gerado automaticamente
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CarroID")
     private Long carroID;
     private String nomeModelo;

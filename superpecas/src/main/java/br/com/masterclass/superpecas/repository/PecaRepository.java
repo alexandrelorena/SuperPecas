@@ -1,15 +1,11 @@
 package br.com.masterclass.superpecas.repository;
 
-import br.com.masterclass.superpecas.Carro;
 import br.com.masterclass.superpecas.Peca;
-//import org.hibernate.query.Page;
-import org.hibernate.mapping.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
