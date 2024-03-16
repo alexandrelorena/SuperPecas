@@ -3,6 +3,7 @@ package br.com.masterclass.superpecas;
 import jakarta.persistence.*;
 
 @Entity // Anotação para marcar a classe como uma entidade JPA
+@Table(name = "Pecas") // Defina o novo nome da tabela aqui
 public class Peca {
 
     @Id // Anotação para marcar o atributo como identificador primário
@@ -16,7 +17,7 @@ public class Peca {
     private String modeloCarro;
 
     @ManyToOne
-    @Column(name = "PecaID") // Mapeia a coluna da chave estrangeira
+    @JoinColumn(name = "PecaID") // Mapeia a coluna da chave estrangeira
     private Carro peca;
 
 
@@ -64,7 +65,7 @@ public class Peca {
         return modeloCarro;
     }
 
-    public void setModelocarro(String modelocarro){
+    public void setModeloCarro(String modelocarro){
         this.modeloCarro = modelocarro;
     }
 }
