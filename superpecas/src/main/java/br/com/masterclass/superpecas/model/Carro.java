@@ -1,6 +1,7 @@
 package br.com.masterclass.superpecas.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Carros")
@@ -15,11 +16,14 @@ public class Carro {
     @Column(name = "CodigoUnico", nullable = false, unique = true)
     private String codigoUnico;
 
-    public Long getCarroId() {
+    @OneToMany(mappedBy = "carro")
+    private List<Peca> pecas;
+
+    public Long getCarroID() {
         return carroID;
     }
 
-    public void setCarroId(Long carroID) {
+    public void setCarroID(Long carroID) {
         this.carroID = carroID;
     }
 

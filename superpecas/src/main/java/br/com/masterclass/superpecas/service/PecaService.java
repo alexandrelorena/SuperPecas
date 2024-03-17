@@ -2,16 +2,17 @@ package br.com.masterclass.superpecas.service;
 
 import br.com.masterclass.superpecas.PecaJaExistenteException;
 import br.com.masterclass.superpecas.PecaNaoEncontradaException;
-import br.com.masterclass.superpecas.model.Carro;
+import br.com.masterclass.superpecas.model.DTO.CarroDTO;
+import br.com.masterclass.superpecas.model.DTO.PecaDTO;
 import br.com.masterclass.superpecas.model.Peca;
 import br.com.masterclass.superpecas.repository.PecaRepository;
 import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,31 +27,40 @@ public class PecaService {
     private ModelMapper modelMapper; // Injeção de dependência do ModelMapper
 
     // Método para cadastrar uma nova peça
-    public Peca cadastrarPeca(@NotNull Peca peca) {
+    public PecaDTO cadastrarPeca(@NotNull PecaDTO pecaDTO) {
         // Valida se a peça já existe no sistema
-        if (pecaRepository.existsByNomeAndNumeroSerie(peca.getNome(), peca.getNumeroSerie())) {
-            throw new PecaJaExistenteException(peca.getNome(), peca.getNumeroSerie());
+        if (pecaRepository.existsByNomeAndNumeroSerie(pecaDTO.getNome(), pecaDTO.getNumeroSerie())) {
+            throw new PecaJaExistenteException(pecaDTO.getNome(), pecaDTO.getNumeroSerie());
         }
+        // Mapeia o PecaDTO para uma instância de Peca
+        Peca peca = modelMapper.map(pecaDTO, Peca.class);
         // Salva a nova peça no repositório
-        return pecaRepository.save(peca);
+        peca = pecaRepository.save(peca);
+        // Mapeia a peça salva de volta para um PecaDTO
+        return modelMapper.map(peca, PecaDTO.class);
     }
 
     // Método para buscar uma peça pelo ID
-    public Peca buscarPeca(Long id) {
-        return pecaRepository.findById(id)
+    public PecaDTO buscarPeca(Long id) {
+        Peca peca = pecaRepository.findById(id)
                 .orElseThrow(() -> new PecaNaoEncontradaException(id));
+        // Mapeia a entidade Peca para um DTO PecaDTO
+        return modelMapper.map(peca, PecaDTO.class);
     }
 
     // Método para atualizar uma peça pelo ID
-    public Peca atualizarPeca(Long id, @NotNull Peca peca) {
+    public PecaDTO atualizarPeca(Long id, @NotNull PecaDTO pecaDTO) {
         // Verifica se a peça existe na base de dados pelo ID
         Peca pecaExistente = pecaRepository.findById(id)
                 .orElseThrow(() -> new PecaNaoEncontradaException(id));
 
         // Verifica se já existe outra peça com o mesmo nome e número de série
-        if (pecaRepository.existsByNomeAndNumeroSerieAndIdNot(peca.getNome(), peca.getNumeroSerie(), id)) {
-            throw new PecaJaExistenteException(peca.getNome(), peca.getNumeroSerie());
+        if (pecaRepository.existsByNomeAndNumeroSerieAndPecaIdNot(pecaDTO.getNome(), pecaDTO.getNumeroSerie(), id)) {
+            throw new PecaJaExistenteException(pecaDTO.getNome(), pecaDTO.getNumeroSerie());
         }
+
+        // Mapeia o DTO para uma instância de Peca
+        Peca peca = modelMapper.map(pecaDTO, Peca.class);
 
         // Atualiza os atributos da peça existente com os novos valores
         pecaExistente.setNome(peca.getNome());
@@ -58,10 +68,12 @@ public class PecaService {
         pecaExistente.setNumeroSerie(peca.getNumeroSerie());
         pecaExistente.setFabricante(peca.getFabricante());
         pecaExistente.setModeloCarro(peca.getModeloCarro());
-        // Continue com os outros atributos, se houver
 
         // Salva a peça atualizada no repositório
-        return pecaRepository.save(pecaExistente);
+        pecaExistente = pecaRepository.save(pecaExistente);
+
+        // Mapeia a peça atualizada de volta para um DTO PecaDTO
+        return modelMapper.map(pecaExistente, PecaDTO.class);
     }
 
     // Método para deletar uma peça pelo ID
@@ -70,30 +82,34 @@ public class PecaService {
     }
 
     // Método para listar todas as peças
-    public List<Peca> listarTodasAsPecas() {
-        return pecaRepository.findAll();
+    public List<PecaDTO> listarTodasAsPecas() {
+        List<Peca> pecas = pecaRepository.findAll();
+        return pecas.stream()
+                .map(peca -> modelMapper.map(peca, PecaDTO.class))
+                .collect(Collectors.toList());
     }
 
     // Método para listar todas as peças paginadas
-    public Page<Peca> listarTodasAsPecasPaginado(Pageable pageable) {
-        return (Page<Peca>) pecaRepository.findAll(pageable);
+    public Page<PecaDTO> listarTodasAsPecasPaginado(Pageable pageable) {
+        Page<Peca> pecasPage = pecaRepository.findAll(pageable);
+        return pecasPage.map(peca -> modelMapper.map(peca, PecaDTO.class));
     }
 
     // Método para listar todas as peças paginadas com um termo de pesquisa
-    public Page<Peca> listarTodasAsPecasPaginadoComTermo(String termo, Pageable pageable) {
-        return (Page<Peca>) pecaRepository.findByNomeContainingIgnoreCase(termo, pageable);
+    public Page<PecaDTO> listarTodasAsPecasPaginadoComTermo(String termo, Pageable pageable) {
+        Page<Peca> pecasPage = pecaRepository.findByNomeContainingIgnoreCase(termo, pageable);
+        return pecasPage.map(peca -> modelMapper.map(peca, PecaDTO.class));
     }
 
     // Método para listar os top 10 carros com mais peças
-    public List<Carro> listarTop10CarrosComMaisPecas() {
-        Pageable pageable = PageRequest.of(0, 10);
-        Page<Object[]> carrosPage = pecaRepository.findTop10ModelosCarroComMaisPecas(pageable);
+    public List<CarroDTO> listarTop10CarrosComMaisPecas() {
+        List<Object[]> carros = pecaRepository.findTop10ModelosCarroComMaisPecas();
 
-        return carrosPage.getContent().stream()
+        return carros.stream()
                 .map(objArray -> {
-                    Carro carro = new Carro();
-                    carro.setNomeModelo((String) objArray[0]);
-                    return carro;
+                    CarroDTO carroDTO = new CarroDTO();
+                    carroDTO.setNomeModelo((String) objArray[0]);
+                    return carroDTO;
                 })
                 .collect(Collectors.toList());
     }

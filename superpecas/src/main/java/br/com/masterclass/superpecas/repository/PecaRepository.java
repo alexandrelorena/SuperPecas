@@ -19,17 +19,17 @@ public interface PecaRepository extends JpaRepository<Peca, Long> {
     @Modifying
     void delete(Peca peca);
 
-    List<Peca> findByCarroId(Long carroId);
+    List<Peca> findByCarro_CarroID(Long carroID);
 
     Page<Peca> findByNomeContainingIgnoreCase(String termo, Pageable pageable);
 
     void deleteById(Long id);
 
-    @Query(value = "SELECT modeloCarro, COUNT(*) AS numPecas FROM Pecas GROUP BY modeloCarro ORDER BY numPecas DESC", nativeQuery = true)
-    Page<Object[]> findTop10ModelosCarroComMaisPecas(Pageable pageable);
+    @Query(value = "SELECT modeloCarro, COUNT(*) AS numPecas FROM Pecas GROUP BY modeloCarro ORDER BY numPecas DESC LIMIT 10", nativeQuery = true)
+    List<Object[]> findTop10ModelosCarroComMaisPecas();
 
     @Query("SELECT p FROM Peca p WHERE p.modeloCarro = :modeloCarro")
     List<Peca> findByModeloCarro(@Param("modeloCarro") String modeloCarro);
 
-    boolean existsByNomeAndNumeroSerieAndIdNot(String nome, String numeroSerie, Long id);
+    boolean existsByNomeAndNumeroSerieAndPecaIdNot(String nome, String numeroSerie, Long id);
 }

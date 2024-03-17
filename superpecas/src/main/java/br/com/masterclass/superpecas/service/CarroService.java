@@ -12,13 +12,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 // Classe de serviço para lidar com operações relacionadas a carros
-@Component
+@Service
 public class CarroService {
 
     // Injeção de dependência do repositório de carros
@@ -27,8 +27,6 @@ public class CarroService {
 
     @Autowired
     private PecaRepository pecaRepository; // Injeção de dependência para o PecaRepository
-
-
 
     // Método para cadastrar um novo carro
     public Carro cadastrarCarro(Carro carro) {
@@ -75,15 +73,15 @@ public class CarroService {
     }
 
     // Método para listar os top 10 fabricantes de carros
-    public List<Carro> listarTop10Fabricantes() {
-        return carroRepository.findTop10ByOrderByFabricanteAsc();
+    public List<String> listarTop10Fabricantes() {
+        return carroRepository.findTop10DistinctFabricanteByOrderByFabricanteAsc();
     }
 
     // Método para atualizar um carro
     public Carro atualizarCarro(@NotNull Carro carro) {
         // Valida se o carro existe antes de atualizá-lo
-        if (!carroRepository.existsById(carro.getCarroId())) {
-            throw new CarroNaoEncontradoException(carro.getCarroId());
+        if (!carroRepository.existsById(carro.getCarroID())) {
+            throw new CarroNaoEncontradoException(carro.getCarroID());
         }
         // Atualiza o carro no repositório
         return carroRepository.save(carro);
@@ -96,7 +94,7 @@ public class CarroService {
                 .orElseThrow(() -> new CarroNaoEncontradoException(id));
 
         // Verifica se existem peças associadas a este carro pelo CarroID
-        List<Peca> pecasAssociadas = pecaRepository.findByCarroId(carro.getCarroId());
+        List<Peca> pecasAssociadas = pecaRepository.findByCarro_CarroID(carro.getCarroID());
         if (!pecasAssociadas.isEmpty()) {
             throw new IllegalStateException("Não é possível excluir o carro pois existem peças associadas a ele.");
         }

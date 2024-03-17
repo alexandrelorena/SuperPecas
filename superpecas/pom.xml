@@ -46,18 +46,36 @@
 			<version>2.3.0</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
 			<version>3.2.0</version>
 		</dependency>
 		<dependency>
+<!--			<groupId>org.jetbrains</groupId>-->
+<!--			<artifactId>annotations</artifactId>-->
+<!--			<version>RELEASE</version>-->
+<!--			<scope>compile</scope>-->
 			<groupId>org.jetbrains</groupId>
 			<artifactId>annotations</artifactId>
-			<version>RELEASE</version>
-			<scope>compile</scope>
+			<version>24.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>br.com.masterclass</groupId>
+			<artifactId>superpecas</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -66,5 +84,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

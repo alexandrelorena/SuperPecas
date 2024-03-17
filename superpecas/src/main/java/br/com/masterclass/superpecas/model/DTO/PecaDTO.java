@@ -1,13 +1,22 @@
 package br.com.masterclass.superpecas.model.DTO;
 
 public class PecaDTO {
-    private Long pecaId;
     private String nome;
-    private String descricao;
     private String numeroSerie;
-    private String fabricante;
-    private String modeloCarro;
-    private Long carroId;
 
-    // getters e setters
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNumeroSerie() {
+        return numeroSerie;
+    }
+
+    public void setNumeroSerie(String numeroSerie) {
+        this.numeroSerie = numeroSerie;
+    }
 }

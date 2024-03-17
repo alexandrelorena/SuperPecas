@@ -64,8 +64,8 @@ public class CarrosController {
     }
 
     @GetMapping("/listaTop10Fabricantes")
-    public ResponseEntity<List<Carro>> listarTop10Fabricantes() {
-        List<Carro> topFabricantes = carroService.listarTop10Fabricantes();
+    public ResponseEntity<List<String>> listarTop10Fabricantes() {
+        List<String> topFabricantes = carroService.listarTop10Fabricantes();
         return ResponseEntity.ok(topFabricantes);
     }
 
