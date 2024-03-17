@@ -26,45 +26,54 @@ public class CarroService {
     private CarroRepository carroRepository;
 
     @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
     private PecaRepository pecaRepository; // Injeção de dependência para o PecaRepository
 
     // Método para cadastrar um novo carro
-    public Carro cadastrarCarro(Carro carro) {
-        // Valida se o carro já existe no sistema
-        if (carroJaExiste(carro)) {
-            throw new CarroJaExistenteException(carro.getNomeModelo(), carro.getFabricante(), carro.getCodigoUnico());
+    public CarroDTO cadastrarCarro(CarroDTO carroDTO) {
+        if (carroJaExiste(carroDTO)) {
+            throw new CarroJaExistenteException(carroDTO.getNomeModelo(), carroDTO.getFabricante(), carroDTO.getCodigoUnico());
         }
-        // Salva o novo carro no repositório
-        return carroRepository.save(carro);
+        Carro carro = modelMapper.map(carroDTO, Carro.class);
+        return modelMapper.map(carroRepository.save(carro), CarroDTO.class);
     }
 
     // Validar se um carro já existe no sistema
-    private boolean carroJaExiste(@NotNull Carro carro) {
-        String nomeModelo = carro.getNomeModelo();
-        String fabricante = carro.getFabricante();
-        String codigoUnico = carro.getCodigoUnico();
-        return carroRepository.existsByNomeModeloAndFabricanteAndCodigoUnico(nomeModelo, fabricante, codigoUnico);
+    private boolean carroJaExiste(@NotNull CarroDTO carroDTO) {
+        String nomeModelo = carroDTO.getNomeModelo();
+        String fabricante = carroDTO.getFabricante();
+        String codigoUnico = carroDTO.getCodigoUnico();
+        return carroRepository.existsByNomeModeloAndFabricanteAndCodigoUnico(carroDTO.getNomeModelo(), carroDTO.getFabricante(), carroDTO.getCodigoUnico());
     }
 
-    // Método para buscar um carro pelo ID
-    public Carro buscarCarro(Long id) {
-        return carroRepository.findById(id)
+    // Método para buscar um carro pelo ID e retornar um DTO
+    public CarroDTO buscarCarro(Long id) {
+        Carro carro = carroRepository.findById(id)
                 .orElseThrow(() -> new CarroNaoEncontradoException(id));
+        return modelMapper.map(carro, CarroDTO.class);
     }
 
-    // Método para listar todos os carros
-    public List<Carro> listarTodosOsCarros() {
-        return carroRepository.findAll();
+
+    // Método para listar todos os carros e retornar como DTOs
+    public List<CarroDTO> listarTodosOsCarros() {
+        List<Carro> carros = carroRepository.findAll();
+        return carros.stream()
+                .map(carro -> modelMapper.map(carro, CarroDTO.class))
+                .collect(Collectors.toList());
     }
 
-    // Método para listar todos os carros paginados
-    public Page<Carro> listarTodosOsCarrosPaginado(Pageable pageable) {
-        return carroRepository.findAll(pageable);
+    // Método para listar todos os carros paginados e retornar como DTOs
+    public Page<CarroDTO> listarTodosOsCarrosPaginado(Pageable pageable) {
+        Page<Carro> carrosPage = carroRepository.findAll(pageable);
+        return carrosPage.map(carro -> modelMapper.map(carro, CarroDTO.class));
     }
 
     // Método para listar todos os carros paginados com um termo de pesquisa
-    public Page<Carro> listarTodosOsCarrosPaginadoComTermo(String termo, Pageable pageable) {
-        return carroRepository.findAllByNomeModeloContainingIgnoreCaseOrFabricanteContainingIgnoreCase(termo, termo, pageable);
+    public Page<CarroDTO> listarTodosOsCarrosPaginadoComTermo(String termo, Pageable pageable) {
+        Page<Carro> carrosPage = carroRepository.findAllByNomeModeloContainingIgnoreCaseOrFabricanteContainingIgnoreCase(termo, termo, pageable);
+        return carrosPage.map(carro -> modelMapper.map(carro, CarroDTO.class));
     }
 
     // Método para listar todos os fabricantes de carros
@@ -77,14 +86,23 @@ public class CarroService {
         return carroRepository.findTop10DistinctFabricanteByOrderByFabricanteAsc();
     }
 
+
     // Método para atualizar um carro
-    public Carro atualizarCarro(@NotNull Carro carro) {
-        // Valida se o carro existe antes de atualizá-lo
-        if (!carroRepository.existsById(carro.getCarroID())) {
-            throw new CarroNaoEncontradoException(carro.getCarroID());
-        }
-        // Atualiza o carro no repositório
-        return carroRepository.save(carro);
+    public CarroDTO atualizarCarro(Long id, @NotNull CarroDTO carroDTO) {
+        // Verifica se o carro existe antes de atualizá-lo
+        Carro carroExistente = carroRepository.findById(id)
+                .orElseThrow(() -> new CarroNaoEncontradoException(id));
+
+        // Atualiza os atributos do carro existente com os novos valores do DTO
+        carroExistente.setNomeModelo(carroDTO.getNomeModelo());
+        carroExistente.setFabricante(carroDTO.getFabricante());
+        carroExistente.setCodigoUnico(carroDTO.getCodigoUnico());
+
+        // Salva o carro atualizado no repositório
+        carroExistente = carroRepository.save(carroExistente);
+
+        // Converte o carro atualizado para um DTO e retorna
+        return modelMapper.map(carroExistente, CarroDTO.class);
     }
 
     // Método para deletar um carro pelo ID
@@ -102,10 +120,6 @@ public class CarroService {
         // Deleta o carro do repositório
         carroRepository.deleteById(id);
     }
-
-    // Injeção de dependência do ModelMapper para converter entidades em DTOs
-    @Autowired
-    private ModelMapper modelMapper;
 
     // Método para converter um objeto Carro em um objeto CarroDTO
     public CarroDTO convertToDto(Carro carro) {

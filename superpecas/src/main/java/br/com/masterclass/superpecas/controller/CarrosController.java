@@ -1,18 +1,18 @@
 package br.com.masterclass.superpecas.controller;
 
-import br.com.masterclass.superpecas.model.Carro;
 import br.com.masterclass.superpecas.CarroNaoEncontradoException;
+import br.com.masterclass.superpecas.model.DTO.CarroDTO;
 import br.com.masterclass.superpecas.service.CarroService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/carro")
@@ -28,32 +28,34 @@ public class CarrosController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Carro> buscaCarro(@PathVariable Long id) {
+    public ResponseEntity<CarroDTO> buscaCarro(@PathVariable Long id) {
         try {
-            return Optional.ofNullable(this.carroService.buscarCarro(id));
+            CarroDTO carroDTO = this.carroService.buscarCarro(id);
+            return ResponseEntity.ok(carroDTO);
         } catch (CarroNaoEncontradoException e) {
             throw e;
         } catch (Exception e) {
             logger.error("Erro buscando carro com id: " + id, e);
-            return Optional.empty();
+            return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping("/listaTodos")
-    public ResponseEntity<List<Carro>> listarTodosOsCarros() {
-        List<Carro> carros = carroService.listarTodosOsCarros();
-        return ResponseEntity.ok(carros);
+    public ResponseEntity<List<CarroDTO>> listarTodosOsCarros() {
+        List<CarroDTO> carrosDTO = carroService.listarTodosOsCarros();
+        return ResponseEntity.ok(carrosDTO);
     }
 
+    // Método para listar todos os carros paginados e retornar como DTOs
     @GetMapping("/listaTodosPaginado")
-    public ResponseEntity<Page<Carro>> listarTodosOsCarrosPaginado(Pageable pageable) {
-        Page<Carro> carros = carroService.listarTodosOsCarrosPaginado(pageable);
+    public ResponseEntity<Page<CarroDTO>> listarTodosOsCarrosPaginado(Pageable pageable) {
+        Page<CarroDTO> carros = carroService.listarTodosOsCarrosPaginado(pageable);
         return ResponseEntity.ok(carros);
     }
 
     @GetMapping("/listaTodosPaginado/{termo}")
-    public ResponseEntity<Page<Carro>> listarTodosOsCarrosPaginadoComTermo(@PathVariable String termo, Pageable pageable) {
-        Page<Carro> carros = carroService.listarTodosOsCarrosPaginadoComTermo(termo, pageable);
+    public ResponseEntity<Page<CarroDTO>> listarTodosOsCarrosPaginadoComTermo(@PathVariable String termo, Pageable pageable) {
+        Page<CarroDTO> carros = carroService.listarTodosOsCarrosPaginadoComTermo(termo, pageable);
         return ResponseEntity.ok(carros);
     }
 
@@ -70,13 +72,15 @@ public class CarrosController {
     }
 
     @PostMapping("/cadastrar")
-    public Carro cadastraCarro(@RequestBody Carro carro) {
-        return carroService.cadastrarCarro(carro);
+    public ResponseEntity<CarroDTO> cadastraCarro(@RequestBody CarroDTO carroDTO) {
+        CarroDTO carroSalvoDTO = carroService.cadastrarCarro(carroDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(carroSalvoDTO);
     }
 
-    @PutMapping("/atualizar")
-    public Carro atualizaCarro(@RequestBody Carro carro) {
-        return carroService.atualizarCarro(carro);
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<CarroDTO> atualizaCarro(@PathVariable Long id, @RequestBody CarroDTO carroDTO) {
+        CarroDTO carroAtualizadoDTO = carroService.atualizarCarro(id, carroDTO);
+        return ResponseEntity.ok(carroAtualizadoDTO);
     }
 
     @DeleteMapping("/deletar/{id}")
