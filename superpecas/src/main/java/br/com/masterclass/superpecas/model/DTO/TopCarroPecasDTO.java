@@ -1,10 +1,22 @@
 package br.com.masterclass.superpecas.model.DTO;
 
-import br.com.masterclass.superpecas.model.Carro;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
+public class TopCarroPecasDTO {
+    private String nomeModelo;
+    private int quantidadePecas;
 
-import java.util.List;
+    public String getNomeModelo() {
+        return nomeModelo;
+    }
+
+    public void setNomeModelo(String nomeModelo) {
+        this.nomeModelo = nomeModelo;
+    }
+
+    public int getQuantidadePecas() {
+        return quantidadePecas;
+    }
+
+    public void setQuantidadePecas(int quantidadePecas) {
+        this.quantidadePecas = quantidadePecas;
+    }
+}
