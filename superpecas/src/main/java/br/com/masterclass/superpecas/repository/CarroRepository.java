@@ -1,6 +1,6 @@
 package br.com.masterclass.superpecas.repository;
 
-import br.com.masterclass.superpecas.Carro;
+import br.com.masterclass.superpecas.model.Carro;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

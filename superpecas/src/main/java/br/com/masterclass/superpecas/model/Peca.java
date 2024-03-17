@@ -1,4 +1,4 @@
-package br.com.masterclass.superpecas;
+package br.com.masterclass.superpecas.model;
 
 import jakarta.persistence.*;
 
@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 public class Peca {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PecaID")
     private Long pecaId;
     private String nome;
     private String descricao;
@@ -16,9 +18,8 @@ public class Peca {
     private String modeloCarro;
 
     @ManyToOne
-    @JoinColumn(name = "PecaID")
-    private Carro peca;
-
+    @JoinColumn(name = "CarroID")
+    private Carro carro;
 
     public Long getPecaId(){
         return pecaId;
@@ -44,12 +45,12 @@ public class Peca {
         this.descricao = descricao;
     }
 
-    public String getNumeroserie(){
+    public String getNumeroSerie() {
         return numeroSerie;
     }
 
-    public void setNumeroserie(String numeroserie){
-        this.numeroSerie = numeroserie;
+    public void setNumeroSerie(String numeroSerie){
+        this.numeroSerie = numeroSerie;
     }
 
     public String getFabricante(){
@@ -60,11 +61,11 @@ public class Peca {
         this.fabricante = fabricante;
     }
 
-    public String getModelocarro() {
+    public String getModeloCarro() {
         return modeloCarro;
     }
 
-    public void setModeloCarro(String modelocarro){
-        this.modeloCarro = modelocarro;
+    public void setModeloCarro(String modeloCarro){
+        this.modeloCarro = modeloCarro;
     }
 }
