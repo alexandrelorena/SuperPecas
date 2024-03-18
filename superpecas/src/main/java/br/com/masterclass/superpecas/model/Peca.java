@@ -9,7 +9,7 @@ public class Peca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PecaID")
-    private Long pecaId;
+    private Long pecaID;
     private String nome;
     private String descricao;
     @Column(name = "NumeroSerie", nullable = false, unique = true)
@@ -21,12 +21,10 @@ public class Peca {
     @JoinColumn(name = "CarroID")
     private Carro carro;
 
-    public Long getPecaId(){
-        return pecaId;
-    }
+    public Long getPecaID() { return pecaID; }
 
-    public void setPecaId(Long pecaId){
-        this.pecaId = pecaId;
+    public void setPecaID(Long pecaID){
+        this.pecaID = pecaID;
     }
 
     public String getNome(){

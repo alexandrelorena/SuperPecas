@@ -55,7 +55,7 @@ public class PecaService {
                 .orElseThrow(() -> new PecaNaoEncontradaException(id));
 
         // Verifica se já existe outra peça com o mesmo nome e número de série
-        if (pecaRepository.existsByNomeAndNumeroSerieAndPecaIdNot(pecaDTO.getNome(), pecaDTO.getNumeroSerie(), id)) {
+        if (pecaRepository.existsByNomeAndNumeroSerieAndPecaIDNot(pecaDTO.getNome(), pecaDTO.getNumeroSerie(), id)) {
             throw new PecaJaExistenteException(pecaDTO.getNome(), pecaDTO.getNumeroSerie());
         }
 

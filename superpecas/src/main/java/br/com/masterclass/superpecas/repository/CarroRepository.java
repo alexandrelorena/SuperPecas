@@ -23,7 +23,6 @@ public interface CarroRepository extends JpaRepository<Carro, Long> {
     @Query("SELECT DISTINCT c.fabricante FROM Carro c")
     List<String> findDistinctFabricante();
 
+    @Query("SELECT c.fabricante FROM Carro c GROUP BY c.fabricante ORDER BY COUNT(c) DESC LIMIT 10")
     List<String> findTop10DistinctFabricanteByOrderByFabricanteAsc();
-
-
 }
