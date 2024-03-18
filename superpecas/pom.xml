@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.2.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>br.com.masterclass</groupId>
 	<artifactId>superpecas</artifactId>
@@ -56,10 +56,6 @@
 			<version>3.2.0</version>
 		</dependency>
 		<dependency>
-<!--			<groupId>org.jetbrains</groupId>-->
-<!--			<artifactId>annotations</artifactId>-->
-<!--			<version>RELEASE</version>-->
-<!--			<scope>compile</scope>-->
 			<groupId>org.jetbrains</groupId>
 			<artifactId>annotations</artifactId>
 			<version>24.1.0</version>
@@ -70,11 +66,6 @@
 			<artifactId>springfox-boot-starter</artifactId>
 			<version>3.0.0</version>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>br.com.masterclass</groupId>-->
-<!--			<artifactId>superpecas</artifactId>-->
-<!--			<version>0.0.1-SNAPSHOT</version>-->
-<!--		</dependency>-->
 	</dependencies>
 	<build>
 		<plugins>
