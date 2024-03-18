@@ -21,6 +21,9 @@ public interface PecaRepository extends JpaRepository<Peca, Long> {
 
     List<Peca> findByCarro_CarroID(Long carroID);
 
+    @Query(value = "SELECT COUNT(p), p.fabricante FROM Peca p GROUP BY p.fabricante ORDER BY COUNT(p) DESC LIMIT 10", nativeQuery = true)
+    List<Object[]> findTop10FabricantesComMaisPecas();
+
     Page<Peca> findByNomeContainingIgnoreCase(String termo, Pageable pageable);
 
     void deleteById(Long ID);

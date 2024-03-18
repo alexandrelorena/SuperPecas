@@ -10,15 +10,24 @@ public class Peca {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PecaID")
     private Long pecaID;
+
+    @Column(name = "Nome")
     private String nome;
+
+    @Column(name = "Descricao")
     private String descricao;
-    @Column(name = "NumeroSerie", nullable = false, unique = true)
+
+    @Column(name = "NumeroSerie", unique = true)
     private String numeroSerie;
+
+    @Column(name = "Fabricante")
     private String fabricante;
+
+    @Column(name = "ModeloCarro")
     private String modeloCarro;
 
-    @ManyToOne
-    @JoinColumn(name = "CarroID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CarroID", nullable = false)
     private Carro carro;
 
     public Long getPecaID() { return pecaID; }

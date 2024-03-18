@@ -2,8 +2,8 @@ package br.com.masterclass.superpecas.service;
 
 import br.com.masterclass.superpecas.PecaJaExistenteException;
 import br.com.masterclass.superpecas.PecaNaoEncontradaException;
-import br.com.masterclass.superpecas.model.DTO.CarroDTO;
 import br.com.masterclass.superpecas.model.DTO.PecaDTO;
+import br.com.masterclass.superpecas.model.DTO.TopFabricantesDTO;
 import br.com.masterclass.superpecas.model.Peca;
 import br.com.masterclass.superpecas.repository.PecaRepository;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +27,7 @@ public class PecaService {
     private ModelMapper modelMapper; // Injeção de dependência do ModelMapper
 
     // Método para cadastrar uma nova peça
-    public PecaDTO cadastrarPeca(@NotNull PecaDTO pecaDTO) {
+    public PecaDTO cadastrarPeca(PecaDTO pecaDTO) {
         // Valida se a peça já existe no sistema
         if (pecaRepository.existsByNomeAndNumeroSerie(pecaDTO.getNome(), pecaDTO.getNumeroSerie())) {
             throw new PecaJaExistenteException(pecaDTO.getNome(), pecaDTO.getNumeroSerie());
@@ -102,14 +102,23 @@ public class PecaService {
     }
 
     // Método para listar os top 10 carros com mais peças
-    public List<CarroDTO> listarTop10CarrosComMaisPecas() {
-        List<Object[]> carros = pecaRepository.findTop10ModelosCarroComMaisPecas();
+    public List<TopFabricantesDTO> listarTop10FabricantesComMaisPecas() {
+        List<Object[]> fabricantes = pecaRepository.findTop10FabricantesComMaisPecas();
 
-        return carros.stream()
+        return fabricantes.stream()
                 .map(objArray -> {
-                    CarroDTO carroDTO = new CarroDTO();
-                    carroDTO.setNomeModelo((String) objArray[0]);
-                    return carroDTO;
+                    TopFabricantesDTO fabricanteDTO = new TopFabricantesDTO() {
+                        @Override
+                        public Integer getQuantidade() {
+                            return (Integer) objArray[0]; // Defina a quantidade
+                        }
+
+                        @Override
+                        public String getFabricante() {
+                            return (String) objArray[1]; // Defina o fabricante
+                        }
+                    };
+                    return fabricanteDTO;
                 })
                 .collect(Collectors.toList());
     }

@@ -20,6 +20,9 @@ public interface CarroRepository extends JpaRepository<Carro, Long> {
 
     Page<Carro> findAllByNomeModeloContainingIgnoreCaseOrFabricanteContainingIgnoreCase(String termo, String termo1, Pageable pageable);
 
+    // Método para buscar carros por modelo contendo o termo especificado
+    Page<Carro> findByNomeModeloContainingIgnoreCase(String termo, Pageable pageable);
+
     @Query("SELECT DISTINCT c.fabricante FROM Carro c")
     List<String> findDistinctFabricante();
 

@@ -1,6 +1,5 @@
 package br.com.masterclass.superpecas.controller;
 
-import br.com.masterclass.superpecas.CarroNaoEncontradoException;
 import br.com.masterclass.superpecas.model.DTO.CarroDTO;
 import br.com.masterclass.superpecas.service.CarroService;
 import io.swagger.annotations.ApiOperation;
@@ -35,17 +34,22 @@ public class CarrosController {
             @ApiResponse(code = 200, message = "Carro encontrado"),
             @ApiResponse(code = 404, message = "Carro não encontrado")
     })
+//    @GetMapping("/{id}")
+//    public ResponseEntity<CarroDTO> buscaCarro(@PathVariable Long id) {
+//        try {
+//            CarroDTO carroDTO = this.carroService.buscarCarro(id);
+//            return ResponseEntity.ok(carroDTO);
+//        } catch (CarroNaoEncontradoException e) {
+//            throw e;
+//        } catch (Exception e) {
+//            logger.error("Erro buscando carro com id: " + id, e);
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
     @GetMapping("/{id}")
     public ResponseEntity<CarroDTO> buscaCarro(@PathVariable Long id) {
-        try {
-            CarroDTO carroDTO = this.carroService.buscarCarro(id);
-            return ResponseEntity.ok(carroDTO);
-        } catch (CarroNaoEncontradoException e) {
-            throw e;
-        } catch (Exception e) {
-            logger.error("Erro buscando carro com id: " + id, e);
-            return ResponseEntity.notFound().build();
-        }
+        CarroDTO carroDTO = this.carroService.buscarCarro(id);
+        return ResponseEntity.ok(carroDTO);
     }
 
     @ApiOperation(value = "Lista todos os carros")
@@ -65,7 +69,9 @@ public class CarrosController {
     })
     @GetMapping("/listaTodosPaginado")
     public ResponseEntity<Page<CarroDTO>> listarTodosOsCarrosPaginado(Pageable pageable) {
-        Page<CarroDTO> carros = carroService.listarTodosOsCarrosPaginado(pageable);
+        int page = pageable.getPageNumber();
+        int size = pageable.getPageSize();
+        Page<CarroDTO> carros = carroService.listarTodosOsCarrosPaginado(page, size);
         return ResponseEntity.ok(carros);
     }
 
@@ -75,7 +81,9 @@ public class CarrosController {
     })
     @GetMapping("/listaTodosPaginado/{termo}")
     public ResponseEntity<Page<CarroDTO>> listarTodosOsCarrosPaginadoComTermo(@PathVariable String termo, Pageable pageable) {
-        Page<CarroDTO> carros = carroService.listarTodosOsCarrosPaginadoComTermo(termo, pageable);
+        int page = pageable.getPageNumber();
+        int size = pageable.getPageSize();
+        Page<CarroDTO> carros = carroService.listarTodosOsCarrosPaginadoComTermo(termo, page, size);
         return ResponseEntity.ok(carros);
     }
 

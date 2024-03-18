@@ -1,7 +1,7 @@
 package br.com.masterclass.superpecas.controller;
 
-import br.com.masterclass.superpecas.model.DTO.CarroDTO;
 import br.com.masterclass.superpecas.model.DTO.PecaDTO;
+import br.com.masterclass.superpecas.model.DTO.TopFabricantesDTO;
 import br.com.masterclass.superpecas.service.PecaService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -67,14 +67,16 @@ public class PecasController {
         return ResponseEntity.ok(pecas);
     }
 
-    @ApiOperation(value = "Lista os top 10 carros com mais peças")
+
+
+    @ApiOperation(value = "Lista os top 10 fabricantes com mais peças")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Lista dos top 10 carros com mais peças retornada com sucesso")
+            @ApiResponse(code = 200, message = "Lista dos top 10 fabricantes com mais peças retornada com sucesso")
     })
-    @GetMapping("/listaTop10CarroComMaisPecas")
-    public ResponseEntity<List<CarroDTO>> listarTop10CarrosComMaisPecas() {
-        List<CarroDTO> topCarros = pecaService.listarTop10CarrosComMaisPecas();
-        return ResponseEntity.ok(topCarros);
+    @GetMapping("/listaTop10FabricantesComMaisPecas")
+    public ResponseEntity<List<TopFabricantesDTO>> listarTop10FabricantesComMaisPecas() {
+        List<TopFabricantesDTO> topFabricantes = pecaService.listarTop10FabricantesComMaisPecas();
+        return ResponseEntity.ok(topFabricantes);
     }
 
     @ApiOperation(value = "Cadastra uma nova peça")

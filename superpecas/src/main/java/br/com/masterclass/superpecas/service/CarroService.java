@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -65,13 +66,15 @@ public class CarroService {
     }
 
     // Método para listar todos os carros paginados e retornar como DTOs
-    public Page<CarroDTO> listarTodosOsCarrosPaginado(Pageable pageable) {
+    public Page<CarroDTO> listarTodosOsCarrosPaginado(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
         Page<Carro> carrosPage = carroRepository.findAll(pageable);
         return carrosPage.map(carro -> modelMapper.map(carro, CarroDTO.class));
     }
 
     // Método para listar todos os carros paginados com um termo de pesquisa
-    public Page<CarroDTO> listarTodosOsCarrosPaginadoComTermo(String termo, Pageable pageable) {
+    public Page<CarroDTO> listarTodosOsCarrosPaginadoComTermo(String termo, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
         Page<Carro> carrosPage = carroRepository.findAllByNomeModeloContainingIgnoreCaseOrFabricanteContainingIgnoreCase(termo, termo, pageable);
         return carrosPage.map(carro -> modelMapper.map(carro, CarroDTO.class));
     }
