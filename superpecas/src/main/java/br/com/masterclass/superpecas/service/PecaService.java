@@ -122,25 +122,7 @@ public class PecaService {
     }
 
     // Método para listar os top 10 carros com mais peças
-//    public List<TopFabricantesDTO> listarTop10FabricantesComMaisPecas() {
-//        List<Object[]> fabricantes = pecaRepository.findTop10FabricantesComMaisPecas();
-//
-//        return fabricantes.stream()
-//                .map(objArray -> {
-//                    return new TopFabricantesDTO() {
-//                        @Override
-//                        public Integer getQuantidade() {
-//                            return (Integer) objArray[0]; // Defina a quantidade
-//                        }
-//
-//                        @Override
-//                        public String getFabricante() {
-//                            return (String) objArray[1]; // Defina o fabricante
-//                        }
-//                    };
-//                })
-//                .collect(Collectors.toList());
-//    }
+
     public List<TopFabricantesDTO> listarTop10FabricantesComMaisPecas() {
         List<Object[]> fabricantes = pecaRepository.findTop10FabricantesComMaisPecas();
 

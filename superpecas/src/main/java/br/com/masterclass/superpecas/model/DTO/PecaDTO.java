@@ -16,8 +16,7 @@ public class PecaDTO {
     private String modeloCarro;
 
     private Carro carro;
-
-    //    @JsonProperty(access = JsonProperty.Access.READY_ONLY)
+    
     public Long getPecaID() { return pecaID; }
 
     public void setPecaID(Long pecaID) { this.pecaID = pecaID; }
