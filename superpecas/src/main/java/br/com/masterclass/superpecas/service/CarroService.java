@@ -56,7 +56,6 @@ public class CarroService {
         return modelMapper.map(carro, CarroDTO.class);
     }
 
-
     // Método para listar todos os carros e retornar como DTOs
     public List<CarroDTO> listarTodosOsCarros() {
         List<Carro> carros = carroRepository.findAll();
@@ -88,7 +87,6 @@ public class CarroService {
     public List<String> listarTop10Fabricantes() {
         return carroRepository.findTop10DistinctFabricanteByOrderByFabricanteAsc();
     }
-
 
     // Método para atualizar um carro
     public CarroDTO atualizarCarro(Long id, @NotNull CarroDTO carroDTO) {

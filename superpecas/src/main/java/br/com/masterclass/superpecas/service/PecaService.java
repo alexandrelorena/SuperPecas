@@ -10,9 +10,11 @@ import org.jetbrains.annotations.NotNull;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,22 @@ public class PecaService {
     @Autowired
     private PecaRepository pecaRepository;
 
+    @Autowired
+    public PecaService(PecaRepository pecaRepository) {
+        this.pecaRepository = pecaRepository;
+    }
+
+    public Page<Peca> listarPecasPaginado(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return pecaRepository.findAll(pageable);
+    }
+
+    public Page<PecaDTO> buscarPecasPorTermo(String termo, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Peca> pecasPage = pecaRepository.findAll(pageable);
+        return pecasPage.map(peca -> modelMapper.map(peca, PecaDTO.class));
+
+    }
     @Autowired
     private ModelMapper modelMapper; // Injeção de dependência do ModelMapper
 
@@ -90,36 +108,60 @@ public class PecaService {
     }
 
     // Método para listar todas as peças paginadas
-    public Page<PecaDTO> listarTodasAsPecasPaginado(Pageable pageable) {
+    public Page<PecaDTO> listarTodasAsPecasPaginado(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
         Page<Peca> pecasPage = pecaRepository.findAll(pageable);
         return pecasPage.map(peca -> modelMapper.map(peca, PecaDTO.class));
     }
 
     // Método para listar todas as peças paginadas com um termo de pesquisa
-    public Page<PecaDTO> listarTodasAsPecasPaginadoComTermo(String termo, Pageable pageable) {
-        Page<Peca> pecasPage = pecaRepository.findByNomeContainingIgnoreCase(termo, pageable);
+    public Page<PecaDTO> listarTodasAsPecasPaginadoComTermo(String termo, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Peca> pecasPage = pecaRepository.findByModeloCarroContainingIgnoreCaseOrFabricanteContainingIgnoreCaseOrNomeContainingIgnoreCase(termo, termo, termo, pageable);
         return pecasPage.map(peca -> modelMapper.map(peca, PecaDTO.class));
     }
 
     // Método para listar os top 10 carros com mais peças
+//    public List<TopFabricantesDTO> listarTop10FabricantesComMaisPecas() {
+//        List<Object[]> fabricantes = pecaRepository.findTop10FabricantesComMaisPecas();
+//
+//        return fabricantes.stream()
+//                .map(objArray -> {
+//                    return new TopFabricantesDTO() {
+//                        @Override
+//                        public Integer getQuantidade() {
+//                            return (Integer) objArray[0]; // Defina a quantidade
+//                        }
+//
+//                        @Override
+//                        public String getFabricante() {
+//                            return (String) objArray[1]; // Defina o fabricante
+//                        }
+//                    };
+//                })
+//                .collect(Collectors.toList());
+//    }
     public List<TopFabricantesDTO> listarTop10FabricantesComMaisPecas() {
         List<Object[]> fabricantes = pecaRepository.findTop10FabricantesComMaisPecas();
 
-        return fabricantes.stream()
-                .map(objArray -> {
-                    TopFabricantesDTO fabricanteDTO = new TopFabricantesDTO() {
-                        @Override
-                        public Integer getQuantidade() {
-                            return (Integer) objArray[0]; // Defina a quantidade
-                        }
+        List<TopFabricantesDTO> fabricantesDTO = new ArrayList<>();
 
-                        @Override
-                        public String getFabricante() {
-                            return (String) objArray[1]; // Defina o fabricante
-                        }
-                    };
-                    return fabricanteDTO;
-                })
-                .collect(Collectors.toList());
+        for (Object[] objArray : fabricantes) {
+            TopFabricantesDTO fabricanteDTO = new TopFabricantesDTO() {
+                @Override
+                public Integer getQuantidade() {
+                    return ((Long) objArray[0]).intValue(); // Convertendo Long para Integer
+                }
+
+                @Override
+                public String getFabricante() {
+                    return (String) objArray[1]; // Mantenha como está
+                }
+            };
+            fabricantesDTO.add(fabricanteDTO);
+        }
+
+        return fabricantesDTO;
     }
+
 }

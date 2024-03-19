@@ -51,9 +51,12 @@ public class PecasController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Lista de peças paginada retornada com sucesso")
     })
+
     @GetMapping("/listaTodosPaginado")
-    public ResponseEntity<Page<PecaDTO>> listarTodasAsPecasPaginado(Pageable pageable) {
-        Page<PecaDTO> pecas = pecaService.listarTodasAsPecasPaginado(pageable);
+    public ResponseEntity<Page<PecaDTO>> listarPecasPaginado(Pageable pageable) {
+        int page = pageable.getPageNumber();
+        int size = pageable.getPageSize();
+        Page<PecaDTO> pecas = pecaService.listarTodasAsPecasPaginado(page, size);
         return ResponseEntity.ok(pecas);
     }
 
@@ -63,17 +66,17 @@ public class PecasController {
     })
     @GetMapping("/listaTodosPaginado/{termo}")
     public ResponseEntity<Page<PecaDTO>> listarTodasAsPecasPaginadoComTermo(@PathVariable String termo, Pageable pageable) {
-        Page<PecaDTO> pecas = pecaService.listarTodasAsPecasPaginadoComTermo(termo, pageable);
+        int page = pageable.getPageNumber();
+        int size = pageable.getPageSize();
+        Page<PecaDTO> pecas = pecaService.listarTodasAsPecasPaginadoComTermo(termo, page, size);
         return ResponseEntity.ok(pecas);
     }
-
-
 
     @ApiOperation(value = "Lista os top 10 fabricantes com mais peças")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Lista dos top 10 fabricantes com mais peças retornada com sucesso")
     })
-    @GetMapping("/listaTop10FabricantesComMaisPecas")
+    @GetMapping("/listaTop10CarroComMaisPeças")
     public ResponseEntity<List<TopFabricantesDTO>> listarTop10FabricantesComMaisPecas() {
         List<TopFabricantesDTO> topFabricantes = pecaService.listarTop10FabricantesComMaisPecas();
         return ResponseEntity.ok(topFabricantes);
@@ -85,7 +88,7 @@ public class PecasController {
             @ApiResponse(code = 400, message = "Requisição inválida"),
             @ApiResponse(code = 500, message = "Erro interno ao processar a requisição")
     })
-    @PostMapping("/cadastrar")
+    @PostMapping("/")
     public ResponseEntity<PecaDTO> cadastrarPeca(@RequestBody PecaDTO pecaDTO) {
         PecaDTO pecaSalvaDTO = pecaService.cadastrarPeca(pecaDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(pecaSalvaDTO);

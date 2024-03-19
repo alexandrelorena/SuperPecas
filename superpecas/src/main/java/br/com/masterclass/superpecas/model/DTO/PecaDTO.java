@@ -2,7 +2,9 @@ package br.com.masterclass.superpecas.model.DTO;
 
 public class PecaDTO {
 
+//    @JsonIgnore
     private Long pecaID;
+
     private String nome;
 
     private String descricao;
@@ -13,7 +15,9 @@ public class PecaDTO {
 
     private String modeloCarro;
 
+    private Carro carro;
 
+    //    @JsonProperty(access = JsonProperty.Access.READY_ONLY)
     public Long getPecaID() { return pecaID; }
 
     public void setPecaID(Long pecaID) { this.pecaID = pecaID; }
@@ -58,4 +62,43 @@ public class PecaDTO {
         this.modeloCarro = modeloCarro;
     }
 
+
+    public Carro getCarro() {
+        return carro;
+    }
+
+    public void setCarro(Carro carro) {
+        this.carro = carro;
+    }
+
+    public static class Carro {
+        private String nomeModelo;
+
+        private String fabricante;
+        private Long carroID;
+
+        public String getNomeModelo() {
+            return nomeModelo;
+        }
+
+        public void setNomeModelo(String nomeModelo) {
+            this.nomeModelo = nomeModelo;
+        }
+
+        public String getFabricante() {
+            return fabricante;
+        }
+
+        public void setFabricante(String fabricante) {
+            this.fabricante = fabricante;
+        }
+
+        public Long getCarroId() {
+            return carroID;
+        }
+
+        public void setCarroId(Long carroID) {
+            this.carroID = carroID;
+        }
+    }
 }

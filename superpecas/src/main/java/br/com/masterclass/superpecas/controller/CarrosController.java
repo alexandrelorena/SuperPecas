@@ -113,7 +113,7 @@ public class CarrosController {
             @ApiResponse(code = 400, message = "Requisição inválida"),
             @ApiResponse(code = 500, message = "Erro interno ao processar a requisição")
     })
-    @PostMapping("/cadastrar")
+    @PostMapping("/")
     public ResponseEntity<CarroDTO> cadastraCarro(@RequestBody CarroDTO carroDTO) {
         CarroDTO carroSalvoDTO = carroService.cadastrarCarro(carroDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(carroSalvoDTO);
@@ -126,7 +126,7 @@ public class CarrosController {
             @ApiResponse(code = 404, message = "Carro não encontrado"),
             @ApiResponse(code = 500, message = "Erro interno ao processar a requisição")
     })
-    @PutMapping("/atualizar/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<CarroDTO> atualizaCarro(@PathVariable Long id, @RequestBody CarroDTO carroDTO) {
         CarroDTO carroAtualizadoDTO = carroService.atualizarCarro(id, carroDTO);
         return ResponseEntity.ok(carroAtualizadoDTO);
@@ -137,7 +137,7 @@ public class CarrosController {
             @ApiResponse(code = 200, message = "Carro deletado com sucesso"),
             @ApiResponse(code = 404, message = "Carro não encontrado")
     })
-    @DeleteMapping("/deletar/{id}")
+    @DeleteMapping("/{id}")
     public void deletaCarro(@PathVariable Long id) {
         carroService.deletarCarro(id);
     }

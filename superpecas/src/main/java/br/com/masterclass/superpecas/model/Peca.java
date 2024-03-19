@@ -75,4 +75,13 @@ public class Peca {
     public void setModeloCarro(String modeloCarro){
         this.modeloCarro = modeloCarro;
     }
+
+    // Getter e Setter para o campo carro
+    public Carro getCarro() {
+        return carro;
+    }
+
+    public void setCarro(Carro carro) {
+        this.carro = carro;
+    }
 }
