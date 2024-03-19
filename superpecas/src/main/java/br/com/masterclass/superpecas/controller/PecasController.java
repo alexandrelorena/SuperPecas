@@ -55,7 +55,7 @@ public class PecasController {
     @GetMapping("/listaTodosPaginado")
     public ResponseEntity<Page<PecaDTO>> listarPecasPaginado(Pageable pageable) {
         int page = pageable.getPageNumber();
-        int size = pageable.getPageSize();
+        int size = 10;
         Page<PecaDTO> pecas = pecaService.listarTodasAsPecasPaginado(page, size);
         return ResponseEntity.ok(pecas);
     }
@@ -67,7 +67,7 @@ public class PecasController {
     @GetMapping("/listaTodosPaginado/{termo}")
     public ResponseEntity<Page<PecaDTO>> listarTodasAsPecasPaginadoComTermo(@PathVariable String termo, Pageable pageable) {
         int page = pageable.getPageNumber();
-        int size = pageable.getPageSize();
+        int size = 10;
         Page<PecaDTO> pecas = pecaService.listarTodasAsPecasPaginadoComTermo(termo, page, size);
         return ResponseEntity.ok(pecas);
     }
