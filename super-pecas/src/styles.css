@@ -1,4 +1,108 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #FDFDFD;
+}
+
+.logo-container {
+  text-align: center;
+  /* margin-top: -20px; */
+}
+
+.logo {
+  width: 200px;
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  position: relative;
+  background-color: #FDFDFD;
+  width: 200px;
+  height: 100vh;
+}
+
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px; /* Largura da linha */
+  height: 100%; /* Altura igual à altura da barra lateral */
+  background-color: #c0c0c0; /* Cor da linha */
+}
+
+/* .sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #000;
+}
+
+.sidebar a:hover {
+  color: #333;
+}
+
+.content {
+  margin-left: 200px;
+  padding: 20px;
+} */
+
+
+.menu {
+  /* position: absolute; */
+  margin-top: 100px;
+  width: 50px;
+
+}
+
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: #c0c0c0;
+  margin-top: 20px;
+
+}
+
+.user-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* margin-top: -40px; */
+}
+
+.user-image {
+  width: 50px;
+  height: 50px;
+  /* background-color: black; */
+
+}
+
+.user {
+  margin-top: 10px;
+  color: #000;
+}
+
+.user-material {
+  font-family: 'Material Symbols Outlined', sans-serif;
+  font-size: 36px;
+
+
+}
+.mat-sidenav-container {
+  min-height: 100vh; /* Defina a altura mínima como 100% da altura da janela */
+}

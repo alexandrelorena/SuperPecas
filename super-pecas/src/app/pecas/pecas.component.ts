@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './pecas.component.css'
 })
 export class PecasComponent {
+pecas: any;
 
 }

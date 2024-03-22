@@ -1,1 +1,22 @@
-<p>carros works!</p>
+<ul>
+  <li *ngFor="let carro of carros">
+    {{ carro.nome }} - {{ carro.modelo }}
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Modelo</th>
+      <th>Ano</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let carro of carros">
+      <td>{{ carro.nome }}</td>
+      <td>{{ carro.modelo }}</td>
+      <td>{{ carro.ano }}</td>
+    </tr>
+  </tbody>
+</table>
