@@ -7,9 +7,11 @@ body {
   background-color: #FDFDFD;
 }
 
+/* menu lateral */
+
 .logo-container {
   text-align: center;
-  /* margin-top: -20px; */
+  margin-top: -20px;
 }
 
 .logo {
@@ -34,7 +36,7 @@ body {
   right: 0;
   width: 1px; /* Largura da linha */
   height: 100%; /* Altura igual à altura da barra lateral */
-  background-color: #c0c0c0; /* Cor da linha */
+  background-color: #E0E0E0; /* Cor da linha */
 }
 
 /* .sidebar ul {
@@ -65,16 +67,14 @@ body {
   /* position: absolute; */
   margin-top: 100px;
   width: 50px;
-
 }
 
 
 .divider {
   height: 1px;
   width: 100%;
-  background-color: #c0c0c0;
+  background-color: #E0E0E0;
   margin-top: 20px;
-
 }
 
 .user-image-container {
@@ -82,14 +82,13 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* margin-top: -40px; */
+  margin-top: -40px;
 }
 
 .user-image {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   /* background-color: black; */
-
 }
 
 .user {
@@ -101,8 +100,35 @@ body {
   font-family: 'Material Symbols Outlined', sans-serif;
   font-size: 36px;
 
-
 }
-.mat-sidenav-container {
-  min-height: 100vh; /* Defina a altura mínima como 100% da altura da janela */
+
+/* header */
+
+.header {
+  width: 100vw;
+  height: 130px;
+  background-color: #FDFDFD;
+  padding: 10px;
+}
+
+.container-header {
+  width: 86.5%;
+  height: 150px;
+  margin-left: 10px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+}
+
+.car-img {
+  display: flex;
+  align-items: center;
+}
+
+.car-img img {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
 }

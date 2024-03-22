@@ -1,9 +1,36 @@
+
+<div class="header">
+  <div class="container-header">
+    <!-- Conteúdo do menu lateral -->
+    <div class="car-img">
+      <img src="assets/images/carro3-header.png" alt="car-img">
+      <!-- <img src="assets/images/car-black.svg" alt="car-img"> -->
+      <span class="text-container"><h1>Listagem de Carros</h1></span>
+    </div>
+  </div>
+</div>
+
+<div class="add-search">
+  <div class="add-car">
+
+  </div>
+  <div class="search-car">
+
+  </div>
+
+</div>
+
 <ul>
   <li *ngFor="let carro of carros">
     {{ carro.nome }} - {{ carro.modelo }}
   </li>
 </ul>
-
+<!-- Seu componente HTML -->
+<button mat-button>Meu Botão</button>
+<mat-form-field>
+  <mat-label>Pesquisar</mat-label>
+  <input matInput type="text" placeholder="Digite aqui...">
+</mat-form-field>
 <table>
   <thead>
     <tr>
