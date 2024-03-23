@@ -20,7 +20,7 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.1",
-    "@canvasjs/charts": "^3.7.44",
+    "@canvasjs/angular-charts": "^1.2.0",
     "angular2-notifications": "^16.0.1",
     "primeng": "^17.12.0",
     "rxjs": "~7.8.0",

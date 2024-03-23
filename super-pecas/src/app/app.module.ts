@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { TemplateComponent } from './template/template.component';
 import { ContentComponent } from './content/content.component';
 import { HomeComponent } from './home/home.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 
 const routes: Routes = [
@@ -43,6 +45,8 @@ const routes: Routes = [
     MatSidenavModule,
     MatButtonModule,
     MatInputModule,
+    CanvasJSAngularChartsModule,
+    MatCardModule
   ],
   providers: [
     provideAnimationsAsync('noop')

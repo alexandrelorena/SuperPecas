@@ -1,0 +1,15 @@
+.charts-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.chart-card {
+  flex: 1;
+  margin-right: 10px; /* Adicione espaço entre os cards */
+}
+
+/* Estilo opcional para ajustar o tamanho dos gráficos */
+.canvasjs-chart {
+  width: 100%;
+  height: 300px; /* Ajuste conforme necessário */
+}
