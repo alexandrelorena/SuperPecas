@@ -153,6 +153,15 @@
   margin-top: 30px;
 }
 
+.add-peca {
+  margin-top: 30px;
+  margin-left: 21px;
+}
+
+.search-peca {
+  margin-top: 30px;
+}
+
 html, body { height: 100%; }
 
 body {

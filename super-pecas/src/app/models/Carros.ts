@@ -1,7 +1,6 @@
 export class Carros {
-  id!: number;
-  nome!: string;
-  modelo!: string;
-  ano!: number;
-
+  CarroID!: number;
+  NomeModelo!: string;
+  Fabricante!: string;
+  CodigoUnico!: number;
 }
