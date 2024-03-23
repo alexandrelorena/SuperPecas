@@ -1,11 +1,8 @@
+
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #FDFDFD;
-}
+
+
 
 /* menu lateral */
 
@@ -105,30 +102,61 @@ body {
 /* header */
 
 .header {
-  width: 100vw;
+  width: 87vw;
   height: 130px;
   background-color: #FDFDFD;
   padding: 10px;
 }
 
 .container-header {
-  width: 86.5%;
+  width: 87vw; /* Define a largura como 80% da largura da viewport */
   height: 150px;
-  margin-left: 10px;
-  background-color: #f0f0f0;
+  margin-left: 11px;
+  margin-top: 10px;
+  background-color: #F5F5F5;
+;
   display: flex;
   align-items: center;
 }
-
 .car-img {
   display: flex;
   align-items: center;
 }
 
 .car-img img {
-  width: 100px;
-  height: 100px;
-  margin-right: 10px;
+  width: 60px;
+  height: 60px;
+  /* margin-right: 20px; */
+  margin-left: 30px;
   display: flex;
   align-items: center;
+}
+
+.text-container {
+  display: flex;
+  /* justify-content: space-between; */
+  margin-left: 20px;
+  margin-top: 30px;
+}
+
+.add-search {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-car {
+  margin-top: 30px;
+  margin-left: 21px;
+}
+
+.search-car {
+  margin-top: 30px;
+}
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #FDFDFD;
 }

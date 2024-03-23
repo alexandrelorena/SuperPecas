@@ -15,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { TemplateComponent } from './template/template.component';
 import { ContentComponent } from './content/content.component';
 import { HomeComponent } from './home/home.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 const routes: Routes = [
@@ -43,7 +44,9 @@ const routes: Routes = [
     MatButtonModule,
     MatInputModule,
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync('noop')
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
