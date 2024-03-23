@@ -2,8 +2,6 @@
 /* You can add global styles to this file, and also import other style files */
 
 
-
-
 /* menu lateral */
 
 .logo-container {
@@ -31,9 +29,9 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 1px; /* Largura da linha */
-  height: 100%; /* Altura igual à altura da barra lateral */
-  background-color: #E0E0E0; /* Cor da linha */
+  width: 1px;
+  height: 100%;
+  background-color: #E0E0E0;
 }
 
 /* .sidebar ul {
@@ -62,8 +60,8 @@
 
 .menu {
   /* position: absolute; */
-  margin-top: 100px;
-  width: 50px;
+  margin-top: 5px;
+  width: 100  px;
 }
 
 
@@ -85,7 +83,6 @@
 .user-image {
   width: 40px;
   height: 40px;
-  /* background-color: black; */
 }
 
 .user {
@@ -104,16 +101,41 @@
 .header {
   width: 87vw;
   height: 130px;
-  background-color: #FDFDFD;
   padding: 10px;
 }
 
+.welcome-card {
+  width: 87vw;
+  /* padding: 20px; */
+  margin-left: 11px;
+  background-color: red;
+}
+
+.mat-card.welcome-card {
+  background-color: red;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+}
+
+.car-img {
+  margin-left: 10px;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.text-container h1 {
+  margin: 0;
+}
+
 .container-header {
-  width: 87vw; /* Define a largura como 80% da largura da viewport */
+  width: 87vw;
   height: 150px;
   margin-left: 11px;
   margin-top: 10px;
-  background-color: #F5F5F5;
+  background-color: white;
 ;
   display: flex;
   align-items: center;
@@ -126,7 +148,6 @@
 .car-img img {
   width: 60px;
   height: 60px;
-  /* margin-right: 20px; */
   margin-left: 30px;
   display: flex;
   align-items: center;
@@ -134,7 +155,6 @@
 
 .text-container {
   display: flex;
-  /* justify-content: space-between; */
   margin-left: 20px;
   margin-top: 30px;
 }

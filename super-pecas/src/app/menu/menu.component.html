@@ -2,7 +2,6 @@
 
 <div class="container">
     <div class="sidebar">
-      <!-- Conteúdo do menu lateral -->
       <div class="logo-container">
         <img src="assets/images/super-pecas.png" alt="Logo do Projeto" class="logo">
       </div>
@@ -12,11 +11,21 @@
       </div>
       <div class="divider"></div>
       <div class="menu">
-        <ul>
-          <li><a routerLink="/home">Home</a></li>
-          <li><a routerLink="/carros">Carros</a></li>
-          <li><a routerLink="/pecas">Peças</a></li>
-        </ul>
+        <mat-nav-list role="list">
+          <a mat-list-item routerLink="/home" routerLinkActive="active">Home</a>
+          <a mat-list-item routerLink="/carros" routerLinkActive="active">Carros</a>
+          <a mat-list-item routerLink="/pecas" routerLinkActive="active">Peças</a>
+        </mat-nav-list>
       </div>
     </div>
+    <mat-nav-list>
+      @for (link of links; track link) {
+        <mat-list-item [activated]="link.isActive">
+           <a matListItemTitle href="...">{{ link }}</a>
+           <button mat-icon-button (click)="showInfo(link)" matListItemMeta>
+              <mat-icon>info</mat-icon>
+           </button>
+        </mat-list-item>
+      }
+    </mat-nav-list>
 </div>

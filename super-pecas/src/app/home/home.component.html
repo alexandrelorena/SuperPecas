@@ -1,27 +1,36 @@
 <div class="header">
-  <div class="container-header">
-    <div class="car-img">
-      <img src="assets/images/super-pecas-home.png" alt="car-img">
+  <mat-card class="welcome-card">
+    <div class="card-content">
+      <div class="car-img">
+        <img src="assets/images/super-pecas-home-white.png" alt="car-img">
+      </div>
+      <div class="text-container">
+        <h1>Bem vindo ao Super Peças</h1>
+      </div>
     </div>
-    <span class="text-container"><h1>Bem vindo ao Super Peças</h1></span>
-  </div>
+  </mat-card>
   <div class="charts-container">
-    <mat-card class="chart-card">
-      <mat-card-header>
-        <mat-card-title>Top 10 Fabricantes</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <canvasjs-chart type="pie" [options]="Top10Fabricantes"></canvasjs-chart>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="chart-card">
-      <mat-card-header>
-        <mat-card-title>Carros e Peças</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <canvasjs-chart type="column" [options]="CarrosePecas"></canvasjs-chart>
-      </mat-card-content>
-    </mat-card>
+    <div class="chart-wrapper-pie">
+      <mat-card class="chart-card">
+        <mat-card-header>
+          <mat-card-title>Top 10 Fabricantes</mat-card-title>
+          <mat-card-subtitle>Lista dos 10 maiores fabricantes</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <canvasjs-chart type="pie" [options]="Top10Fabricantes"></canvasjs-chart>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="chart-wrapper-column">
+      <mat-card class="chart-card">
+        <mat-card-header>
+          <mat-card-title>Carros e Peças</mat-card-title>
+          <mat-card-subtitle>Top 10 Carros com mais peças cadastradas</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <canvasjs-chart type="column" [options]="CarrosePecas"></canvasjs-chart>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </div>

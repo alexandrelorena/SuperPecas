@@ -9,16 +9,17 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 })
 export class HomeComponent implements OnInit {
-  Top10Fabricantes: any; // Defina o tipo de dados adequado para suas opções de gráfico
-  CarrosePecas: any; // Defina o tipo de dados adequado para suas opções de gráfico
+  Top10Fabricantes: any;
+  CarrosePecas: any;
+
 
   constructor() { }
 
   ngOnInit() {
-    // Defina as opções para o segundo gráfico (chartOptions2)
+
     this.Top10Fabricantes = {
       title: {
-        text: "Top 10 Fabricantes"
+        text: ""
       },
       data: [{
         type: "pie",
@@ -36,11 +37,18 @@ export class HomeComponent implements OnInit {
         ]
       }]
     };
-   // Defina as opções para o segundo gráfico (chartOptions2)
+
     this.CarrosePecas = {
       title: {
-        text: "Carros e Peças"
+        text: ""
       },
+
+  axisX: {
+    labelAngle: 135
+    },
+    axisY: {
+    title: "Quantidade"
+    },
       data: [{
         type: "column",
         dataPoints: [
@@ -57,5 +65,6 @@ export class HomeComponent implements OnInit {
         ]
       }]
     };
+
   }
 }
