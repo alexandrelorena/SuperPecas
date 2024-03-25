@@ -1,6 +1,9 @@
 export class Carros {
-  CarroID!: number;
-  NomeModelo!: string;
-  Fabricante!: string;
-  CodigoUnico!: number;
+  NomeModelo: string = '';
+  Fabricante: string = '';
+  CodigoUnico: number = 0;
+  carroId: number = 0;
+  nomeModelo: any;
+  fabricante: any;
+  codigoUnico: any;
 }

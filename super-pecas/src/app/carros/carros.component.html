@@ -1,4 +1,4 @@
-<div class="header">
+ <div class="header">
   <mat-card class="welcome-card">
     <div class="card-content">
       <div class="container-header">
@@ -12,11 +12,7 @@
     </div>
   </mat-card>
 </div>
-<ul>
-  <li *ngFor="let carro of carros">
-    {{ carro.NomeModelo }} - {{ carro.CodigoUnico }}
-  </li>
-</ul>
+
 <div class="add-search">
   <div class="add-car">
     <button mat-stroked-button color="primary">Adicionar Carro</button>
@@ -27,22 +23,57 @@
     </mat-form-field>
   </div>
 </div>
-<table>
-  <thead>
+
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nome do Modelo</th>
+        <th>Fabricante</th>
+        <th>Código Único</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let carro of carros; let i = index">
+        <td>{{ carro.carroId }}</td>
+        <td>{{ carro.nomeModelo }}</td>
+        <td>{{ carro.fabricante }}</td>
+        <td>{{ carro.codigoUnico }}</td>
+        <td>
+          <button (click)="updateCarro(carro)">Alterar</button>
+          <button (click)="deleteCarro(carro)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+</mat-paginator>
+</div>
+<!-- <div class="container">
+<p-table [columns]="cols" [value]="carros" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="10">
+  <ng-template pTemplate="header" let-columns>
     <tr>
-      <th>Id</th>
-      <th>Nome do Modelo</th>
-      <th>Fabricante</th>
-      <th>Código Único</th>
+      <th *ngFor="let col of columns">
+        {{ col.header }}
+      </th>
       <th>Ação</th>
     </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let carro of carros">
-      <td>{{ carro.CarroID }}</td>
-      <td>{{ carro.NomeModelo }}</td>
-      <td>{{ carro.Fabricante }}</td>
-      <td>{{ carro.CodigoUnico }}</td>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      <td *ngFor="let col of columns">
+        {{ rowData[col.field] }}
+      </td>
+      <td>
+        <button (click)="updateCarro(rowData)">Alterar</button>
+        <button (click)="deleteCarro(rowData)">Excluir</button>
+      </td>
     </tr>
-  </tbody>
-</table>
+  </ng-template>
+</p-table>
+</div> -->

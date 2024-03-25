@@ -1,31 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Carros } from '../models/Carros';
+import { Observable } from 'rxjs';
+import { ApiService } from '../.././../services/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarrosService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private apiService: ApiService) { }
 
-  getCarros() {
-    return this.http.get<Carros[]>('api/carros');
+  getCarrosPaginados(page: number, size: number): Observable<Carros[]> {
+    return this.apiService.getCarrosPaginados(page, size);
   }
 
-  getCarro(carroID: number) {
-    return this.http.get<Carros>('api/carros/' + carroID);
+  createCarro(carro: Carros): Observable<Carros> {
+    return this.apiService.createCarro(carro);
   }
 
-  createCarro(carro: Carros) {
-    return this.http.post<Carros>('api/carros', carro);
+  updateCarro(carroID: number, carro: Carros): Observable<Carros> {
+    return this.apiService.updateCarro(carroID, carro);
   }
-
-  updateCarro(carro: Carros) {
-    return this.http.put<Carros>('api/carros/' + carro.CarroID, carro);
-  }
-
-  deleteCarro(carroID: number) {
-    return this.http.delete('api/carros/' + carroID);
+  deleteCarro(carroID: number): Observable<void> {
+    return this.apiService.deleteCarro(carroID);
   }
 }

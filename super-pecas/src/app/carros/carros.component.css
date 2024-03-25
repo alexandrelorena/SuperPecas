@@ -1,0 +1,11 @@
+.table-container {
+  margin: 0 auto; /* Isso centralizará a div horizontalmente */
+  width: 80%; /* Ajuste a largura conforme necessário */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+}
