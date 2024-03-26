@@ -1,11 +1,69 @@
+
 .table-container {
-  margin: 0 auto; /* Isso centralizará a div horizontalmente */
-  width: 80%; /* Ajuste a largura conforme necessário */
+  margin: 0 auto;
+  width: 80%;
 }
 
-.container {
+/* .container-header {
+
+  height: 150px;
+  margin-left: 11px;
+  margin-top: 10px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+} */
+.carros-card {
+  width: 87vw;
+  display: flex;
+  margin-left: 15px;
+  height: 165px;
+
+}
+/* .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
+  height: 100vh;
+} */
+
+.container-header {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  margin-top: 60px;
+}
+
+.text-container {
+  /* display: flex; */
+  margin-left: 20px;
+  margin-top: 5px;
+}
+.add-search {
+  /* margin-top: 10px; */
+  /* margin-right: 10px; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-car {
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.search-car {
+  margin-top: 10px;
+
+}
+.car-card{
+
+  background-color: #FFFFFF;
+  width: 99%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px;
+  margin-left: 15px;
+  height: 71vh;
+
 }

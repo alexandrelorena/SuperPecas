@@ -1,0 +1,14 @@
+.add-peca {
+  margin-top: 30px;
+  margin-left: 21px;
+}
+
+.search-peca {
+  margin-top: 30px;
+}
+
+.add-search {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}

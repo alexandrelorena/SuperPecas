@@ -1,5 +1,6 @@
- <div class="header">
-  <mat-card class="welcome-card">
+
+<div class="header">
+  <mat-card class="carros-card">
     <div class="card-content">
       <div class="container-header">
         <div class="car-img">
@@ -24,56 +25,31 @@
   </div>
 </div>
 
-<div class="container">
-  <table>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Nome do Modelo</th>
-        <th>Fabricante</th>
-        <th>Código Único</th>
-        <th>Ação</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let carro of carros; let i = index">
-        <td>{{ carro.carroId }}</td>
-        <td>{{ carro.nomeModelo }}</td>
-        <td>{{ carro.fabricante }}</td>
-        <td>{{ carro.codigoUnico }}</td>
-        <td>
-          <button (click)="updateCarro(carro)">Alterar</button>
-          <button (click)="deleteCarro(carro)">Excluir</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              aria-label="Select page">
-</mat-paginator>
-</div>
-<!-- <div class="container">
-<p-table [columns]="cols" [value]="carros" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="10">
-  <ng-template pTemplate="header" let-columns>
-    <tr>
-      <th *ngFor="let col of columns">
-        {{ col.header }}
-      </th>
-      <th>Ação</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-rowData let-columns="columns">
-    <tr>
-      <td *ngFor="let col of columns">
-        {{ rowData[col.field] }}
-      </td>
-      <td>
-        <button (click)="updateCarro(rowData)">Alterar</button>
-        <button (click)="deleteCarro(rowData)">Excluir</button>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
-</div> -->
+<mat-card class="car-card">
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nome do Modelo</th>
+          <th>Fabricante</th>
+          <th>Código Único</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let carro of carros; let i = index">
+          <td>{{ carro.carroId }}</td>
+          <td>{{ carro.nomeModelo }}</td>
+          <td>{{ carro.fabricante }}</td>
+          <td>{{ carro.codigoUnico }}</td>
+          <td>
+            <button (click)="updateCarro(carro)">Alterar</button>
+            <button (click)="deleteCarro(carro)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="120" styleClass="ui-paginator-blue"></p-paginator>
+</mat-card>

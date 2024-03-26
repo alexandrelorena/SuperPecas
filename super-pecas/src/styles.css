@@ -1,149 +1,23 @@
-
-/* You can add global styles to this file, and also import other style files */
-
-
-/* menu lateral */
-
-.logo-container {
-  text-align: center;
-  margin-top: -20px;
-}
-
-.logo {
-  width: 200px;
-}
-
 .container {
   display: flex;
 }
 
-.sidebar {
-  position: relative;
-  background-color: #FDFDFD;
-  width: 200px;
-  height: 100vh;
-}
-
-.sidebar::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 1px;
-  height: 100%;
-  background-color: #E0E0E0;
-}
-
-/* .sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar li {
-  margin-bottom: 10px;
-}
-
-.sidebar a {
-  text-decoration: none;
-  color: #000;
-}
-
-.sidebar a:hover {
-  color: #333;
-}
-
-.content {
-  margin-left: 200px;
-  padding: 20px;
-} */
-
-
-.menu {
-  /* position: absolute; */
-  margin-top: 5px;
-  width: 100  px;
-}
-
-
-.divider {
-  height: 1px;
-  width: 100%;
-  background-color: #E0E0E0;
-  margin-top: 20px;
-}
-
-.user-image-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-top: -40px;
-}
-
-.user-image {
-  width: 40px;
-  height: 40px;
-}
-
-.user {
-  margin-top: 10px;
-  color: #000;
-}
-
-.user-material {
-  font-family: 'Material Symbols Outlined', sans-serif;
-  font-size: 36px;
-
-}
-
 /* header */
 
-.header {
-  width: 87vw;
-  height: 130px;
-  padding: 10px;
-}
 
-.welcome-card {
-  width: 87vw;
-  /* padding: 20px; */
-  margin-left: 11px;
-  background-color: red;
-}
 
-.mat-card.welcome-card {
-  background-color: red;
-}
 
-.card-content {
-  display: flex;
-  align-items: center;
-}
 
-.car-img {
+/* .car-img {
   margin-left: 10px;
   margin-right: 20px;
   margin-top: 20px;
-}
+} */
 
-.text-container h1 {
-  margin: 0;
-}
-
-.container-header {
-  width: 87vw;
-  height: 150px;
-  margin-left: 11px;
-  margin-top: 10px;
-  background-color: white;
-;
+/* .car-img {
   display: flex;
   align-items: center;
-}
-.car-img {
-  display: flex;
-  align-items: center;
-}
+} */
 
 .car-img img {
   width: 60px;
@@ -152,35 +26,13 @@
   display: flex;
   align-items: center;
 }
-
-.text-container {
-  display: flex;
-  margin-left: 20px;
-  margin-top: 30px;
+.text-container h1 {
+  margin: 0;
 }
 
-.add-search {
-  display: flex;
-  justify-content: space-between;
-}
 
-.add-car {
-  margin-top: 30px;
-  margin-left: 21px;
-}
 
-.search-car {
-  margin-top: 30px;
-}
 
-.add-peca {
-  margin-top: 30px;
-  margin-left: 21px;
-}
-
-.search-peca {
-  margin-top: 30px;
-}
 
 html, body { height: 100%; }
 
