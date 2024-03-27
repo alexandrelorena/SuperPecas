@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //@ComponentScan({"br.com.masterclass.superpecas.*"})
 
 @EnableJpaRepositories(basePackages = "br.com.masterclass.superpecas.repository")
-@EntityScan(basePackages={"br.com.masterclass.superpecas"})
+@EntityScan(basePackages={"br.com.masterclass.superpecas.model"})
 @SpringBootApplication(scanBasePackages = "br.com.masterclass.superpecas")
 @ComponentScan({"br.com.masterclass.superpecas"})
 public class SuperPecasApplication {

@@ -1,4 +1,3 @@
-
 <div class="header">
   <mat-card class="carros-card">
     <div class="card-content">
@@ -27,29 +26,30 @@
 
 <mat-card class="car-card">
   <div>
-    <table>
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Nome do Modelo</th>
-          <th>Fabricante</th>
-          <th>Código Único</th>
-          <th>Ação</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let carro of carros; let i = index">
-          <td>{{ carro.carroId }}</td>
-          <td>{{ carro.nomeModelo }}</td>
-          <td>{{ carro.fabricante }}</td>
-          <td>{{ carro.codigoUnico }}</td>
-          <td>
-            <button (click)="updateCarro(carro)">Alterar</button>
-            <button (click)="deleteCarro(carro)">Excluir</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <p-table [value]="carros" [paginator]="false" [rows]="rows" [totalRecords]="totalRecords">
+      <ng-template pTemplate="header">
+          <tr>
+              <th>ID</th>
+              <th>Nome do Modelo</th>
+              <th>Fabricante</th>
+              <th>Código Único</th>
+              <th>Ações</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-carro>
+          <tr>
+              <td>{{ carro.carroId }}</td>
+              <td>{{ carro.nomeModelo }}</td>
+              <td>{{ carro.fabricante }}</td>
+              <td>{{ carro.codigoUnico }}</td>
+              <td>
+                  <button (click)="updateCarro(carro.carroId, carro)">Alterar</button>
+                  <button (click)="deleteCarro(carro.carroId)">Excluir</button>
+              </td>
+          </tr>
+      </ng-template>
+  </p-table>
+  <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords"></p-paginator>
   </div>
-  <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="120" styleClass="ui-paginator-blue"></p-paginator>
 </mat-card>
+<!-- <pre>{{ carros | json }}</pre> -->

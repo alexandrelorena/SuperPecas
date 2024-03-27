@@ -67,10 +67,8 @@ public class CarrosController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Lista de carros paginada retornada com sucesso")
     })
-    @GetMapping("/listaTodosPaginado")
-    public ResponseEntity<Page<CarroDTO>> listarTodosOsCarrosPaginado(Pageable pageable) {
-        int page = pageable.getPageNumber();
-        int size = pageable.getPageSize();
+    @GetMapping("/88")
+    public ResponseEntity<Page<CarroDTO>> listaCarrosPaginado(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size) {
         Page<CarroDTO> carros = carroService.listarTodosOsCarrosPaginado(page, size);
         return ResponseEntity.ok(carros);
     }
