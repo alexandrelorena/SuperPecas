@@ -67,7 +67,7 @@ public class CarrosController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Lista de carros paginada retornada com sucesso")
     })
-    @GetMapping("/88")
+    @GetMapping("/listaTodosPaginado")
     public ResponseEntity<Page<CarroDTO>> listaCarrosPaginado(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int size) {
         Page<CarroDTO> carros = carroService.listarTodosOsCarrosPaginado(page, size);
         return ResponseEntity.ok(carros);

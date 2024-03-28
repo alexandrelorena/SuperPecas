@@ -1,55 +1,106 @@
-<div class="header">
-  <mat-card class="carros-card">
-    <div class="card-content">
-      <div class="container-header">
-        <div class="car-img">
-          <img src="assets/images/carro3-white.png" alt="car-img">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <div class="header">
+      <mat-card class="carros-card">
+        <div class="card-content">
+          <div class="container-header">
+            <div class="car-img">
+              <img src="assets/images/carro3-white.png" alt="car-img">
+            </div>
+            <div class="text-container">
+              <h1>Listagem de Carros</h1>
+            </div>
+          </div>
         </div>
-        <div class="text-container">
-          <h1>Listagem de Carros</h1>
-        </div>
+      </mat-card>
+    </div>
+
+    <div class="add-search">
+      <div class="add-car">
+        <button mat-stroked-button color="primary" (click)="openAddForm()">Adicionar Carro</button>
+      </div>
+      <div class="search-car">
+        <mat-form-field>
+          <input matInput placeholder="Pesquisar Carro">
+        </mat-form-field>
       </div>
     </div>
-  </mat-card>
-</div>
 
-<div class="add-search">
-  <div class="add-car">
-    <button mat-stroked-button color="primary">Adicionar Carro</button>
-  </div>
-  <div class="search-car">
-    <mat-form-field>
-      <input matInput placeholder="Pesquisar Carro">
-    </mat-form-field>
-  </div>
-</div>
+    <mat-card class="car-card">
+      <div class="car-table-container">
+        <p-table [value]="carros" [paginator]="false" [rows]="rows" [totalRecords]="totalRecords">
+          <ng-template pTemplate="header">
+              <tr>
+                  <th>Id</th>
+                  <th>Nome do Modelo</th>
+                  <th>Fabricante</th>
+                  <th>Código Único</th>
+                  <th>Ações</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-carro>
+              <tr>
+                  <td>{{ carro.carroId }}</td>
+                  <td>{{ carro.nomeModelo }}</td>
+                  <td>{{ carro.fabricante }}</td>
+                  <td>{{ carro.codigoUnico }}</td>
+                  <td>
+                      <button (click)="openEditForm(carro)">Alterar</button>
+                      <button (click)="deleteCarro(carro.carroId)">Excluir</button>
+                  </td>
+              </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <p-paginator [showCurrentPageReport]="true" currentPageReportTemplate="Exibindo {{first + 1}} - {{first + rows}} de {{totalRecords}} registros" (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords"></p-paginator>
 
-<mat-card class="car-card">
-  <div>
-    <p-table [value]="carros" [paginator]="false" [rows]="rows" [totalRecords]="totalRecords">
-      <ng-template pTemplate="header">
-          <tr>
-              <th>ID</th>
-              <th>Nome do Modelo</th>
-              <th>Fabricante</th>
-              <th>Código Único</th>
-              <th>Ações</th>
-          </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-carro>
-          <tr>
-              <td>{{ carro.carroId }}</td>
-              <td>{{ carro.nomeModelo }}</td>
-              <td>{{ carro.fabricante }}</td>
-              <td>{{ carro.codigoUnico }}</td>
-              <td>
-                  <button (click)="updateCarro(carro.carroId, carro)">Alterar</button>
-                  <button (click)="deleteCarro(carro.carroId)">Excluir</button>
-              </td>
-          </tr>
-      </ng-template>
-  </p-table>
-  <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords"></p-paginator>
-  </div>
-</mat-card>
-<!-- <pre>{{ carros | json }}</pre> -->
+
+    </mat-card>
+
+    <p-dialog header="Cadastrar Carro" [(visible)]="displayAddDialog" [modal]="true" [style]="{ 'width': '500px', 'max-width': '90%' }">
+      <form (ngSubmit)="openAddForm()">
+          <div class="p-fluid">
+              <div class="p-field">
+                <label for="nomeModelo">Nome do Modelo:</label>
+                <input type="text" name="nomeModelo" [(ngModel)]="carro.nomeModelo" required>
+              </div>
+              <div class="p-field">
+                <label for="fabricante">Fabricante:</label>
+                <input type="text" name="fabricante" [(ngModel)]="carro.fabricante" required>
+              </div>
+              <div class="p-field">
+                <label for="codigoUnico">Código Único:</label>
+                <input type="text" name="codigoUnico" [(ngModel)]="carro.codigoUnico" required>
+              </div>
+          </div>
+          <div class="p-dialog-footer">
+              <button type="submit" pButton icon="pi pi-check" label="salvar" class="save-button"></button>
+              <button type="button" pButton icon="pi pi-times" label="cancelar" (click)="hideAddDialog()" class="cancel-button"></button>
+          </div>
+      </form>
+    </p-dialog>
+
+    <p-dialog header="Editar Carro" [(visible)]="displayEditDialog" [modal]="true" [style]="{ 'width': '500px', 'max-width': '90%' }">
+      <form (ngSubmit)="updateCarro(carro.carroId, carro)">
+          <div class="p-fluid">
+              <div class="p-field">
+                  <label for="nomeModelo" class="custom-label">Nome do Modelo:</label>
+                  <input type="text" id="nomeModelo" name="nomeModelo" [(ngModel)]="carro.nomeModelo" class="custom-input" required>
+              </div>
+              <div class="p-field">
+                  <label for="fabricante" class="custom-label">Fabricante:</label>
+                  <input type="text" id="fabricante" name="fabricante" [(ngModel)]="carro.fabricante" class="custom-input" required>
+              </div>
+              <div class="p-field">
+                  <label for="codigoUnico" class="custom-label">Código Único:</label>
+                  <input type="text" id="codigoUnico" name="codigoUnico" [(ngModel)]="carro.codigoUnico" class="custom-input" required>
+              </div>
+          </div>
+          <div class="p-dialog-footer">
+              <button type="submit" pButton icon="pi pi-check" label="salvar" class="save-button"></button>
+              <button type="button" pButton icon="pi pi-times" label="cancelar" (click)="hideEditDialog()" class="cancel-button"></button>
+          </div>
+      </form>
+    </p-dialog>
+
+

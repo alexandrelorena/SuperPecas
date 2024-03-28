@@ -9,8 +9,14 @@ import { CarrosResponse } from './carro.interface';
 })
 export class CarrosService {
   private baseUrl = 'http://localhost:8080/carro';
+  addCarro: any;
 
   constructor(private http: HttpClient) { }
+
+  verificarPecasAssociadas(carroId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/${carroId}/verificar-pecas-associadas`);
+  }
+
 
   getAllCarros(page: number, size: number): Observable<CarrosResponse> {
     const url = `${this.baseUrl}/listaTodosPaginado?page=${page}&size=${size}`;
@@ -18,14 +24,14 @@ export class CarrosService {
   }
 
   createCarro(carro: Carros): Observable<Carros> {
-    return this.http.post<Carros>(`${this.baseUrl}/create`, carro);
+    return this.http.post<Carros>(`${this.baseUrl}/`, carro);
   }
 
-  updateCarro(carroID: number, carro: Carros): Observable<Carros> {
-    return this.http.put<Carros>(`${this.baseUrl}/update/${carroID}`, carro);
+  updateCarro(carroId: number, carro: Carros): Observable<Carros> {
+    return this.http.put<Carros>(`${this.baseUrl}/${carroId}`, carro);
   }
 
-  deleteCarro(carroID: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/delete/${carroID}`);
+  deleteCarro(carroId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${carroId}`);
   }
 }

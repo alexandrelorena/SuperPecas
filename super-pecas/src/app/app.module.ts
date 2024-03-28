@@ -13,6 +13,9 @@ import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { PaginatorModule } from 'primeng/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogModule } from 'primeng/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -60,7 +63,10 @@ const routes: Routes = [
     ButtonModule,
     ToastModule,
     ToolbarModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    PaginatorModule,
+    MatDialogModule,
+    DialogModule
   ],
   providers: [
     ApiService,
