@@ -29,25 +29,7 @@ public class Peca {
     @OneToOne(optional = false)
     @JoinColumn(name = "CarroID", nullable = false)
     Carro carro;
-    // @Column(name = "Nome")
-    // private String nome;
-
-    // @Column(name = "Descricao")
-    // private String descricao;
-
-    // @Column(name = "NumeroSerie", unique = true)
-    // private String numeroSerie;
-
-    // @Column(name = "Fabricante")
-    // private String fabricante;
-
-    // @Column(name = "ModeloCarro")
-    // private String modeloCarro;
-
-    // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "CarroID", nullable = false)
-    // private Carro carro;
-
+    
     public int getPecaID() {
         return pecaID; 
     }
