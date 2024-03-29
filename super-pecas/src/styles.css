@@ -1,5 +1,7 @@
-@import '/media/alexandre/ARQUIVOS/GITHUB/SuperPecas/super-pecas/node_modules/primeng/resources/themes/saga-blue/theme.css';
-@import '/media/alexandre/ARQUIVOS/GITHUB/SuperPecas/super-pecas/node_modules/primeng/resources/components/table/table.css';
+/* @import '/media/alexandre/ARQUIVOS/GITHUB/SuperPecas/super-pecas/node_modules/primeng/resources/themes/saga-blue/theme.css';
+@import '/media/alexandre/ARQUIVOS/GITHUB/SuperPecas/super-pecas/node_modules/primeng/resources/components/table/table.css'; */
+/* @import '~primeng/resources/themes/saga-blue/theme.css';
+@import '~primeng/resources/components/table/table.css'; */
 
 .container {
   display: flex;

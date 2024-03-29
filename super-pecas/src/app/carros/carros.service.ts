@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Carros } from './../models/Carros';
 import { CarrosResponse } from './carro.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarrosService {
-  private baseUrl = 'http://localhost:8080/carro';
+  private baseUrl = 'http://4.228.57.162:8080/carro/listaTodos';
   addCarro: any;
 
   constructor(private http: HttpClient) { }

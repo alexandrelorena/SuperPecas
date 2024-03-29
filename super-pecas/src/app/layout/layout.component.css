@@ -1,0 +1,26 @@
+/* .container-content {
+  display: flex;
+  height: 100vh;
+  width: 87vw;
+} */
+
+.sidebar {
+  width: 200px; /* Largura da barra lateral */
+  background-color: #f0f0f0;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  height: 60px; /* Altura do cabeçalho */
+  background-color: #e0e0e0;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
