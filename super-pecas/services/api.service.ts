@@ -8,7 +8,7 @@ import { CarrosResponse } from '../src/app/carros/carro.interface';
 })
 export class ApiService {
 
-  private baseUrl = 'http://localhost:8080/carro/listaTodos'; // Remova "/listaTodos" do baseUrl
+  private baseUrl = 'http://4.228.57.162:8080/carro/listaTodos';
 
   constructor(private http: HttpClient) { }
 
