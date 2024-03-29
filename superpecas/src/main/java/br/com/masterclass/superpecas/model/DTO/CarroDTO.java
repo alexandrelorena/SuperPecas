@@ -6,7 +6,6 @@ public class CarroDTO {
     String fabricante;
     String codigoUnico;
 
-    // Getter e setter para carroId
     public int getCarroId() {
         return carroID;
     }
@@ -15,7 +14,6 @@ public class CarroDTO {
         this.carroID = carroID;
     }
 
-    // Getter e setter para nomeModelo
     public String getNomeModelo() {
         return nomeModelo;
     }
@@ -24,7 +22,6 @@ public class CarroDTO {
         this.nomeModelo = nomeModelo;
     }
 
-    // Getter e setter para fabricante
     public String getFabricante() {
         return fabricante;
     }
@@ -33,7 +30,6 @@ public class CarroDTO {
         this.fabricante = fabricante;
     }
 
-    // Getter e setter para codigoUnico
     public String getCodigoUnico() {
         return codigoUnico;
     }
