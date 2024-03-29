@@ -1,25 +1,25 @@
 package br.com.masterclass.superpecas.model.DTO;
 
+import br.com.masterclass.superpecas.model.Carro;
+
 public class PecaDTO {
-
-//    @JsonIgnore
-    private Long pecaID;
-
-    private String nome;
-
-    private String descricao;
-
-    private String numeroSerie;
-
-    private String fabricante;
-
-    private String modeloCarro;
-
-    private Carro carro;
+    int pecaID;
+    String nome;
+    String descricao;
+    String numeroSerie;
+    String fabricante;
+    String modeloCarro;
+    String carroNomeModelo;
+    String carroFabricante;
+    Integer carroId;
     
-    public Long getPecaID() { return pecaID; }
+    public int getPecaID() {
+        return pecaID; 
+    }
 
-    public void setPecaID(Long pecaID) { this.pecaID = pecaID; }
+    public void setPecaID(int pecaID) { 
+        this.pecaID = pecaID; 
+    }
 
     public String getNome() {
         return nome;
@@ -45,14 +45,6 @@ public class PecaDTO {
         this.descricao = descricao;
     }
 
-    public String getFabricante(){
-        return fabricante;
-    }
-
-    public void setFabricante(String fabricante){
-        this.fabricante = fabricante;
-    }
-
     public String getModeloCarro() {
         return modeloCarro;
     }
@@ -61,43 +53,35 @@ public class PecaDTO {
         this.modeloCarro = modeloCarro;
     }
 
-
-    public Carro getCarro() {
-        return carro;
+    public String getFabricante(){
+        return fabricante;
     }
 
-    public void setCarro(Carro carro) {
-        this.carro = carro;
+    public void setFabricante(String fabricante){
+        this.fabricante = fabricante;
     }
 
-    public static class Carro {
-        private String nomeModelo;
+    public Integer getCarroId() {
+        return carroId;
+    }
 
-        private String fabricante;
-        private Long carroID;
+    public void setCarroId(Integer carroId) {
+        this.carroId = carroId;
+    }
 
-        public String getNomeModelo() {
-            return nomeModelo;
-        }
+    public String getCarroNomeModelo() {
+        return carroNomeModelo;
+    }
 
-        public void setNomeModelo(String nomeModelo) {
-            this.nomeModelo = nomeModelo;
-        }
+    public void setCarroNomeModelo(String carroNomeModelo) {
+        this.carroNomeModelo = carroNomeModelo;
+    }
 
-        public String getFabricante() {
-            return fabricante;
-        }
+    public String getCarroFabricante() {
+        return carroFabricante;
+    }
 
-        public void setFabricante(String fabricante) {
-            this.fabricante = fabricante;
-        }
-
-        public Long getCarroId() {
-            return carroID;
-        }
-
-        public void setCarroId(Long carroID) {
-            this.carroID = carroID;
-        }
+    public void setCarroFabricante(String carroFabricante) {
+        this.carroFabricante = carroFabricante;
     }
 }

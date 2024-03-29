@@ -1,6 +1,6 @@
 package br.com.masterclass.superpecas.model.DTO;
 
 public interface TopCarroPecasDTO {
-    String getNomeModelo();
-    int getQuantidadePecas();
+    String getCarro();
+    Integer getQuantidadePecas();
 }

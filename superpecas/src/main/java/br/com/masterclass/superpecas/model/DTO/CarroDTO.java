@@ -1,17 +1,17 @@
 package br.com.masterclass.superpecas.model.DTO;
 
 public class CarroDTO {
-    private Long carroID;
-    private String nomeModelo;
-    private String fabricante;
-    private String codigoUnico;
+    int carroID;
+    String nomeModelo;
+    String fabricante;
+    String codigoUnico;
 
     // Getter e setter para carroId
-    public Long getCarroId() {
+    public int getCarroId() {
         return carroID;
     }
 
-    public void setCarroId(Long carroID) {
+    public void setCarroId(int carroID) {
         this.carroID = carroID;
     }
 

@@ -1,38 +1,58 @@
 package br.com.masterclass.superpecas.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Pecas")
 public class Peca {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PecaID")
-    private Long pecaID;
+    @Column(name = "PecaID", nullable = false)
+    int pecaID;
 
-    @Column(name = "Nome")
-    private String nome;
+    @Column(name = "Nome", nullable = false)
+    String nome;
 
-    @Column(name = "Descricao")
-    private String descricao;
+    @Column(name = "Descricao", nullable = false)
+    String descricao;
 
-    @Column(name = "NumeroSerie", unique = true)
-    private String numeroSerie;
+    @Column(name = "NumeroSerie", nullable = false)
+    String numeroSerie;
 
-    @Column(name = "Fabricante")
-    private String fabricante;
+    @Column(name = "Fabricante", nullable = false)
+    String fabricante;
 
-    @Column(name = "ModeloCarro")
-    private String modeloCarro;
+    @Column(name = "ModeloCarro", nullable = false)
+    String modeloCarro;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(optional = false)
     @JoinColumn(name = "CarroID", nullable = false)
-    private Carro carro;
+    Carro carro;
+    // @Column(name = "Nome")
+    // private String nome;
 
-    public Long getPecaID() { return pecaID; }
+    // @Column(name = "Descricao")
+    // private String descricao;
 
-    public void setPecaID(Long pecaID){
+    // @Column(name = "NumeroSerie", unique = true)
+    // private String numeroSerie;
+
+    // @Column(name = "Fabricante")
+    // private String fabricante;
+
+    // @Column(name = "ModeloCarro")
+    // private String modeloCarro;
+
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "CarroID", nullable = false)
+    // private Carro carro;
+
+    public int getPecaID() {
+        return pecaID; 
+    }
+
+    public void setPecaID(int pecaID){
         this.pecaID = pecaID;
     }
 
@@ -76,7 +96,6 @@ public class Peca {
         this.modeloCarro = modeloCarro;
     }
 
-    // Getter e Setter para o campo carro
     public Carro getCarro() {
         return carro;
     }
