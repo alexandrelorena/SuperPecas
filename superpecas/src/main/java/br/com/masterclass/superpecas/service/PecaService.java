@@ -68,7 +68,7 @@ public class PecaService {
     }
 
     public List<Peca> listaPecasPorCarroId(int carroId){
-        return pecaRepository.findByCarroId(carroId);
+        return pecaRepository.findByCarro_CarroID(carroId);
     }
 
     public List<TopCarroPecasDTO> listaTop10CarrosComMaisPecas(){
