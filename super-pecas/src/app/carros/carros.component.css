@@ -1,4 +1,4 @@
-
+/*
 .table-container {
   margin: 0 auto;
   width: 80%;
@@ -96,4 +96,12 @@
 .cancel-button {
   background-color: darkorange;
 
+}
+
+.car-img img {
+  width: 60px;
+  height: 60px;
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
 }

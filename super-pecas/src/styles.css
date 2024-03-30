@@ -1,7 +1,9 @@
-/* @import '/media/alexandre/ARQUIVOS/GITHUB/SuperPecas/super-pecas/node_modules/primeng/resources/themes/saga-blue/theme.css';
-@import '/media/alexandre/ARQUIVOS/GITHUB/SuperPecas/super-pecas/node_modules/primeng/resources/components/table/table.css'; */
-/* @import '~primeng/resources/themes/saga-blue/theme.css';
-@import '~primeng/resources/components/table/table.css'; */
+
+@import 'primeng/resources/primeng.css';
+@import 'primeflex/primeflex.css';
+@import 'primeicons/primeicons.css';
+@import 'primeng/resources/themes/saga-blue/theme.css';
+
 
 .container {
   display: flex;
@@ -51,9 +53,6 @@
 .text-container h1 {
   margin: 0;
 }
-
-
-
 
 
 html, body { height: 100%; }

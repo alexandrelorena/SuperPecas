@@ -8,15 +8,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 import { TableModule } from 'primeng/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { PaginatorModule } from 'primeng/paginator';
-import { MatDialogModule } from '@angular/material/dialog';
 import { DialogModule } from 'primeng/dialog';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -29,6 +29,7 @@ import { HomeComponent } from './home/home.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { ApiService } from '../../services/api.service';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -47,27 +48,31 @@ const routes: Routes = [
     ContentComponent,
     HomeComponent
    ],
+
   imports: [
+
     BrowserModule,
-    AppRoutingModule,
-    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
     HttpClientModule,
+    RouterModule.forRoot(routes),
+    AppRoutingModule,
     MatSidenavModule,
     MatButtonModule,
     MatInputModule,
-    CanvasJSAngularChartsModule,
     MatCardModule,
     MatListModule,
     MatIconModule,
+    MatPaginatorModule,
+    MatDialogModule,
     TableModule,
     ButtonModule,
     ToastModule,
     ToolbarModule,
-    MatPaginatorModule,
     PaginatorModule,
-    MatDialogModule,
-    DialogModule
+    DialogModule,
+    CanvasJSAngularChartsModule,
   ],
+
   providers: [
     ApiService,
     provideAnimationsAsync('noop')
