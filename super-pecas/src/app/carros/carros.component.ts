@@ -4,23 +4,29 @@ import { Carros } from '../models/Carros';
 import { CarrosService } from './carros.service';
 import { CarrosResponse } from './carro.interface';
 import { MatDialog } from '@angular/material/dialog';
-import { EditarCarroComponent } from './editar-carro/editar-carro.component';
+import { GerenciaCarrosComponent } from '../gerenciaCarros/gerenciaCarros.component';
 import { Router } from '@angular/router';
+import { ConfirmDialogComponent } from '../ConfirmDialog/ConfirmDialog.component';
+
 
 @Component({
   selector: 'app-carros',
   templateUrl: './carros.component.html',
   styleUrls: ['./carros.component.css']
 })
+
+
 export class CarrosComponent implements OnInit {
   carros: Carros[] = [];
+  filteredCarros: Carros[] = [];
+  searchText: string = '';
+  isEditMode: boolean = false;
   totalRecords = 0;
   first = 0;
   rows = 10;
   carrosSubscription: any;
   carro: Carros;
   carroEditFormVisible: { [key: number]: boolean } = {};
-  dialog: any;
   displayEditDialog: boolean = false;
   displayAddDialog: boolean = false;
   hideAddDialog: any;
@@ -29,11 +35,13 @@ export class CarrosComponent implements OnInit {
     fabricante: '',
     codigoUnico: '',
     carroId: 0
+
   };
 
   constructor(
     private carrosService: CarrosService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
     this.carro = {} as Carros;
   }
@@ -51,6 +59,7 @@ export class CarrosComponent implements OnInit {
       console.log('Dados recebidos do serviço:', response);
       this.carros = response.content;
       this.totalRecords = response.totalElements;
+      this.filteredCarros = [...this.carros];
 
       console.log('Carros:', this.carros);
     });
@@ -62,35 +71,13 @@ export class CarrosComponent implements OnInit {
   }
 
   openAddForm() {
-    // Exibir o diálogo de adição de carro
-    this.displayAddDialog = true;
-
-    // Chamar o serviço para criar o carro
-    this.carrosService.createCarro(this.novoCarro)
-      .subscribe({
-        next: (response: any) => {
-          // Verificar se a resposta foi bem-sucedida
-          if (response && response.status === 200) {
-            // Se o carro foi adicionado com sucesso, feche o diálogo e exiba a mensagem
-            this.displayAddDialog = false;
-            this.showMessage('Carro adicionado com sucesso!');
-          } else {
-            // Se houve um problema, exiba uma mensagem de erro
-            console.error('Erro ao adicionar o carro:', response);
-            this.showMessage('Erro ao adicionar o carro. Por favor, tente novamente mais tarde.');
-          }
-        },
-        error: (error: any) => {
-          // Se ocorrer um erro durante a solicitação, exiba uma mensagem de erro
-          console.error('Erro ao adicionar o carro:', error);
-          this.showMessage('Erro ao adicionar o carro. Por favor, tente novamente mais tarde.');
-        }
-      });
+    this.router.navigate(['/gerenciar']);
   }
-  openEditForm(carro: Carros) {
-    this.carro = { ...carro };
-    this.carroEditFormVisible[carro.carroId] = true;
-    this.displayEditDialog = true;
+
+  openEditForm(carroId: Carros) {
+    console.log(carroId);
+    this.isEditMode = true;
+    this.router.navigate(['/gerenciar', carroId]);
   }
 
   hideEditDialog() {
@@ -98,39 +85,80 @@ export class CarrosComponent implements OnInit {
     this.displayAddDialog = false;
   }
 
-  updateCarro(carroId: number, carro: Carros) {
-    this.carrosService.updateCarro(carroId, carro)
-      .subscribe({
-        next: () => {
-          this.hideEditDialog();
-          this.showMessage('Carro atualizado com sucesso!');
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
-        },
-        error: (error) => {
-          console.error('Erro ao atualizar o carro:', error);
-        }
-      });
-  }
-
   showMessage(message: string) {
     alert(message);
   }
 
-  deleteCarro(carroId: number) {
-    this.carrosService.deleteCarro(carroId)
+  salvarCarro() {
+    // Verifica se os campos estão vazios
+    if (!this.novoCarro.nomeModelo || !this.novoCarro.fabricante || !this.novoCarro.codigoUnico) {
+      this.showMessage('Todos os campos devem ser preenchidos.');
+      return;
+    }
+
+    // Se todos os campos estiverem preenchidos, continua com a operação de salvar
+    this.carrosService.createCarro(this.novoCarro)
       .subscribe({
         next: () => {
-          console.log('Carro excluído com sucesso!');
+          console.log('Carro criado com sucesso!');
+          // Limpa os campos e recarrega a lista de carros
+          this.limparCampos();
           this.loadCarros();
         },
-        error: (error) => {
-          console.error('Erro ao excluir o carro:', error);
+        error: (error: any) => {
+          console.error('Erro ao criar o carro:', error);
         }
       });
   }
 
+  limparCampos() {
+    // Limpa os campos
+    this.novoCarro = {
+      nomeModelo: '',
+      fabricante: '',
+      codigoUnico: '',
+      carroId: 0
+    };
+  }
+
+  openConfirmDialog(carroId: number): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      data: { message: 'Tem certeza de que deseja excluir este carro?', carroId: carroId } // Certifique-se de passar o objeto de dados corretamente
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.carrosService.deleteCarro(carroId)
+          .subscribe({
+            next: () => {
+              console.log('Carro excluído com sucesso!');
+              setTimeout(() => {
+                location.reload();
+              }, 1000);
+            },
+            error: (error) => {
+              console.error('Erro ao excluir o carro:', error);
+            }
+          });
+      }
+    });
+  }
+
+  filterCarros() {
+    if (this.searchText.trim()) {
+      this.filteredCarros = this.carros.filter(carro =>
+        carro.nomeModelo.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        carro.fabricante.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        carro.codigoUnico.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    } else {
+      this.filteredCarros = this.carros;
+    }
+  }
+  onSearchChange() {
+    this.filterCarros();
+  }
     ngOnDestroy() {
     if (this.carrosSubscription) {
       this.carrosSubscription.unsubscribe();

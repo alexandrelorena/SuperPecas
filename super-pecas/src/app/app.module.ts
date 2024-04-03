@@ -13,9 +13,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { TableModule } from 'primeng/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { PaginatorModule } from 'primeng/paginator';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { DialogModule } from 'primeng/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,12 +32,15 @@ import { HomeComponent } from './home/home.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { ApiService } from '../../services/api.service';
+import { GerenciaCarrosComponent } from './gerenciaCarros/gerenciaCarros.component';
+import { ConfirmDialogComponent } from './ConfirmDialog/ConfirmDialog.component';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'carros', component: CarrosComponent },
   { path: 'pecas', component: PecasComponent },
+  { path: 'gerenciar', component: GerenciaCarrosComponent },
   { path: '', redirectTo: '/carros', pathMatch: 'full' }
 ];
 @NgModule({
@@ -46,7 +52,9 @@ const routes: Routes = [
     HeaderComponent,
     TemplateComponent,
     ContentComponent,
-    HomeComponent
+    HomeComponent,
+    GerenciaCarrosComponent,
+    ConfirmDialogComponent
    ],
 
   imports: [
@@ -65,12 +73,15 @@ const routes: Routes = [
     MatPaginatorModule,
     MatDialogModule,
     TableModule,
+    InputTextModule,
     ButtonModule,
     ToastModule,
     ToolbarModule,
     PaginatorModule,
     DialogModule,
     CanvasJSAngularChartsModule,
+    InputGroupModule,
+    InputGroupAddonModule
   ],
 
   providers: [
@@ -78,6 +89,7 @@ const routes: Routes = [
     provideAnimationsAsync('noop')
   ],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }
 

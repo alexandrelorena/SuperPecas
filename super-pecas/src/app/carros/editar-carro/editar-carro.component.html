@@ -1,3 +1,21 @@
-<p>
-  editar-carro works!
-</p>
+<form (ngSubmit)="updateCarro(carro.carroId, carro)" *ngIf="editarCarro" class="p-formgrid">
+  <div class="editaCarro p-grid">
+      <div class="p-field">
+          <label for="nomeModelo" class="custom-label">Nome do Modelo:</label>
+          <input type="text" id="nomeModelo" name="nomeModelo" [(ngModel)]="carro.nomeModelo" class="custom-input" required>
+      </div>
+      <div class="p-field">
+          <label for="fabricante" class="custom-label">Fabricante:</label>
+          <input type="text" id="fabricante" name="fabricante" [(ngModel)]="carro.fabricante" class="custom-input" required>
+      </div>
+      <div class="p-field">
+          <label for="codigoUnico" class="custom-label">Código Único:</label>
+          <input type="text" id="codigoUnico" name="codigoUnico" [(ngModel)]="carro.codigoUnico" class="custom-input" required>
+      </div>
+  </div>
+  <div class="p-dialog-footer">
+      <button type="submit" pButton icon="pi pi-check" label="salvar" class="save-button"></button>
+      <button type="button" pButton icon="pi pi-times" label="cancelar" (click)="voltarParaCarros()" class="cancel-button"></button>
+  </div>
+</form>
+

@@ -1,72 +1,66 @@
-/*
-.table-container {
-  margin: 0 auto;
-  width: 80%;
+
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
 }
 
-/* .container-header {
+::ng-deep .p-datatable-wrapper {
+  max-height: 600px;
+}
 
-  height: 150px;
-  margin-left: 11px;
-  margin-top: 10px;
-  background-color: white;
-  display: flex;
-  align-items: center;
-} */
+::ng-deep .p-paginator {
+  background-color: #F8F9FA;
+}
+
+::ng-deep .p-paginator-summary {
+  height: 10px;
+}
+
 .carros-card {
   width: 87vw;
   display: flex;
   margin-left: 15px;
-  height: 165px;
-
+  margin-top: 15px;
+  height: 171px;
 }
-/* .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-} */
 
 .container-header {
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
   margin-top: 60px;
 }
 
 .text-container {
-  /* display: flex; */
   margin-left: 20px;
   margin-top: 5px;
 }
+
 .add-search {
-  /* margin-top: 10px; */
-  /* margin-right: 10px; */
   display: flex;
   justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 .add-car {
-  margin-top: 20px;
+  margin-top: 15px;
   margin-left: 15px;
 }
 
 .search-car {
-  margin-top: 10px;
+  margin-top: 15px;
   margin-bottom: -15px;
-
 }
+
+
 .car-card{
 
   background-color: #FFFFFF;
   width: 99%;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   margin-top: 0px;
   margin-left: 15px;
   height: 71vh;
-
 }
 
 .custom-label {
@@ -84,9 +78,6 @@
 
 .save-button, .cancel-button {
   background-color: lightseagreen;
-  /* display: block;
-  margin: 0 auto; */
-
 }
 
 .save-button {
@@ -95,7 +86,6 @@
 
 .cancel-button {
   background-color: darkorange;
-
 }
 
 .car-img img {
