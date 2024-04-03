@@ -34,6 +34,7 @@ import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { ApiService } from '../../services/api.service';
 import { GerenciaCarrosComponent } from './gerenciaCarros/gerenciaCarros.component';
 import { ConfirmDialogComponent } from './ConfirmDialog/ConfirmDialog.component';
+import { GerenciaPecasComponent } from './gerenciaPecas/gerenciaPecas.component';
 
 
 const routes: Routes = [
@@ -41,7 +42,8 @@ const routes: Routes = [
   { path: 'carros', component: CarrosComponent },
   { path: 'pecas', component: PecasComponent },
   { path: 'gerenciar', component: GerenciaCarrosComponent },
-  { path: '', redirectTo: '/carros', pathMatch: 'full' }
+  { path: 'gerenciar-pecas', component: GerenciaPecasComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ const routes: Routes = [
     ContentComponent,
     HomeComponent,
     GerenciaCarrosComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    GerenciaPecasComponent
    ],
 
   imports: [

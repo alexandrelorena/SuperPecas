@@ -11,7 +11,7 @@ describe('PecasComponent', () => {
       declarations: [PecasComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(PecasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

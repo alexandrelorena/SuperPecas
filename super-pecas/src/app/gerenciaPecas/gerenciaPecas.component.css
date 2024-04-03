@@ -1,0 +1,74 @@
+.pecas-card {
+  width: 87vw;
+  display: flex;
+  margin-left: 15px;
+  margin-top: 15px;
+  height: 171px;
+}
+
+.container-header {
+  display: flex;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.text-container {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.adicionaPeca {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 15px;
+}
+
+.custom-input {
+  width: calc(33.33% - 15px);
+  padding: 10px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  box-sizing: border-box;
+}
+
+.add {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+.add-search {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 4px;
+  margin-left: 15px;
+}
+
+.limparGravar {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 15px;
+  gap: 10px;
+}
+
+.add-search .add-peca button {
+  margin-bottom: 10px;
+}
+
+.p-dialog-footer button {
+  margin-right: 10px;
+}
+
+.save-button, .cancel-button {
+  background-color: lightseagreen;
+}
+
+.save-button {
+  background-color: lightseagreen;
+}
+
+.cancel-button {
+  background-color: darkorange;
+}

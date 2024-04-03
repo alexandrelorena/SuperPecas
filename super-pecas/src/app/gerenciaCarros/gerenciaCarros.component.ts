@@ -12,7 +12,7 @@ import { CarrosService } from '../carros/carros.service';
 export class GerenciaCarrosComponent implements OnInit {
   carro: Carros = new Carros();
   isEditing: boolean = false;
-  isEditMode: boolean = false;
+  // isEditMode: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,

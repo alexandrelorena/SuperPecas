@@ -15,7 +15,7 @@
 
 <div class="add-search">
   <div class="add-peca">
-    <button mat-stroked-button color="primary">Adicionar Peça</button>
+    <button mat-stroked-button color="primary" (click)="openAddForm()">Adicionar Peça</button>
   </div>
   <div class="search-peca">
     <mat-form-field>
@@ -23,9 +23,9 @@
     </mat-form-field>
   </div>
 </div>
-<mat-card class="car-card">
+<mat-card class="peca-card">
   <div class="car-table-container">
-    <p-table [value]="pecas" [paginator]="false" [rows]="rows" [totalRecords]="totalRecords">
+    <p-table [value]="filteredPecas" [paginator]="false" [rows]="rows" [totalRecords]="totalRecords">
       <ng-template pTemplate="header">
           <tr>
               <th>Id</th>
@@ -34,86 +34,28 @@
               <th>NumeroSerie</th>
               <th>Fabricante</th>
               <th>ModeloCarro</th>
-              <th>CarroID</th>
+              <!-- <th>CarroId</th> -->
               <th>Ações</th>
           </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-carro>
-          <tr>
+      <ng-template pTemplate="body" let-peca>
+          <tr class="p-datatable-tbod">
               <td>{{ peca.pecaId }}</td>
               <td>{{ peca.nome }}</td>
               <td>{{ peca.descricao }}</td>
               <td>{{ peca.numeroSerie }}</td>
               <td>{{ peca.fabricante }}</td>
               <td>{{ peca.modeloCarro }}</td>
-              <td>{{ peca.carroID }}</td>
+              <!-- <td>{{ peca.carroId }}</td> -->
               <td>
-                  <!-- <button (click)="openEditForm(peca)">Alterar</button>
-                  <button (click)="deletePeca(peca.pecaId)">Excluir</button> -->
+                <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (click)="openEditForm(peca)">
+                </p-button>
+                <p-button icon="pi pi-trash"  [rounded]="true" [text]="true" severity="danger " (click)="openConfirmDialog(peca.pecaId)">
+                </p-button>
               </td>
           </tr>
       </ng-template>
     </p-table>
   </div>
-  <!-- <p-paginator [showCurrentPageReport]="true" currentPageReportTemplate="Exibindo {{first + 1}} - {{first + rows}} de {{totalRecords}} registros" (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords"></p-paginator> -->
-
-
+  <p-paginator [showCurrentPageReport]="true" currentPageReportTemplate="Exibindo {{first + 1}} - {{first + rows}} de {{totalRecords}} registros" (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords"></p-paginator>
 </mat-card>
-
-<!-- <p-dialog header="Cadastrar Peça" [(visible)]="displayAddDialog" [modal]="true" [style]="{ 'width': '500px', 'max-width': '90%' }">
-  <form (ngSubmit)="openAddForm()">
-      <div class="p-fluid">
-          <div class="p-field">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" [(ngModel)]="peca.nome" required>
-          </div>
-          <div class="p-field">
-            <label for="descricao">Descrição:</label>
-            <input type="text" name="descricao" [(ngModel)]="peca.descricao" required>
-          </div>
-          <div class="p-field">
-            <label for="numeroSerie">Número de Série:</label>
-            <input type="text" name="numeroSerie" [(ngModel)]="peca.numeroSerie" required>
-          </div>
-          <div class="p-field">
-            <label for="fabricante">Fabricante:</label>
-            <input type="text" name="fabricante" [(ngModel)]="peca.fabricante" required>
-          </div>
-          <div class="p-field">
-            <label for="modeloCarro">Modelo do carro associado:</label>
-            <input type="text" name="modeloCarro" [(ngModel)]="peca.modeloCarro" required>
-          </div>
-          <div class="p-field">
-            <label for="carroID">Carro:</label>
-            <input type="text" name="carroID" [(ngModel)]="peca.carroID" required>
-          </div>
-      </div>
-      <div class="p-dialog-footer">
-          <button type="submit" pButton icon="pi pi-check" label="salvar" class="save-button"></button>
-          <button type="button" pButton icon="pi pi-times" label="cancelar" (click)="hideAddDialog()" class="cancel-button"></button>
-      </div>
-  </form>
-</p-dialog>
-
-<p-dialog header="Editar Peça" [(visible)]="displayEditDialog" [modal]="true" [style]="{ 'width': '500px', 'max-width': '90%' }">
-  <form (ngSubmit)="updateCarro(carro.carroId, carro)">
-      <div class="p-fluid">
-          <div class="p-field">
-              <label for="nomeModelo" class="custom-label">Nome do Modelo:</label>
-              <input type="text" id="nomeModelo" name="nomeModelo" [(ngModel)]="carro.nomeModelo" class="custom-input" required>
-          </div>
-          <div class="p-field">
-              <label for="fabricante" class="custom-label">Fabricante:</label>
-              <input type="text" id="fabricante" name="fabricante" [(ngModel)]="carro.fabricante" class="custom-input" required>
-          </div>
-          <div class="p-field">
-              <label for="codigoUnico" class="custom-label">Código Único:</label>
-              <input type="text" id="codigoUnico" name="codigoUnico" [(ngModel)]="carro.codigoUnico" class="custom-input" required>
-          </div>
-      </div>
-      <div class="p-dialog-footer">
-          <button type="submit" pButton icon="pi pi-check" label="salvar" class="save-button"></button>
-          <button type="button" pButton icon="pi pi-times" label="cancelar" (click)="hideEditDialog()" class="cancel-button"></button>
-      </div>
-  </form>
-</p-dialog> -->

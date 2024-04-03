@@ -1,3 +1,21 @@
+
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+::ng-deep .p-datatable-wrapper {
+  max-height: 600px;
+}
+
+::ng-deep .p-paginator {
+  background-color: #F8F9FA;
+}
+
+::ng-deep .p-paginator-summary {
+  height: 10px;
+}
+
 .add-peca {
   margin-top: 30px;
   margin-left: 21px;
@@ -11,4 +29,84 @@
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
+}
+
+.carros-card {
+  width: 87vw;
+  display: flex;
+  margin-left: 15px;
+  margin-top: 15px;
+  height: 171px;
+}
+
+.container-header {
+  display: flex;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.text-container {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.add-search {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.add-car {
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.search-car {
+  margin-top: 15px;
+  margin-bottom: -15px;
+}
+
+
+.peca-card{
+
+  background-color: #FFFFFF;
+  width: 99%;
+  display: flex;
+  justify-content: center;
+  margin-top: 0px;
+  margin-left: 15px;
+  height: 71vh;
+}
+
+.custom-label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.custom-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.save-button, .cancel-button {
+  background-color: lightseagreen;
+}
+
+.save-button {
+  background-color: lightseagreen;
+}
+
+.cancel-button {
+  background-color: darkorange;
+}
+
+.car-img img {
+  width: 60px;
+  height: 60px;
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
 }

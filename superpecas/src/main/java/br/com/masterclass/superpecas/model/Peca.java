@@ -8,8 +8,8 @@ import jakarta.validation.constraints.NotNull;
 public class Peca {
 
     @Id
-    @Column(name = "PecaID", nullable = false)
-    int pecaID;
+    @Column(name = "PecaId", nullable = false)
+    int pecaId;
 
     @Column(name = "Nome", nullable = false)
     String nome;
@@ -27,15 +27,15 @@ public class Peca {
     String modeloCarro;
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "CarroID", nullable = false)
+    @JoinColumn(name = "CarroId", nullable = false)
     Carro carro;
     
-    public int getPecaID() {
-        return pecaID; 
+    public int getPecaId() {
+        return pecaId; 
     }
 
-    public void setPecaID(int pecaID){
-        this.pecaID = pecaID;
+    public void setPecaId(int pecaId){
+        this.pecaId = pecaId;
     }
 
     public String getNome(){

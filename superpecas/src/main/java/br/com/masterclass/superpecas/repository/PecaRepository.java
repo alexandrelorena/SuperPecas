@@ -22,7 +22,7 @@ public interface PecaRepository extends JpaRepository<Peca, Integer> {
     @Query(value = "SELECT c FROM Peca c WHERE lower(c.nome) like lower(concat('%', ?1,'%')) OR lower(c.numeroSerie) like lower(concat('%', ?1,'%')) OR lower(c.fabricante) like lower(concat('%', ?1,'%')) OR lower(c.modeloCarro) like lower(concat('%', ?1,'%'))")
     Page<Peca> findByNomeOrNumeroSerieOrFabricanteOrModeloCarro(String termo, Pageable pageable);
 
-    List<Peca> findByCarro_CarroID(int carroId);
+    List<Peca> findByCarro_CarroId(int carroId);
 
     @Query(nativeQuery = true, value = "SELECT Count(pe.PecaId) 'quantidade', CONCAT(ca.NomeModelo, '/', ca.Fabricante) 'carro' FROM Pecas pe "
         + "INNER JOIN Carros ca ON ca.CarroId = pe.CarroId "

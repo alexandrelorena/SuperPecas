@@ -50,6 +50,14 @@
   display: flex;
   align-items: center;
 }
+
+.peca-img img {
+  width: 60px;
+  height: 60px;
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
+}
 .text-container h1 {
   margin: 0;
 }

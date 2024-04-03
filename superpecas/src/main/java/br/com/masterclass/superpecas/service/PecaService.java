@@ -46,7 +46,7 @@ public class PecaService {
     }
 
     public Peca editaPeca(Peca pecaPut){
-        Peca peca = pecaRepository.findById(pecaPut.getPecaID()).orElse(null);
+        Peca peca = pecaRepository.findById(pecaPut.getPecaId()).orElse(null);
 
         if (peca == null){
             return null;
@@ -54,7 +54,7 @@ public class PecaService {
 
         Peca existeMesmoNome = pecaRepository.findByNomeAndNumeroSerie(pecaPut.getNome(), pecaPut.getNumeroSerie());
 
-        if (existeMesmoNome != null && existeMesmoNome.getPecaID()!= pecaPut.getPecaID()){
+        if (existeMesmoNome != null && existeMesmoNome.getPecaId()!= pecaPut.getPecaId()){
             return null;
         }
 
@@ -68,7 +68,7 @@ public class PecaService {
     }
 
     public List<Peca> listaPecasPorCarroId(int carroId){
-        return pecaRepository.findByCarro_CarroID(carroId);
+        return pecaRepository.findByCarro_CarroId(carroId);
     }
 
     public List<TopCarroPecasDTO> listaTop10CarrosComMaisPecas(){
