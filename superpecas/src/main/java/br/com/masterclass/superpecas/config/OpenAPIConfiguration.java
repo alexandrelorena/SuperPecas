@@ -30,25 +30,3 @@ public class OpenAPIConfiguration {
         return new OpenAPI().info(information).servers(List.of(server));
     }
 }
-
-// @Configuration
-// public class OpenAPIConfiguration {
-
-//     @Bean
-//     public Docket customOpenAPI() {
-//         return new Docket(DocumentationType.SWAGGER_2)
-//                 .select()
-//                 .apis(RequestHandlerSelectors.basePackage("br.com.masterclass.superpecas.controller"))
-//                 .paths(PathSelectors.any())
-//                 .build()
-//                 .apiInfo(apiInfo());
-//     }
-
-//     private ApiInfo apiInfo() {
-//         return new ApiInfoBuilder()
-//                 .title("API Super Peças")
-//                 .description("Documentação da API para Super Peças")
-//                 .version("1.0.0")
-//                 .build();
-//     }
-// }

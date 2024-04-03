@@ -53,7 +53,7 @@ public class CarroService {
     }
 
     public Carro editaCarro(Carro carroPut){
-        Carro carro = carroRepository.findById(carroPut.getCarroID()).orElse(null);
+        Carro carro = carroRepository.findById(carroPut.getCarroId()).orElse(null);
 
         if (carro == null){
             return null;
@@ -61,7 +61,7 @@ public class CarroService {
 
         Carro existeMesmoNome = carroRepository.findByNomeModeloOrCodigoUnico(carroPut.getNomeModelo(), carroPut.getCodigoUnico());
 
-        if (existeMesmoNome != null && existeMesmoNome.getCarroID()!= carroPut.getCarroID()){
+        if (existeMesmoNome != null && existeMesmoNome.getCarroId()!= carroPut.getCarroId()){
             return null;
         }
 
@@ -75,7 +75,7 @@ public class CarroService {
             return false;
         }
 
-        List<Peca> existePeca = pecaService.listaPecasPorCarroId(carro.getCarroID());
+        List<Peca> existePeca = pecaService.listaPecasPorCarroId(carro.getCarroId());
 
         if (existePeca.isEmpty()){
             carroRepository.delete(carro);

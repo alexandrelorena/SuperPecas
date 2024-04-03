@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotNull;
 public class Carro {
     @Id
     @Column(name = "CarroID", nullable = false)
-    int carroID;
+    int carroId;
     @Column(name = "NomeModelo", nullable = false)
     String nomeModelo;
     @NotNull
@@ -19,12 +19,12 @@ public class Carro {
     @Column(name = "CodigoUnico", nullable = false)
     String codigoUnico;
 
-    public int getCarroID() {
-        return carroID;
+    public int getCarroId() {
+        return carroId;
     }
 
-    public void setCarroID(int carroID) {
-        this.carroID = carroID;
+    public void setCarroId(int carroId) {
+        this.carroId = carroId;
     }
 
     public String getNomeModelo() {
