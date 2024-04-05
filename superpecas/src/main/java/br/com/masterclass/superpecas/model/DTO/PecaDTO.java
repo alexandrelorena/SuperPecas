@@ -3,7 +3,7 @@ package br.com.masterclass.superpecas.model.DTO;
 import br.com.masterclass.superpecas.model.Carro;
 
 public class PecaDTO {
-    int pecaID;
+    int pecaId;
     String nome;
     String descricao;
     String numeroSerie;
@@ -13,12 +13,12 @@ public class PecaDTO {
     String carroFabricante;
     Integer carroId;
     
-    public int getPecaID() {
-        return pecaID; 
+    public int getPecaId() {
+        return pecaId; 
     }
 
-    public void setPecaID(int pecaID) { 
-        this.pecaID = pecaID; 
+    public void setPecaId(int pecaId) { 
+        this.pecaId = pecaId; 
     }
 
     public String getNome() {

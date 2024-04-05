@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 public class Peca {
 
     @Id
-    @Column(name = "PecaId", nullable = false)
+    @Column(name = "PecaID", nullable = false)
     int pecaId;
 
     @Column(name = "Nome", nullable = false)
@@ -27,7 +27,7 @@ public class Peca {
     String modeloCarro;
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "CarroId", nullable = false)
+    @JoinColumn(name = "CarroID", nullable = false)
     Carro carro;
     
     public int getPecaId() {
