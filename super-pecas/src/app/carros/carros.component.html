@@ -46,7 +46,7 @@
                   <td>
                     <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (click)="openEditForm(carro.carroId)">
                     </p-button>
-                    <p-button icon="pi pi-trash"  [rounded]="true" [text]="true" severity="danger " (click)="openConfirmDialog(carro.carroId)">
+                    <p-button icon="pi pi-trash"  [rounded]="true" [text]="true" severity="danger " (click)="openConfirmDialog(carro.carroId, carro.nomeModelo)">
                     </p-button>
                   </td>
               </tr>

@@ -1,121 +1,130 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
-
-interface DadosTop10Fabricantes {
-  label: string;
-  y: number;
-}
-
-interface DadosCarrosEPecas {
-  label: string;
-  y: number;
-}
+import { NotificationType, NotificationsService } from 'angular2-notifications';
+import { Subject, takeUntil } from 'rxjs';
+import { CarrosService } from '../carros/carros.service';
+import { PecasService } from '../pecas/pecas.service';
+import { Top10CarroComMaisPecas } from '../models/top10carros';
+import { Top10Fabricantes } from '../models/top10fabricantes';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  Top10Fabricantes: any;
-  CarrosePecas: any;
+  private unsubscribe = new Subject<void>;
 
-  constructor(private http: HttpClient) {}
+  top10fabricantes!: Top10Fabricantes[];
+  top10CarroComMaisPecas!: Top10CarroComMaisPecas[];
 
-  ngOnInit() {
-    this.http.get<any>('./carro/listaTop10Fabricantes').subscribe(data => {
-      console.log('Dados retornados da solicitação HTTP:', data);
-      this.Top10Fabricantes = {
-        title: { text: 'Top 10 Fabricantes' },
-        data: [{
-          type: 'pie',
-          dataPoints: data.map((item: { label: any; y: any; }) => ({ label: item.label, y: item.y }))
-        }]
-      };
-    });
+  data!: any;
+  options: any;
 
-    this.http.get<any>('carro/listaTop10CarroComMaisPecas').subscribe(data => {
-      this.CarrosePecas = {
-        title: { text: 'Carros e Peças' },
-        axisX: { labelAngle: 135 },
-        axisY: { title: 'Quantidade' },
-        data: [{
-          type: 'column',
-          dataPoints: data.map((item: { label: any; y: any; }) => ({ label: item.label, y: item.y }))
-        }]
-      };
-    });
+  chartOptionsPie: any;
+  chartOptionsColumn: any;
+  _reloadPie = false;
+  _reloadColumn = false;
+
+  constructor(private carrosService: CarrosService, private pecasService: PecasService, private _notifications: NotificationsService) {
+
   }
+
+  ngOnInit(): void {
+    this.getTop10Fabricantes();
+    this.getTop10PecasCarros();
+  }
+
+
+  getTop10Fabricantes() {
+    this.carrosService.getTop10Fabricantes()
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe({
+        next: (response) => {
+          this.top10fabricantes = response;
+          this.callPieChart(this.top10fabricantes);
+        },
+        error: (error) => {
+          this._notifications.create("Erro", error.error, NotificationType.Error);
+        }
+      });
+  }
+
+
+  getTop10PecasCarros() {
+    this.pecasService.getTop10CarroComMaisPecas()
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe({
+        next: (response) => {
+          this.top10CarroComMaisPecas = response;
+          this.callColumnChart(this.top10CarroComMaisPecas);
+        },
+        error: (error) => {
+          this._notifications.create("Erro", error.error, NotificationType.Error);
+        }
+      });
+  }
+
+  callPieChart(top10fabricantes: Top10Fabricantes[]) {
+    const data = top10fabricantes.map((x) => {
+      return { y: x.quantidade, label: x.fabricante };
+    });
+
+    this.chartOptionsPie = {
+      animationEnabled: true,
+      animationDuration: 500,
+      data: [{
+        type: "pie",
+        indexLabel: "{label}  #percent%",
+        percentFormatString: "#0.##",
+        dataPoints: data
+      }]
+    };
+
+    this._reloadPie = true;
+
+    setTimeout(() => {
+      this.removeElementsByClass("canvasjs-chart-credit");
+    }, 100);
+  }
+
+  callColumnChart(top10CarroComMaisPecas: Top10CarroComMaisPecas[]) {
+    const data = top10CarroComMaisPecas.map((x) => {
+      return { y: x.quantidade, label: x.carro };
+    });
+
+    this.chartOptionsColumn = {
+      animationEnabled: true,
+      animationDuration: 500,
+      theme: "light2", // "light1", "light2", "dark1", "dark2"
+      axisY: {
+        title: "Quantidade",
+        interval: 1,
+        padding: 20
+      },
+      axisX: {
+        interval: 1,
+        labelFontSize: 10,
+      },
+      data: [{
+        type: "column",
+        showInLegend: false,
+        dataPoints: data,
+        interval: 1
+      }]
+    };
+
+    this._reloadColumn = true;
+
+    setTimeout(() => {
+      this.removeElementsByClass("canvasjs-chart-credit");
+    }, 10);
+  }
+
+  removeElementsByClass(className: string) {
+    const elements = document.getElementsByClassName(className);
+    while (elements.length > 0) {
+      elements[0].parentNode!.removeChild(elements[0]);
+    }
+  }
+
 }
-
-// import { Component, OnInit } from '@angular/core';
-
-// import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
-
-// @Component({
-//   selector: 'app-home',
-//   templateUrl: './home.component.html',
-//   styleUrls: ['./home.component.css'],
-
-// })
-// export class HomeComponent implements OnInit {
-//   Top10Fabricantes: any;
-//   CarrosePecas: any;
-
-
-//   constructor() { }
-
-//   ngOnInit() {
-
-//     this.Top10Fabricantes = {
-//       title: {
-//         text: ""
-//       },
-//       data: [{
-//         type: "pie",
-//         dataPoints: [
-//           { label: "Fab1",  y: 20  },
-//           { label: "Fab2", y: 25  },
-//           { label: "Fab3", y: 35  },
-//           { label: "Fab4",  y: 40  },
-//           { label: "Fab5",  y: 38  },
-//           { label: "Fab6",  y: 20  },
-//           { label: "Fab7", y: 25  },
-//           { label: "Fab8", y: 35  },
-//           { label: "Fab9",  y: 40  },
-//           { label: "Fab10",  y: 38  }
-//         ]
-//       }]
-//     };
-
-//     this.CarrosePecas = {
-//       title: {
-//         text: ""
-//       },
-
-//   axisX: {
-//     labelAngle: 135
-//     },
-//     axisY: {
-//     title: "Quantidade"
-//     },
-//       data: [{
-//         type: "column",
-//         dataPoints: [
-//           { label: "CarroPeças1",  y: 20  },
-//           { label: "CarroPeças2", y: 25  },
-//           { label: "CarroPeças3", y: 35  },
-//           { label: "CarroPeças4",  y: 40  },
-//           { label: "CarroPeças5",  y: 38  },
-//           { label: "CarroPeças6",  y: 20  },
-//           { label: "CarroPeças7", y: 25  },
-//           { label: "CarroPeças8", y: 35  },
-//           { label: "CarroPeças9",  y: 40  },
-//           { label: "CarroPeças10",  y: 38  }
-//         ]
-//       }]
-//     };
-
-//   }
-// }

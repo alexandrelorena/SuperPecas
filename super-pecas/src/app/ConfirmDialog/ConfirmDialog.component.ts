@@ -12,7 +12,8 @@ export class ConfirmDialogComponent implements OnInit {
   message: string;
   carroId: any;
   loadCarros: any;
-openConfirmDialog: any;
+  openConfirmDialog: any;
+  nomeModelo: any;
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmDialogComponent>,
@@ -21,6 +22,7 @@ openConfirmDialog: any;
   ) {
     this.message = data;
     this.carroId = data.carroId;
+    this.nomeModelo = data.nomeModelo;
   }
 
   ngOnInit(): void {
@@ -38,11 +40,11 @@ openConfirmDialog: any;
           setTimeout(() => {
             location.reload();
           }, 1000);
-          this.dialogRef.close(true); // Feche o diálogo com um valor verdadeiro para indicar sucesso
+          this.dialogRef.close(true);
         },
         error: (error: any) => {
           console.error('Erro ao excluir o carro:', error);
-          this.dialogRef.close(false); // Feche o diálogo com um valor falso para indicar falha
+          this.dialogRef.close(false);
         }
       });
   }

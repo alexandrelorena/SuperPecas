@@ -1,12 +1,13 @@
-
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Carros } from '../models/Carros';
-import { PecasResponse } from './peca.interface';
-import { Pecas } from '../models/Pecas';
+import { Subject, takeUntil } from 'rxjs';
+import { NotificationType, NotificationsService } from 'angular2-notifications';
+import { PecasResponse } from '../models/Pecas';
+import { Peca } from '../models/Pecas';
 import { PecasService } from './pecas.service';
-import { ConfirmDialogComponent } from '../ConfirmDialog/ConfirmDialog.component';
+import { Carros } from './../carros/carro.interface';
+import { ConfirmDialogPecaComponent } from '../ConfirmDialogPeca/ConfirmDialogPeca.component';
 
 @Component({
   selector: 'app-pecas',
@@ -14,35 +15,37 @@ import { ConfirmDialogComponent } from '../ConfirmDialog/ConfirmDialog.component
   styleUrl: './pecas.component.css'
 })
 export class PecasComponent implements OnInit {
-  pecas: Pecas[] = [];
-  filteredPecas: Pecas[] = [];
+  pecas: Peca[] = [];
+  filteredPecas: Peca[] = [];
   searchText: string = '';
   isEditMode: boolean = false;
   totalRecords = 0;
   first = 0;
   rows = 10;
   pecasSubscription: any;
-  peca: Pecas;
+  peca: Peca;
   pecaEditFormVisible: { [key: number]: boolean } = {};
   displayEditDialog: boolean = false;
   displayAddDialog: boolean = false;
   hideAddDialog: any;
-  novaPeca: Pecas = {
-    pecaId: 0,
-    nome: '',
-    descricao: '',
-    numeroSerie: '',
-    fabricante: '',
-    modeloCarro: '',
-    carroId: 0
-  };
+  Carro!: Carros;
+    novaPeca: Peca = {
+      nome: '',
+      descricao: '',
+      numeroSerie: '',
+      fabricante: '',
+      modeloCarro: '',
+      pecaId: 0,
+      carroId: 0
+    };
+
 
 constructor(
   private pecasService: PecasService,
   private router: Router,
   private dialog: MatDialog
 ) {
-  this.peca = {} as Pecas;
+  this.peca = {} as Peca;
 }
 
 ngOnInit() {
@@ -95,12 +98,10 @@ salvarPeca() {
     return;
   }
 
-  // Se todos os campos estiverem preenchidos, continua com a operação de salvar
-  this.pecasService.createPeca(this.novaPeca)
+    this.pecasService.createPeca(this.novaPeca)
     .subscribe({
       next: () => {
         console.log('Peça criada com sucesso!');
-        // Limpa os campos e recarrega a lista de carros
         this.limparCampos();
         this.loadPecas();
       },
@@ -111,7 +112,6 @@ salvarPeca() {
 }
 
 limparCampos() {
-  // Limpa os campos
   this.novaPeca = {
     pecaId: 0,
     nome: '',
@@ -123,10 +123,10 @@ limparCampos() {
   };
 }
 
-openConfirmDialog(pecaId: number): void {
-  const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-    width: '250px',
-    data: { message: 'Tem certeza de que deseja excluir esta peça?', pecaId: pecaId } // Certifique-se de passar o objeto de dados corretamente
+openConfirmDialogPeca(pecaId: number, nome: string): void {
+  const dialogRef = this.dialog.open(ConfirmDialogPecaComponent, {
+    width: '600px',
+    data: { message: 'Tem certeza de que deseja excluir esta peça?', pecaId: pecaId, nome: nome}
   });
 
   dialogRef.afterClosed().subscribe((result: any) => {

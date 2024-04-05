@@ -1,25 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Pecas} from '../models/Pecas';
-import { Carros } from '../models/Carros';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { Subject, takeUntil } from 'rxjs';
+import { Peca } from '../models/Pecas';
+// import { Pecas } from '../pecas/peca.interface';
 import { PecasService } from '../pecas/pecas.service';
 import { CarrosService } from '../carros/carros.service';
-
+// import { Carros } from '../carros/carro.interface';
+import { Carro } from '../models/Carros';
+// import { NotificationType } from 'angular2-notifications';
 
 @Component({
-  selector: 'app-gerenciaPecas',
+  selector: 'app-gerencia-Pecas',
   templateUrl: './gerenciaPecas.component.html',
   styleUrls: ['./gerenciaPecas.component.css']
 })
+
 export class GerenciaPecasComponent implements OnInit {
-  peca: Pecas = new Pecas();
+  peca: Peca = {} as Peca;
   isEditing: boolean = false;
-  isEditMode: boolean = false;
-  // carroId: 0;
+  carros: Carro[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private pecasService: PecasService
+    private pecasService: PecasService,
+    private carrosService: CarrosService
 
   ) {}
 
@@ -29,13 +35,13 @@ export class GerenciaPecasComponent implements OnInit {
       if (pecaId) {
         // Editar
         this.isEditing = true;
-        this.pecasService.getPeca(pecaId).subscribe((peca: Pecas) => {
+        this.pecasService.getPeca(pecaId).subscribe((peca: Peca) => {
           this.peca = peca;
         });
       } else {
         // Cadastrar
         this.isEditing = false;
-        this.peca = new Pecas();
+        this.peca = {} as Peca;
       }
     });
   }
@@ -48,7 +54,7 @@ export class GerenciaPecasComponent implements OnInit {
     }
 
     if (this.isEditing) {
-      // Salvar carro editado
+
       this.pecasService.updatePeca({
         pecaId: this.peca.pecaId,
         nome: this.peca.nome,
@@ -56,20 +62,20 @@ export class GerenciaPecasComponent implements OnInit {
         numeroSerie: this.peca.numeroSerie,
         fabricante: this.peca.fabricante,
         modeloCarro: this.peca.modeloCarro,
-
+        carroId: this.peca.carroId
       }).subscribe({
         next: () => {
           this.router.navigate(['/pecas']);
           alert('Peça editada com sucesso!');
         },
         error: (error: any) => {
-          console.error('Erro ao editar o carro:', error);
+          console.error('Erro ao editar o peça:', error);
           alert('Erro ao editar a peça. Por favor, tente novamente mais tarde.');
         }
       });
 
     } else {
-      // Salvar novo carro
+
       this.pecasService.createPeca(this.peca).subscribe({
         next: () => {
           this.router.navigate(['/cadastrar-peca']);
@@ -91,7 +97,7 @@ export class GerenciaPecasComponent implements OnInit {
   }
 
   limparCampos() {
-    this.peca = new Pecas();
+    this.peca = {} as Peca;
   }
 
 }

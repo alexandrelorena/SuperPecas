@@ -10,8 +10,10 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'carros', component: CarrosComponent },
   { path: 'pecas', component: PecasComponent },
-  { path: 'gerenciar/:carroId', component: GerenciaCarrosComponent },
+  { path: 'gerenciar-carros/:carroId', component: GerenciaCarrosComponent },
   { path: 'gerenciar-pecas/:pecaId', component: GerenciaPecasComponent },
+  { path: 'gerenciar-carros', component: GerenciaCarrosComponent },
+  { path: 'gerenciar-pecas', component: GerenciaPecasComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 

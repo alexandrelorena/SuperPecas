@@ -35,18 +35,20 @@ import { ApiService } from '../../services/api.service';
 import { GerenciaCarrosComponent } from './gerenciaCarros/gerenciaCarros.component';
 import { ConfirmDialogComponent } from './ConfirmDialog/ConfirmDialog.component';
 import { GerenciaPecasComponent } from './gerenciaPecas/gerenciaPecas.component';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { MatOptionModule } from '@angular/material/core';
+import { ConfirmDialogPecaComponent } from './ConfirmDialogPeca/ConfirmDialogPeca.component';
 
-
-const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'carros', component: CarrosComponent },
-  { path: 'pecas', component: PecasComponent },
-  { path: 'gerenciar', component: GerenciaCarrosComponent },
-  { path: 'gerenciar-pecas', component: GerenciaPecasComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
-];
+// const routes: Routes = [
+//   { path: 'home', component: HomeComponent },
+//   { path: 'carros', component: CarrosComponent },
+//   { path: 'pecas', component: PecasComponent },
+//   { path: 'gerenciar', component: GerenciaCarrosComponent },
+//   { path: 'gerenciar-pecas', component: GerenciaPecasComponent },
+//   { path: '', redirectTo: '/home', pathMatch: 'full' }
+// ];
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     MenuComponent,
     CarrosComponent,
@@ -57,7 +59,8 @@ const routes: Routes = [
     HomeComponent,
     GerenciaCarrosComponent,
     ConfirmDialogComponent,
-    GerenciaPecasComponent
+    GerenciaPecasComponent,
+      ConfirmDialogPecaComponent
    ],
 
   imports: [
@@ -65,7 +68,7 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
+    RouterModule,
     AppRoutingModule,
     MatSidenavModule,
     MatButtonModule,
@@ -75,6 +78,7 @@ const routes: Routes = [
     MatIconModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatOptionModule,
     TableModule,
     InputTextModule,
     ButtonModule,
@@ -84,7 +88,9 @@ const routes: Routes = [
     DialogModule,
     CanvasJSAngularChartsModule,
     InputGroupModule,
-    InputGroupAddonModule
+    InputGroupAddonModule,
+    SimpleNotificationsModule.forRoot(),
+
   ],
 
   providers: [

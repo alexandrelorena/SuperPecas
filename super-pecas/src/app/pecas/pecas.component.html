@@ -1,5 +1,5 @@
 <div class="header">
-  <mat-card class="welcome-card">
+  <mat-card class="carros-card">
     <div class="card-content">
       <div class="container-header">
         <div class="car-img">
@@ -14,17 +14,18 @@
 </div>
 
 <div class="add-search">
-  <div class="add-peca">
+  <div class="add-car">
     <button mat-stroked-button color="primary" (click)="openAddForm()">Adicionar Peça</button>
   </div>
-  <div class="search-peca">
-    <mat-form-field>
-      <input matInput placeholder="Pesquisar Peça">
-    </mat-form-field>
+  <div class="search-car">
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input type="text" pInputText [(ngModel)]="searchText" (input)="onSearchChange()" placeholder="pesquise aqui">
+  </span>
   </div>
 </div>
-<mat-card class="peca-card">
-  <div class="car-table-container">
+<mat-card class="car-card">
+  <div class="car-table-container ui-saga-blue">
     <p-table [value]="filteredPecas" [paginator]="false" [rows]="rows" [totalRecords]="totalRecords">
       <ng-template pTemplate="header">
           <tr>
@@ -48,10 +49,11 @@
               <td>{{ peca.modeloCarro }}</td>
               <!-- <td>{{ peca.carroId }}</td> -->
               <td>
-                <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (click)="openEditForm(peca)">
+                <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (click)="openEditForm(peca.pecaId)">
                 </p-button>
-                <p-button icon="pi pi-trash"  [rounded]="true" [text]="true" severity="danger " (click)="openConfirmDialog(peca.pecaId)">
+                <p-button icon="pi pi-trash"  [rounded]="true" [text]="true" severity="danger " mat-button (click)="openConfirmDialogPeca(peca.pecaId, peca.nome )">
                 </p-button>
+                <!-- <button mat-button (click)="openConfirmDialogPeca(peca.pecaId)">Launch dialog</button> -->
               </td>
           </tr>
       </ng-template>

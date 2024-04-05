@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Carros } from '../models/Carros';
+import { Carro } from '../models/Carros';
 import { CarrosService } from '../carros/carros.service';
-
 
 @Component({
   selector: 'app-gerencia-carros',
@@ -10,9 +9,9 @@ import { CarrosService } from '../carros/carros.service';
   styleUrls: ['./gerenciaCarros.component.css']
 })
 export class GerenciaCarrosComponent implements OnInit {
-  carro: Carros = new Carros();
+  carro: Carro = {} as Carro;
   isEditing: boolean = false;
-  // isEditMode: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -25,13 +24,13 @@ export class GerenciaCarrosComponent implements OnInit {
       if (carroId) {
         // Editar
         this.isEditing = true;
-        this.carrosService.getCarro(carroId).subscribe((carro: Carros) => {
+        this.carrosService.getCarro(carroId).subscribe((carro: Carro) => {
           this.carro = carro;
         });
       } else {
         // Cadastrar
         this.isEditing = false;
-        this.carro = new Carros();
+        this.carro = {} as Carro;
       }
     });
   }
@@ -44,8 +43,13 @@ export class GerenciaCarrosComponent implements OnInit {
     }
 
     if (this.isEditing) {
-      // Salvar carro editado
-      this.carrosService.updateCarro({ carroId: this.carro.carroId, nomeModelo: this.carro.nomeModelo, fabricante: this.carro.fabricante, codigoUnico: this.carro.codigoUnico }).subscribe({
+
+      this.carrosService.updateCarro({
+        carroId: this.carro.carroId,
+        nomeModelo: this.carro.nomeModelo,
+        fabricante: this.carro.fabricante,
+        codigoUnico: this.carro.codigoUnico
+       }).subscribe({
         next: () => {
           this.router.navigate(['/carros']);
           alert('Carro editado com sucesso!');
@@ -57,7 +61,7 @@ export class GerenciaCarrosComponent implements OnInit {
       });
 
     } else {
-      // Salvar novo carro
+
       this.carrosService.createCarro(this.carro).subscribe({
         next: () => {
           this.router.navigate(['/cadastrar-carro']);
@@ -79,7 +83,7 @@ export class GerenciaCarrosComponent implements OnInit {
   }
 
   limparCampos() {
-    this.carro = new Carros();
+    this.carro = {} as Carro;
   }
 
 }

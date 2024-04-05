@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Carros } from '../models/Carros';
+import { Carro } from '../models/Carros';
 import { CarrosService } from './carros.service';
 import { CarrosResponse } from './carro.interface';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,20 +17,20 @@ import { ConfirmDialogComponent } from '../ConfirmDialog/ConfirmDialog.component
 
 
 export class CarrosComponent implements OnInit {
-  carros: Carros[] = [];
-  filteredCarros: Carros[] = [];
+  carros: Carro[] = [];
+  filteredCarros: Carro[] = [];
   searchText: string = '';
   isEditMode: boolean = false;
   totalRecords = 0;
   first = 0;
   rows = 10;
   carrosSubscription: any;
-  carro: Carros;
+  carro: Carro;
   carroEditFormVisible: { [key: number]: boolean } = {};
   displayEditDialog: boolean = false;
   displayAddDialog: boolean = false;
   hideAddDialog: any;
-    novoCarro: Carros = {
+    novoCarro: Carro = {
     nomeModelo: '',
     fabricante: '',
     codigoUnico: '',
@@ -43,7 +43,7 @@ export class CarrosComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog
   ) {
-    this.carro = {} as Carros;
+    this.carro = {} as Carro;
   }
 
   ngOnInit() {
@@ -71,13 +71,13 @@ export class CarrosComponent implements OnInit {
   }
 
   openAddForm() {
-    this.router.navigate(['/gerenciar']);
+    this.router.navigate(['/gerenciar-carros']);
   }
 
-  openEditForm(carroId: Carros) {
+  openEditForm(carroId: Carro) {
     console.log(carroId);
     this.isEditMode = true;
-    this.router.navigate(['/gerenciar', carroId]);
+    this.router.navigate(['/gerenciar-carros', carroId]);
   }
 
   hideEditDialog() {
@@ -121,10 +121,10 @@ export class CarrosComponent implements OnInit {
     };
   }
 
-  openConfirmDialog(carroId: number): void {
+  openConfirmDialog(carroId: number, nomeModelo: string): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '250px',
-      data: { message: 'Tem certeza de que deseja excluir este carro?', carroId: carroId } // Certifique-se de passar o objeto de dados corretamente
+      width: '600px',
+      data: { message: 'Tem certeza de que deseja excluir este carro?', carroId: carroId, nomeModelo: nomeModelo }
     });
 
     dialogRef.afterClosed().subscribe(result => {
