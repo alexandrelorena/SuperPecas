@@ -72,6 +72,9 @@ export class HomeComponent implements OnInit {
     this.chartOptionsPie = {
       animationEnabled: true,
       animationDuration: 500,
+      height: 400,
+      // fontFamily: "Arial, sans-serif",
+      // fontSize: 10,
       data: [{
         type: "pie",
         indexLabel: "{label}  #percent%",
@@ -95,6 +98,9 @@ export class HomeComponent implements OnInit {
     this.chartOptionsColumn = {
       animationEnabled: true,
       animationDuration: 500,
+      height: 400,
+      // fontFamily: "Arial, sans-serif",
+      // fontSize: 10,
       theme: "light2", // "light1", "light2", "dark1", "dark2"
       axisY: {
         title: "Quantidade",

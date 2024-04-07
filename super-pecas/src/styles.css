@@ -5,6 +5,9 @@
 @import 'primeng/resources/themes/saga-blue/theme.css';
 
 
+.card-index {
+  background-color: red;
+}
 .container {
   display: flex;
 }
@@ -43,13 +46,13 @@
   align-items: center;
 } */
 
-.car-img img {
-  width: 60px;
-  height: 60px;
+/* .car-img img {
+  width: 100px;
+  height: 100px;
   margin-left: 30px;
   display: flex;
   align-items: center;
-}
+} */
 
 .peca-img img {
   width: 60px;

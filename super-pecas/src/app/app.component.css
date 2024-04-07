@@ -1,0 +1,33 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  height: 80%;
+}
+
+.header {
+  height: 30px;
+  background-color: white;
+  color: #7e7e7e;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  background-color: white;
+}
+
+.sidenav {
+  width: 10%;
+  margin-top: 110px;
+  margin-left: 10px;
+  background-color: white;
+}
+
+.main-content {
+
+  flex: 1;
+  overflow-y: auto;
+  background-color: white;
+}

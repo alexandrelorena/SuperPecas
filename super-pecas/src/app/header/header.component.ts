@@ -1,10 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HeaderService } from './header.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  public headerTitle!: string;
 
+  constructor(private headerService: HeaderService) { }
+
+  ngOnInit(): void {
+    this.headerService.headerTitle.subscribe(title => {
+      this.headerTitle = title;
+    });
+  }
 }

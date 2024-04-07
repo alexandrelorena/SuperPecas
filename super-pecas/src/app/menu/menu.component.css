@@ -1,39 +1,13 @@
-
-.logo-container {
+.menu-card {
+  margin-top: 0px;
+  height: 700.5px;
   text-align: center;
-  margin-top: 15px;
-  margin-left: 15px;
+  background-color: #fff;
 }
 
-.logo {
-  width: 200px;
+.mat-list{
+  margin-top: -10px;
 }
-
-.container {
-  display: flex;
-}
-
-.sidebar {
-  margin-top: 10px;
-  margin-left: 10px;
-  position: relative;
-  background-color: #FDFDFD;
-  width: 200px;
-  height: 96vh;
-}
-.menu {
-  /* position: absolute; */
-  margin-top: 5px;
-  width: 100  px;
-}
-
-
-/* .divider {
-  height: 1px;
-  width: 100%;
-  background-color: #E0E0E0;
-  margin-top: 20px;
-} */
 
 .user-image-container {
   display: flex;
@@ -56,13 +30,4 @@
 .user-material {
   font-family: 'Material Symbols Outlined', sans-serif;
   font-size: 36px;
-
-}
-
-.logo-card {
-  background-color: #fff;
-}
-.menu-card {
-  margin-top: 16px;
-  height: 71vh;
 }

@@ -1,15 +1,16 @@
-<!-- app.component.html -->
 <div class="container">
-  <!-- Barra lateral -->
-  <div class="sidebar">
-    <app-menu></app-menu>
-  </div>
-
-  <!-- Conteúdo principal -->
-  <div class="main-content">
+  <div class="header">
     <app-header></app-header>
-    <div class="content">
+  </div>
+  <div class="content">
+    <div class="sidenav">
+      <app-menu></app-menu>
+    </div>
+    <div class="main-content">
       <router-outlet></router-outlet>
     </div>
+  </div>
+  <div class="footer">
+    <app-footer></app-footer>
   </div>
 </div>

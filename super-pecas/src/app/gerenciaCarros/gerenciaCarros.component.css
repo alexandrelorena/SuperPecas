@@ -1,19 +1,23 @@
+
 .carros-card {
-  width: 87vw;
-  display: flex;
+  /* width: 87vw; */
+  /* display: flex; */
   margin-left: 15px;
-  margin-top: 15px;
-  height: 171px;
+  margin-top: 0px;
+  height: 70px;
+  box-shadow: none;
+  border: none;
+
 }
 
 .container-header {
   display: flex;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 
 .text-container {
-  margin-left: 20px;
+  margin-left: 5px;
   margin-top: 5px;
 }
 
@@ -24,12 +28,17 @@
   margin-left: 15px;
 }
 
+.teste {
+  margin-top: 40px;
+}
+
 .custom-input {
-  width: calc(33.33% - 15px);
-  padding: 10px;
+  width: calc(32.43% - 0px);
+  /* padding: 10px; */
   margin-bottom: 15px;
   margin-left: 15px;
-  box-sizing: border-box;
+  display:  -ms-inline-grid;
+  /* box-sizing: border-box; */
 }
 
 .add {
@@ -41,7 +50,7 @@
 
 .add-search {
   display: flex;
-  margin-top: 15px;
+  margin-top: -36px;
   margin-bottom: 4px;
   margin-left: 15px;
 }

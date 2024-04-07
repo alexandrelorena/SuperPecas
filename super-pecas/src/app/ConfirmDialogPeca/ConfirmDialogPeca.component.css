@@ -12,14 +12,26 @@
   justify-content: flex-end;
 }
 
+
 .cancel-button {
-  color: #333;
+  color: white;
+  background-color: #7E7E7E;
 }
 
 .confirm-button {
-  color: #fff;
-  background-color: red;
+  color: white;
+  background-color: rgb(103, 190, 123);
 }
 .mat-dialog-container {
-  width: 800px !important; /* Defina o máximo desejado */
+  width: 800px !important;
 }
+
+.dialog-title {
+  font-weight: bold;
+  color: #7E7E7E;
+}
+
+.p {
+  color: #7E7E7E;
+}
+

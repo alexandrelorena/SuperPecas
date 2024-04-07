@@ -1,7 +1,8 @@
 
 ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
-  padding-top: 8px !important;
-  padding-bottom: 8px !important;
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+  color: #7E7E7E;
 }
 
 ::ng-deep .p-datatable-wrapper {
@@ -16,25 +17,6 @@
   height: 10px;
 }
 
-.carros-card {
-  width: 87vw;
-  display: flex;
-  margin-left: 15px;
-  margin-top: 15px;
-  height: 171px;
-}
-
-.container-header {
-  display: flex;
-  align-items: center;
-  margin-top: 60px;
-}
-
-.text-container {
-  margin-left: 20px;
-  margin-top: 5px;
-}
-
 .add-search {
   display: flex;
   justify-content: space-between;
@@ -42,25 +24,24 @@
 }
 
 .add-car {
-  margin-top: 15px;
-  margin-left: 15px;
+  margin-top: 110px;
+  margin-left: 10px;
 }
 
 .search-car {
-  margin-top: 15px;
+  margin-top: 110px;
   margin-bottom: -15px;
+  margin-right: 10px;
 }
 
-
 .car-card{
-
   background-color: #FFFFFF;
-  width: 99%;
+  width: 98.8%;
   display: flex;
   justify-content: center;
-  margin-top: 0px;
-  margin-left: 15px;
-  height: 71vh;
+  margin-top: -5px;
+  margin-left: 10px;
+  height: 654px;
 }
 
 .custom-label {
@@ -69,11 +50,10 @@
 }
 
 .custom-input {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
+  width: calc(15.77% - 0px);
+  margin-bottom: 15px;
+  margin-left: 15px;
+  display:  -ms-inline-grid;
 }
 
 .save-button, .cancel-button {
@@ -94,4 +74,8 @@
   margin-left: 30px;
   display: flex;
   align-items: center;
+}
+
+.dados {
+  margin-top: -15px;
 }

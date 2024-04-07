@@ -1,46 +1,33 @@
 
-<div class="header">
-  <mat-card class="welcome-card">
-    <div class="card-content">
-      <div class="car-img">
-        <img src="assets/images/super-pecas-home-white.png" alt="car-img">
-      </div>
-      <div class="text-container">
-        <h1>Bem vindo ao Super Peças</h1>
-      </div>
-    </div>
-  </mat-card>
-  <div class="charts-container">
+  <div div class="charts-container">
     <div class="chart-wrapper-pie">
-      <mat-card>
+      <mat-card class="graficos">
         <mat-card-header>
-                  <mat-card-title>Top 10 Fabricantes</mat-card-title>
-                  <mat-card-subtitle>Listagem dos 10 maiores fabricantes</mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content>
+          <mat-card-title>Top 10 Fabricantes</mat-card-title>
+            <mat-card-subtitle class="subtitle">Listagem dos 10 maiores fabricantes</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
                   <ng-container *ngIf="_reloadPie">
                       <div>
                           <canvasjs-chart [options]="chartOptionsPie"></canvasjs-chart>
                       </div>
                   </ng-container>
-
-              </mat-card-content>
-          </mat-card>
+        </mat-card-content>
+      </mat-card>
       </div>
-      <div class="chart-wrapper-column">
-                  <mat-card>
-              <mat-card-header>
-                  <mat-card-title>Carros e Peças</mat-card-title>
-                  <mat-card-subtitle>TOP 10 carros com mais peças cadastrasdas no sistema</mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content>
-                  <ng-container *ngIf="_reloadColumn">
-                      <div>
-                          <canvasjs-chart [options]="chartOptionsColumn"></canvasjs-chart>
-                      </div>
-                  </ng-container>
-              </mat-card-content>
-          </mat-card>
-      </div>
-  </div>
+    <div class="chart-wrapper-column">
+      <mat-card class="graficos">
+        <mat-card-header>
+          <mat-card-title>Carros e Peças</mat-card-title>
+            <mat-card-subtitle class="subtitle">TOP 10 carros com mais peças cadastrasdas no sistema</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <ng-container *ngIf="_reloadColumn">
+            <div>
+              <canvasjs-chart [options]="chartOptionsColumn"></canvasjs-chart>
+            </div>
+          </ng-container>
+        </mat-card-content>
+      </mat-card>
+    </div>
 </div>

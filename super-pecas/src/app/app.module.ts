@@ -22,6 +22,7 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { DialogModule } from 'primeng/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FooterComponent } from './footer/footer.component';
 import { MenuComponent } from './menu/menu.component';
 import { CarrosComponent } from './carros/carros.component';
 import { PecasComponent } from './pecas/pecas.component';
@@ -39,17 +40,10 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { MatOptionModule } from '@angular/material/core';
 import { ConfirmDialogPecaComponent } from './ConfirmDialogPeca/ConfirmDialogPeca.component';
 
-// const routes: Routes = [
-//   { path: 'home', component: HomeComponent },
-//   { path: 'carros', component: CarrosComponent },
-//   { path: 'pecas', component: PecasComponent },
-//   { path: 'gerenciar', component: GerenciaCarrosComponent },
-//   { path: 'gerenciar-pecas', component: GerenciaPecasComponent },
-//   { path: '', redirectTo: '/home', pathMatch: 'full' }
-// ];
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
+    FooterComponent,
     MenuComponent,
     CarrosComponent,
     PecasComponent,
@@ -60,7 +54,7 @@ import { ConfirmDialogPecaComponent } from './ConfirmDialogPeca/ConfirmDialogPec
     GerenciaCarrosComponent,
     ConfirmDialogComponent,
     GerenciaPecasComponent,
-      ConfirmDialogPecaComponent
+    ConfirmDialogPecaComponent
    ],
 
   imports: [
