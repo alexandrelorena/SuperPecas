@@ -13,8 +13,6 @@
   </mat-card>
 </div>
 
-
-
 <form class="p-formgrid">
     <div class="teste">
       <!-- <input type="text" name="id" [(ngModel)]="peca.pecaId" pInputText required placeholder="Id" class="custom-input"> -->
@@ -32,14 +30,17 @@
       <input type="text" name="carroId" [(ngModel)]="peca.carroId" pInputText required placeholder="Id do Carro" class="custom-input">
 
     </div>
-
-
-  <div class="limparGravar">
-    <div class="add-peca">
-      <button mat-stroked-button color="accent" (click)="limparCampos()">Limpar</button>
-    </div>
-    <div class="add-peca">
-      <button mat-stroked-button color="primary" (click)="salvarPeca()">Gravar</button>
-    </div>
+<div class="limparGravar">
+  <div class="add-peca">
+    <button mat-stroked-button color="accent" (click)="limparCampos()">Limpar</button>
   </div>
+  <div class="add-peca">
+    <button mat-stroked-button color="primary" (click)="salvarPeca()">Gravar</button>
+  </div>
+</div>
+<div class="add-search">
+  <div class="add-peca">
+    <button mat-stroked-button color="primary" (click)="voltarParaPecas()">Voltar</button>
+  </div>
+</div>
 </form>
