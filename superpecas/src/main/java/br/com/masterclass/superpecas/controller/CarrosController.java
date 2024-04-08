@@ -125,6 +125,20 @@ public class CarrosController {
         }
     }
 
+    @Operation(summary = "Verificar peças associadas ao carro", description = "Verifica se um carro possui peças associadas.")
+@ApiResponses({
+    @ApiResponse(responseCode = "200", description = "Carro não possui peças associadas"),
+    @ApiResponse(responseCode = "400", description = "Carro possui peças associadas", content = @Content)
+})
+@RequestMapping(value = "/{carroId}/verificar-pecas-associadas", method = RequestMethod.GET)
+public ResponseEntity<?> verificarPecasAssociadas(@Parameter(description = "ID do carro", required = true) @PathVariable int carroId) {
+    boolean temPecasAssociadas = carroService.verificarPecasAssociadas(carroId);
+    if (temPecasAssociadas) {
+        return new ResponseEntity<>("Carro possui peças associadas", HttpStatus.BAD_REQUEST);
+    } else {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+}
     @Operation(summary = "Lista TOP 10 fabricantes", description = "Lista TOP 10 fabricantes.")
     @ApiResponses({ @ApiResponse(responseCode = "200", content = { @Content(mediaType = "application/json", schema = @Schema(implementation = TopFabricantesDTO[].class)) })})
     @RequestMapping(value = "/listaTop10Fabricantes", method = RequestMethod.GET)

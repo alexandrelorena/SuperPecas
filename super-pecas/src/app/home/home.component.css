@@ -8,28 +8,18 @@
   display: flex;
   align-items: center;
   margin-left: 10px;
-  margin-top: 158px;
+  margin-top: 110px;
   gap: 10px;
-  height: 65vh;
-}
-
-/* .chart-card {
-  margin-top: 400px;
-} */
-
-.chart-wrapper-pie {
-  width: 49.4%;
-  height: 500vh;
-}
-
-.chart-wrapper-column {
-  width: 49.4%;
-  height: 500vh;
+  height: 700px;
 }
 
 .chart-wrapper-pie,
 .chart-wrapper-column {
+  width: 49.4%;
+}
 
+.chart-wrapper-pie,
+.chart-wrapper-column {
   height: 700px;
   gap: 5px;
 }

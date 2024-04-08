@@ -30,16 +30,17 @@ export class PecasService {
   }
 
   getPeca(pecaId: number) {
-      return this.http.get<Peca>(`${environment.host}/peca/${pecaId}`);
+      return this.http.get<Peca>(`${this.baseUrl}/${pecaId}`);
   }
 
   getAllPecas(page: number, size: number): Observable<PecasResponse> {
-    const url = `${environment.host}/peca/listaTodosPaginado?page=${page}&size=${size}`;
+    const url = `${this.baseUrl}/listaTodosPaginado?page=${page}&size=${size}`;
     return this.http.get<PecasResponse>(url);
   }
 
-  getPecasByTermo(termo: String, page: number = 0) {
-  return this.http.get<Peca[]>(`${environment.host}/peca/listaTodosPaginado/${termo}?page=${page}&size=10`);
+  getPecasByTermo(termo: String, page: number = 0, size: number = 10): Observable<PecasResponse> {
+  const url = `${this.baseUrl}/listaTodosPaginado/${termo}?page=${page}&size=${size}`;
+  return this.http.get<PecasResponse>(url);
   }
 
   createPeca(peca: Peca): Observable<Peca> {
@@ -59,6 +60,6 @@ export class PecasService {
   }
 
   getTop10CarroComMaisPecas(){
-    return this.http.get<Top10CarroComMaisPecas[]>(`${environment.host}/peca/listaTop10CarroComMaisPecas`);
+    return this.http.get<Top10CarroComMaisPecas[]>(`${this.baseUrl}/listaTop10CarroComMaisPecas`);
   }
 }

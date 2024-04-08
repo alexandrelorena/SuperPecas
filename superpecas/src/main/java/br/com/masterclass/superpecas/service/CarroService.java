@@ -68,6 +68,11 @@ public class CarroService {
         return carroRepository.save(carroPut);
     }
 
+    public boolean verificarPecasAssociadas(int carroId) {
+        List<Peca> pecasAssociadas = pecaService.listaPecasPorCarroId(carroId);
+        return !pecasAssociadas.isEmpty();
+    }
+    
     public boolean excluiCarro(int id){
         Carro carro = carroRepository.findById(id).orElse(null);
 

@@ -1,4 +1,9 @@
-
+import { Peca } from '../models/Pecas';
+export interface PecasResponse {
+  totalRecords: number;
+  totalElements: number;
+  content: Peca[];
+}
 export interface Pecas {
   pecaId: number;
   nome: string;

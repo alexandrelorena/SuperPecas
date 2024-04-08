@@ -5,7 +5,7 @@
   <div class="search-car">
     <span class="p-input-icon-left">
       <i class="pi pi-search"></i>
-      <input type="text" pInputText [(ngModel)]="searchText" (input)="onSearchChange()" placeholder="pesquise aqui">
+      <input type="text" pInputText [(ngModel)]="searchText" (keypress)="onSearchKeyPress($event)" placeholder="pesquise aqui">
   </span>
   </div>
 </div>
@@ -13,15 +13,14 @@
   <div class="dados">
     <p-table [value]="filteredPecas" [paginator]="false" [rows]="rows" [totalRecords]="totalRecords" class="p-datatable">
       <ng-template pTemplate="header">
-          <tr>
+          <tr class="p-datatable-thed">
               <th>Id</th>
               <th>Nome</th>
               <th>Descricao</th>
               <th>NumeroSerie</th>
               <th>Fabricante</th>
               <th>ModeloCarro</th>
-              <!-- <th>CarroId</th> -->
-              <th>Ações</th>
+              <th>&nbsp;&nbsp;&nbsp;Ações</th>
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-peca>
@@ -32,17 +31,20 @@
               <td>{{ peca.numeroSerie }}</td>
               <td>{{ peca.fabricante }}</td>
               <td>{{ peca.modeloCarro }}</td>
-              <!-- <td>{{ peca.carroId }}</td> -->
               <td>
                 <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (click)="openEditForm(peca.pecaId)">
                 </p-button>
                 <p-button icon="pi pi-trash"  [rounded]="true" [text]="true" severity="danger " mat-button (click)="openConfirmDialogPeca(peca.pecaId, peca.nome )">
                 </p-button>
-                <!-- <button mat-button (click)="openConfirmDialogPeca(peca.pecaId)">Launch dialog</button> -->
               </td>
           </tr>
       </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+            <td style="text-align: center;" colspan="7">Nenhuma peça foi encontrada com o filtro informado.</td>
+        </tr>
+    </ng-template>
     </p-table>
-  </div>
-  <p-paginator [showCurrentPageReport]="true" currentPageReportTemplate="Exibindo {{first + 1}} - {{first + rows}} de {{totalRecords}} registros" (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords"></p-paginator>
-</mat-card>
+      <p-paginator [showCurrentPageReport]="true" currentPageReportTemplate="Exibindo {{first + 1}} - {{first + rows}} de {{totalRecords}} registros" (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords"></p-paginator>
+     </div>
+  </mat-card>

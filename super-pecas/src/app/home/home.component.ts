@@ -34,7 +34,6 @@ export class HomeComponent implements OnInit {
     this.getTop10PecasCarros();
   }
 
-
   getTop10Fabricantes() {
     this.carrosService.getTop10Fabricantes()
       .pipe(takeUntil(this.unsubscribe))
@@ -48,7 +47,6 @@ export class HomeComponent implements OnInit {
         }
       });
   }
-
 
   getTop10PecasCarros() {
     this.pecasService.getTop10CarroComMaisPecas()
@@ -73,8 +71,6 @@ export class HomeComponent implements OnInit {
       animationEnabled: true,
       animationDuration: 500,
       height: 400,
-      // fontFamily: "Arial, sans-serif",
-      // fontSize: 10,
       data: [{
         type: "pie",
         indexLabel: "{label}  #percent%",
@@ -99,8 +95,6 @@ export class HomeComponent implements OnInit {
       animationEnabled: true,
       animationDuration: 500,
       height: 400,
-      // fontFamily: "Arial, sans-serif",
-      // fontSize: 10,
       theme: "light2", // "light1", "light2", "dark1", "dark2"
       axisY: {
         title: "Quantidade",

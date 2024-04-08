@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { NotificationType, NotificationsService } from 'angular2-notifications';
-import { PecasResponse } from '../models/Pecas';
+import { PecasResponse } from './peca.interface';
 import { Peca } from '../models/Pecas';
 import { PecasService } from './pecas.service';
 import { Carros } from './../carros/carro.interface';
@@ -27,6 +27,9 @@ export class PecasComponent implements OnInit {
   pecaEditFormVisible: { [key: number]: boolean } = {};
   displayEditDialog: boolean = false;
   displayAddDialog: boolean = false;
+  currentPage = 0;
+  searchTerm = '';
+  totalPages: number = 0;
   hideAddDialog: any;
   Carro!: Carros;
     novaPeca: Peca = {
@@ -38,7 +41,6 @@ export class PecasComponent implements OnInit {
       pecaId: 0,
       carroId: 0
     };
-
 
 constructor(
   private pecasService: PecasService,
@@ -52,24 +54,28 @@ ngOnInit() {
   this.loadPecas();
 }
 
-loadPecas() {
-  const page = this.first / this.rows;
-  const size = this.rows;
-
-  this.pecasService.getAllPecas(page, size)
-  .subscribe((response: PecasResponse) => {
-    console.log('Dados recebidos do serviço:', response);
-    this.pecas = response.content;
-    this.totalRecords = response.totalElements;
-    this.filteredPecas = [...this.pecas];
-
-    console.log('Pecas:', this.pecas);
-  });
+loadPecas(page: number = this.currentPage, size: number = this.rows) {
+  if (this.searchText.trim()) {
+    this.pecasService.getPecasByTermo(this.searchText.trim(), page, size)
+      .subscribe((response: PecasResponse) => {
+        this.filteredPecas = response.content;
+        this.totalRecords = response.totalElements;
+        this.currentPage = page;
+        this.searchTerm = this.searchTerm;
+      });
+  } else {
+    this.pecasService.getAllPecas(page, size)
+      .subscribe((response: PecasResponse) => {
+        this.filteredPecas = response.content;
+        this.totalRecords = response.totalElements;
+        this.currentPage = page;
+      });
+  }
 }
 
 onPageChange(event: any) {
-  this.first = event.first;
-  this.loadPecas();
+  const page = event.first / event.rows;
+  this.loadPecas(page);
 }
 
 openAddForm() {
@@ -92,7 +98,6 @@ showMessage(message: string) {
 }
 
 salvarPeca() {
-  // Verifica se os campos estão vazios
   if (!this.novaPeca.nome || !this.novaPeca.descricao || !this.novaPeca.numeroSerie || !this.novaPeca.fabricante || !this.novaPeca.modeloCarro) {
     this.showMessage('Todos os campos devem ser preenchidos.');
     return;
@@ -160,10 +165,18 @@ filterPecas() {
     this.filteredPecas = this.pecas;
   }
 }
-onSearchChange() {
-  this.filterPecas();
+
+onSearchKeyPress(event: KeyboardEvent) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+   this.onSearchChange();
+  }
 }
-  ngOnDestroy() {
+onSearchChange() {
+   this.loadPecas(0);
+}
+
+ngOnDestroy() {
   if (this.pecasSubscription) {
     this.pecasSubscription.unsubscribe();
   }
