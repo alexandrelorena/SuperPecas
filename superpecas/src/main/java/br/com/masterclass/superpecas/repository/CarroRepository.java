@@ -27,3 +27,4 @@ public interface CarroRepository extends CrudRepository<Carro, Integer> {
     List<TopFabricantesDTO> findTop10Fabricantes();
 
 }
+

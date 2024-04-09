@@ -121,7 +121,7 @@ public class CarrosController {
         if (retorno)
             return new ResponseEntity<>(HttpStatus.OK);
         else {
-            return new ResponseEntity<>("Carro possui peças, não é possível remover", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("O carro possui peças, não é possível remover", HttpStatus.BAD_REQUEST);
         }
     }
 
