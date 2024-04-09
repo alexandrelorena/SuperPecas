@@ -2,13 +2,16 @@ FROM node:20-alpine as angular
 
 WORKDIR /ng-app
 
+RUN npm install -g @angular/cli
+
 COPY package*.json ./
 
 RUN npm ci
 
 COPY . .
 
-RUN npm run build
+RUN ng build --configuration=production
+# RUN npm run build
 
 FROM nginx:alpine
 
