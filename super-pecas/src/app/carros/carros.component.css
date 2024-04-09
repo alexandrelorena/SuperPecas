@@ -10,11 +10,7 @@
 }
 
 ::ng-deep .p-paginator {
-  background-color: #F8F9FA;
-}
-
-::ng-deep .p-paginator-summary {
-  height: 10px;
+  background-color: #fff;
 }
 
 .add-search {
@@ -41,7 +37,7 @@
   justify-content: center;
   margin-top: -5px;
   margin-left: 10px;
-  height: 654px;
+  height: 652px;
 }
 
 .custom-label {
@@ -54,18 +50,6 @@
   margin-bottom: 15px;
   margin-left: 15px;
   display:  -ms-inline-grid;
-}
-
-.save-button, .cancel-button {
-  background-color: lightseagreen;
-}
-
-.save-button {
-  background-color: lightseagreen;
-}
-
-.cancel-button {
-  background-color: darkorange;
 }
 
 .car-img img {

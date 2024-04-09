@@ -34,7 +34,13 @@ export class CarrosService {
   }
 
   getTodosCarros() {
-    return this.http.get<Carro[]>(`${environment.host}/carro/listaTodos`);
+    return this.http.get<Carro[]>(`${this.baseUrl}/listaTodos`);
+}
+
+
+  getCarrosByTermo(termo: string, page: number = 0, size: number = 10): Observable<CarrosResponse> {
+    const url = `${this.baseUrl}/listaTodosPaginado/${termo}?page=${page}&size=${size}`;
+    return this.http.get<CarrosResponse>(url);
 }
 
   createCarro(carro: Carro): Observable<Carro> {

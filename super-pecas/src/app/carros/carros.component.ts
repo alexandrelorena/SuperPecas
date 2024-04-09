@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Carro } from '../models/Carros';
 import { CarrosService } from './carros.service';
@@ -7,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GerenciaCarrosComponent } from '../gerenciaCarros/gerenciaCarros.component';
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '../ConfirmDialog/ConfirmDialog.component';
+import { ErrorDialogComponent } from '../ErrorDialog/ErrorDialog.component';
 
 
 @Component({
@@ -29,6 +29,9 @@ export class CarrosComponent implements OnInit {
   carroEditFormVisible: { [key: number]: boolean } = {};
   displayEditDialog: boolean = false;
   displayAddDialog: boolean = false;
+  currentPage = 0;
+  searchTerm = '';
+  totalPages: number = 0;
   hideAddDialog: any;
     novoCarro: Carro = {
     nomeModelo: '',
@@ -37,6 +40,7 @@ export class CarrosComponent implements OnInit {
     carroId: 0
 
   };
+
 
   constructor(
     private carrosService: CarrosService,
@@ -49,25 +53,31 @@ export class CarrosComponent implements OnInit {
   ngOnInit() {
     this.loadCarros();
   }
-
-  loadCarros() {
-    const page = this.first / this.rows;
-    const size = this.rows;
-
-    this.carrosService.getAllCarros(page, size)
-    .subscribe((response: CarrosResponse) => {
-      console.log('Dados recebidos do serviço:', response);
-      this.carros = response.content;
-      this.totalRecords = response.totalElements;
-      this.filteredCarros = [...this.carros];
-
-      console.log('Carros:', this.carros);
-    });
+  loadCarros(page: number = this.currentPage, size: number = this.rows) {
+    const searchTerm = this.searchText.trim().toLowerCase();
+    if (searchTerm) {
+      this.carrosService.getCarrosByTermo(searchTerm, page, size)
+        .subscribe((response: CarrosResponse) => {
+          this.filteredCarros = response.content;
+          this.totalRecords = response.totalElements;
+          this.currentPage = page;
+          this.searchTerm = searchTerm;
+        });
+    } else {
+      this.carrosService.getAllCarros(page, size)
+        .subscribe((response: CarrosResponse) => {
+          this.carros = response.content;
+          this.totalRecords = response.totalElements;
+          this.filteredCarros = [...this.carros];
+          this.currentPage = page;
+          this.searchTerm = '';
+        });
+    }
   }
 
   onPageChange(event: any) {
-    this.first = event.first;
-    this.loadCarros();
+    const page = event.first / event.rows;
+    this.loadCarros(page);
   }
 
   openAddForm() {
@@ -90,18 +100,17 @@ export class CarrosComponent implements OnInit {
   }
 
   salvarCarro() {
-    // Verifica se os campos estão vazios
+
     if (!this.novoCarro.nomeModelo || !this.novoCarro.fabricante || !this.novoCarro.codigoUnico) {
       this.showMessage('Todos os campos devem ser preenchidos.');
       return;
     }
 
-    // Se todos os campos estiverem preenchidos, continua com a operação de salvar
     this.carrosService.createCarro(this.novoCarro)
       .subscribe({
         next: () => {
           console.log('Carro criado com sucesso!');
-          // Limpa os campos e recarrega a lista de carros
+
           this.limparCampos();
           this.loadCarros();
         },
@@ -112,7 +121,7 @@ export class CarrosComponent implements OnInit {
   }
 
   limparCampos() {
-    // Limpa os campos
+
     this.novoCarro = {
       nomeModelo: '',
       fabricante: '',
@@ -122,28 +131,60 @@ export class CarrosComponent implements OnInit {
   }
 
   openConfirmDialog(carroId: number, nomeModelo: string): void {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '600px',
-      data: { message: 'Tem certeza de que deseja excluir este carro?', carroId: carroId, nomeModelo: nomeModelo }
-    });
+    this.carrosService.verificarPecasAssociadas(carroId).subscribe({
+      next: (temPecasAssociadas: boolean) => {
+        if (temPecasAssociadas) {
+          this.dialog.open(ErrorDialogComponent, {
+            width: '400px',
+            data: { message: 'Este carro possui peças associadas e não pode ser excluído.' }
+          });
+        } else {
+          const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            width: '600px',
+            data: { message: 'Tem certeza de que deseja excluir esta peça?', carroId: carroId, nomeModelo: nomeModelo}
+          });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.carrosService.deleteCarro(carroId)
-          .subscribe({
-            next: () => {
-              console.log('Carro excluído com sucesso!');
-              setTimeout(() => {
-                location.reload();
-              }, 1000);
-            },
-            error: (error) => {
-              console.error('Erro ao excluir o carro:', error);
+          dialogRef.afterClosed().subscribe((result: any) => {
+            if (result) {
+              this.carrosService.deleteCarro(carroId)
+                .subscribe({
+                  next: () => {
+                    console.log('Carro excluído com sucesso!');
+                    setTimeout(() => {
+                      location.reload();
+                    }, 1000);
+                  },
+                  error: (error) => {
+                    console.error('Erro ao excluir o carro:', error);
+                  }
+                });
             }
           });
+        }
+      },
+      error: (error: any) => {
+        console.error('Erro ao verificar peças associadas:', error);
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          data: { message: 'Exclua as peças associadas ao carro.' }
+        });
       }
     });
   }
+
+  // excluirCarro(carroId: number) {
+  //   this.carrosService.deleteCarro(carroId).subscribe({
+  //     next: () => {
+  //       console.log('Carro excluído com sucesso!');
+  //       setTimeout(() => {
+  //         location.reload();
+  //       }, 1000);
+  //     },
+  //     error: (error) => {
+  //       console.error('Erro ao excluir o carro:', error);
+  //     }
+  //   });
+  // }
 
   filterCarros() {
     if (this.searchText.trim()) {
@@ -156,8 +197,17 @@ export class CarrosComponent implements OnInit {
       this.filteredCarros = this.carros;
     }
   }
+
+  onSearchKeyPress(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.onSearchChange();
+    }
+  }
+
   onSearchChange() {
-    this.filterCarros();
+
+  this.loadCarros(0);
+
   }
     ngOnDestroy() {
     if (this.carrosSubscription) {

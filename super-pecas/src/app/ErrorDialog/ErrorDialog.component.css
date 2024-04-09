@@ -1,0 +1,31 @@
+.custom-dialog-container {
+  background-color: rgb(255, 17, 0);
+}
+
+.custom-dialog-title {
+  text-align: center;
+  color: white;
+}
+
+.custom-dialog-button {
+  background-color: white;
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.custom-dialog-button:hover {
+  background-color: #abcef3;
+}
+
+.custom-dialog-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.data-message {
+  text-align: center;
+  color: white;
+}
