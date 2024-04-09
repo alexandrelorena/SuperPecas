@@ -39,6 +39,7 @@ import { GerenciaPecasComponent } from './gerenciaPecas/gerenciaPecas.component'
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { MatOptionModule } from '@angular/material/core';
 import { ConfirmDialogPecaComponent } from './ConfirmDialogPeca/ConfirmDialogPeca.component';
+import { ErrorDialogComponent } from './ErrorDialog/ErrorDialog.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ConfirmDialogPecaComponent } from './ConfirmDialogPeca/ConfirmDialogPec
     GerenciaCarrosComponent,
     ConfirmDialogComponent,
     GerenciaPecasComponent,
-    ConfirmDialogPecaComponent
+    ConfirmDialogPecaComponent,
+    ErrorDialogComponent
    ],
 
   imports: [

@@ -13,6 +13,7 @@
   border: none;
   padding: 8px 16px;
   cursor: pointer;
+  margin: auto; /* Centralizar horizontalmente */
 }
 
 .custom-dialog-button:hover {
@@ -23,6 +24,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center; /* Centralizar horizontalmente */
 }
 
 .data-message {
