@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 // import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // import { Subject, takeUntil } from 'rxjs';
 import { Peca } from '../models/Pecas';
@@ -8,7 +9,10 @@ import { PecasService } from '../pecas/pecas.service';
 import { CarrosService } from '../carros/carros.service';
 // import { Carros } from '../carros/carro.interface';
 import { Carro } from '../models/Carros';
-// import { NotificationType } from 'angular2-notifications';
+import { ConfirmDialogComponent } from '../ConfirmDialog/ConfirmDialog.component';
+import { ErrorDialogComponent } from '../ErrorDialog/ErrorDialog.component';
+import { SuccessDialogComponent } from '../SuccessDialog/SuccessDialog.component';
+
 
 @Component({
   selector: 'app-gerencia-Pecas',
@@ -20,12 +24,15 @@ export class GerenciaPecasComponent implements OnInit {
   peca: Peca = {} as Peca;
   isEditing: boolean = false;
   carros: Carro[] = [];
+  showMessage: any;
+  loadPecas: any;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private pecasService: PecasService,
-    private carrosService: CarrosService
+    private carrosService: CarrosService,
+    private dialog: MatDialog
 
   ) {}
 
@@ -47,9 +54,8 @@ export class GerenciaPecasComponent implements OnInit {
   }
 
   salvarPeca(): void {
-    // Verificar se todos os campos estão preenchidos
     if (!this.peca.nome || !this.peca.descricao || !this.peca.numeroSerie || !this.peca.fabricante || !this.peca.modeloCarro) {
-      alert('Todos os campos devem ser preenchidos.');
+      this.showMessage('Todos os campos devem ser preenchidos.');
       return;
     }
 
@@ -66,10 +72,13 @@ export class GerenciaPecasComponent implements OnInit {
       }).subscribe({
         next: () => {
           this.router.navigate(['/pecas']);
-          alert('Peça editada com sucesso!');
+          this.dialog.open(SuccessDialogComponent, {
+            width: '300px',
+            data: { message: 'Peça atualizado com sucesso!'}
+          });
         },
         error: (error: any) => {
-          console.error('Erro ao editar o peça:', error);
+          // console.error('Erro ao editar o peça:', error);
           alert('Erro ao editar a peça. Por favor, tente novamente mais tarde.');
         }
       });
@@ -78,11 +87,12 @@ export class GerenciaPecasComponent implements OnInit {
 
       this.pecasService.createPeca(this.peca).subscribe({
         next: () => {
-          this.router.navigate(['/cadastrar-peca']);
-          alert('Peça cadastrado com sucesso!');
-          setTimeout(() => {
-            location.reload();
-          }, 1000);
+          this.dialog.open(SuccessDialogComponent, {
+            width: '300px',
+            data: { message: 'Peça cadastrado com sucesso!' }
+          });
+          this.limparCampos();
+          this.loadPecas();
         },
         error: (error: any) => {
           console.error('Erro ao cadastrar a peça:', error);
