@@ -29,3 +29,4 @@ public interface PecaRepository extends JpaRepository<Peca, Integer> {
         + "GROUP BY ca.NomeModelo, ca.Fabricante ORDER BY Count(pe.PecaId) DESC LIMIT 10")
     List<TopCarroPecasDTO> findTop10CarrosComMaisPecas();
 }
+
