@@ -1,8 +1,11 @@
 .custom-dialog-container {
+  height: 200px;
   background-color: rgb(255, 17, 0);
+
 }
 
 .custom-dialog-title {
+  font-weight: bold;
   text-align: center;
   color: white;
 }
@@ -11,9 +14,9 @@
   background-color: white;
   color: #000;
   border: none;
-  padding: 8px 16px;
-  cursor: pointer;
-  margin: auto; /* Centralizar horizontalmente */
+  /* padding: 8px 20px; */
+  /* cursor: pointer; */
+  margin: auto;
 }
 
 .custom-dialog-button:hover {
@@ -24,10 +27,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center; /* Centralizar horizontalmente */
+  text-align: center;
 }
 
 .data-message {
+  font-weight: bold;
   text-align: center;
   color: white;
 }
