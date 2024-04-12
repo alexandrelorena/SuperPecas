@@ -1,3 +1,7 @@
+.dialog-message {
+  color: red;
+  font-weight: bold;
+}
 
 ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
   padding-top: 7px !important;
@@ -22,6 +26,12 @@
 .add-car {
   margin-top: 110px;
   margin-left: 10px;
+}
+
+::ng-deep .search-car input:focus {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 252, 206, 0.87);
+  color: #7E7E7E;
 }
 
 .search-car {
@@ -63,3 +73,8 @@
 .dados {
   margin-top: -15px;
 }
+
+.acoes p-button {
+  margin-right: 10px;
+}
+

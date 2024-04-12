@@ -5,13 +5,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
-import { TableModule } from 'primeng/table';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { MatOptionModule } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
@@ -30,16 +37,14 @@ import { HeaderComponent } from './header/header.component';
 import { TemplateComponent } from './template/template.component';
 import { ContentComponent } from './content/content.component';
 import { HomeComponent } from './home/home.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { ApiService } from '../../services/api.service';
 import { GerenciaCarrosComponent } from './gerenciaCarros/gerenciaCarros.component';
 import { ConfirmDialogComponent } from './ConfirmDialog/ConfirmDialog.component';
 import { GerenciaPecasComponent } from './gerenciaPecas/gerenciaPecas.component';
-import { SimpleNotificationsModule } from 'angular2-notifications';
-import { MatOptionModule } from '@angular/material/core';
 import { ConfirmDialogPecaComponent } from './ConfirmDialogPeca/ConfirmDialogPeca.component';
 import { ErrorDialogComponent } from './ErrorDialog/ErrorDialog.component';
+import { SuccessDialogComponent } from './SuccessDialog/SuccessDialog.component';
+
 
 @NgModule({
   declarations: [
@@ -56,7 +61,8 @@ import { ErrorDialogComponent } from './ErrorDialog/ErrorDialog.component';
     ConfirmDialogComponent,
     GerenciaPecasComponent,
     ConfirmDialogPecaComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    SuccessDialogComponent
    ],
 
   imports: [
@@ -75,6 +81,8 @@ import { ErrorDialogComponent } from './ErrorDialog/ErrorDialog.component';
     MatPaginatorModule,
     MatDialogModule,
     MatOptionModule,
+    MatFormFieldModule,
+    MatSelectModule,
     TableModule,
     InputTextModule,
     ButtonModule,
@@ -86,7 +94,8 @@ import { ErrorDialogComponent } from './ErrorDialog/ErrorDialog.component';
     InputGroupModule,
     InputGroupAddonModule,
     SimpleNotificationsModule.forRoot(),
-
+    FormsModule,
+    ReactiveFormsModule
   ],
 
   providers: [

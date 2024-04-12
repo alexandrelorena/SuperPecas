@@ -8,6 +8,7 @@ import { HeaderService } from './header.service';
 })
 export class HeaderComponent implements OnInit {
   public headerTitle!: string;
+  headerTitleSubscription: any;
 
   constructor(private headerService: HeaderService) { }
 
@@ -15,5 +16,10 @@ export class HeaderComponent implements OnInit {
     this.headerService.headerTitle.subscribe(title => {
       this.headerTitle = title;
     });
+  }
+  ngOnDestroy() {
+    if (this.headerTitleSubscription) {
+      this.headerTitleSubscription.unsubscribe();
+    }
   }
 }

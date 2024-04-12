@@ -2,39 +2,51 @@
   <mat-card class="carros-card">
     <div class="card-content">
       <div class="container-header">
-        <!-- <div class="car-img">
-          <img src="assets/images/carro3-white.png" alt="car-img">
-        </div> -->
         <div class="text-container">
-          <h1>{{ isEditing ? 'Editar Carro' : 'Cadastrar Carro' }}</h1>
+          <h1 *ngIf="type === 'adicionar'">Adicionar novo carro</h1>
+          <h1 *ngIf="type === 'editar' && loading == false">Editar carro - {{ carro!.nomeModelo }} </h1>
         </div>
       </div>
     </div>
   </mat-card>
 </div>
-
-<form class="p-formgrid">
+<form [formGroup]="carroForm" (ngSubmit)="salvarCarro()">
+  <mat-card class="form">
   <div class="teste">
-    <div>
-      <input type="text" name="nomeModelo" [(ngModel)]="carro.nomeModelo" pInputText required placeholder="Nome do Modelo" class="custom-input">
-
-      <input type="text" name="fabricante" [(ngModel)]="carro.fabricante" pInputText required placeholder="Fabricante" class="custom-input">
-
-      <input type="text" name="codigoUnico" [(ngModel)]="carro.codigoUnico" pInputText required placeholder="Código Único" class="custom-input">
-    </div>
+      <mat-form-field class="campos">
+        <mat-label>Nome do modelo</mat-label>
+        <input matInput formControlName="nomeModelo">
+        <mat-icon matPrefix fontIcon="directions_car"></mat-icon>
+        <mat-error *ngIf="f.nomeModelo.hasError('required')" class="error">Informe o nome do modelo</mat-error>
+      </mat-form-field>
+      <mat-form-field class="campos">
+        <mat-label>Fabricante</mat-label>
+        <mat-select formControlName="fabricante">
+          <mat-option [value]="">Selecione um fabricante</mat-option>
+          <mat-option *ngFor="let fabricante of fabricantes" [value]="fabricante">{{fabricante}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="f.fabricante.hasError('required')" class="error">Informe o fabricante</mat-error>
+      </mat-form-field>
+      <mat-form-field class="campos">
+        <mat-label>Código único</mat-label>
+        <input matInput formControlName="codigoUnico"/>
+        <mat-icon matPrefix fontIcon="code"></mat-icon>
+        <mat-error *ngIf="f.codigoUnico.hasError('required')" class="error">Informe o código único</mat-error>
+      </mat-form-field>
   </div>
-
   <div class="limparGravar">
     <div class="add-car">
-      <button mat-stroked-button color="accent" (click)="limparCampos()">Limpar</button>
+      <button mat-raised-button color="warn" type="button" (click)="limparCampos()">Limpar</button>
     </div>
     <div class="add-car">
-      <button mat-stroked-button color="primary" (click)="salvarCarro()">Gravar</button>
+      <button mat-raised-button color="primary" type="submit">Gravar</button>
     </div>
   </div>
   <div class="add-search">
     <div class="add-car">
-      <button mat-stroked-button color="primary" (click)="voltarParaCarros()">Voltar</button>
+      <button mat-raised-button color="basic" (click)="voltarParaCarros()">Voltar</button>
     </div>
   </div>
-</form>
+  </mat-card>
+  </form>
+

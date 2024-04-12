@@ -1,17 +1,18 @@
 .dialog-title {
-  color: #333;
-  font-size: 20px;
+  text-align: center;
+  color: red;
 }
 
 .dialog-content {
+  text-align: center;
   color: #666;
+  width: 400px;
 }
 
 .dialog-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
-
 
 .cancel-button {
   color: white;
@@ -22,16 +23,3 @@
   color: white;
   background-color: rgb(103, 190, 123);
 }
-.mat-dialog-container {
-  width: 800px !important;
-}
-
-.dialog-title {
-  font-weight: bold;
-  color: #7E7E7E;
-}
-
-.p {
-  color: #7E7E7E;
-}
-

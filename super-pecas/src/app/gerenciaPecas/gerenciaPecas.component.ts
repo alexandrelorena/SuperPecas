@@ -1,98 +1,115 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { Subject, takeUntil } from 'rxjs';
 import { Peca } from '../models/Pecas';
-// import { Pecas } from '../pecas/peca.interface';
 import { PecasService } from '../pecas/pecas.service';
 import { CarrosService } from '../carros/carros.service';
-// import { Carros } from '../carros/carro.interface';
 import { Carro } from '../models/Carros';
-import { ConfirmDialogComponent } from '../ConfirmDialog/ConfirmDialog.component';
-import { ErrorDialogComponent } from '../ErrorDialog/ErrorDialog.component';
 import { SuccessDialogComponent } from '../SuccessDialog/SuccessDialog.component';
-
 
 @Component({
   selector: 'app-gerencia-Pecas',
   templateUrl: './gerenciaPecas.component.html',
   styleUrls: ['./gerenciaPecas.component.css']
 })
-
 export class GerenciaPecasComponent implements OnInit {
   peca: Peca = {} as Peca;
   isEditing: boolean = false;
   carros: Carro[] = [];
-  showMessage: any;
-  loadPecas: any;
+  type!: any;
+  loading: boolean = false;
+  pecaForm!: FormGroup;
+
+  get f(): any {
+    return this.pecaForm.controls;
+  }
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private pecasService: PecasService,
     private carrosService: CarrosService,
-    private dialog: MatDialog
-
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.createForm();
+    this.getCarros();
+
     this.route.params.subscribe(params => {
       const pecaId = params['pecaId'];
       if (pecaId) {
         // Editar
         this.isEditing = true;
-        this.pecasService.getPeca(pecaId).subscribe((peca: Peca) => {
-          this.peca = peca;
-        });
+        this.type = "editar";
+        this.getPeca(pecaId);
       } else {
         // Cadastrar
         this.isEditing = false;
-        this.peca = {} as Peca;
+        this.type = "adicionar";
       }
     });
   }
 
+  createForm(): void {
+    this.pecaForm = this.formBuilder.group({
+      pecaId: ['0'],
+      nome: ['', Validators.required],
+      descricao: ['', Validators.required],
+      numeroSerie: ['', Validators.required],
+      fabricante: ['', Validators.required],
+      modeloCarro: ['', Validators.required],
+      carroId: ['', Validators.required]
+    });
+  }
+
+  getPeca(pecaId: number): void {
+    this.pecasService.getPeca(pecaId).subscribe((peca: Peca) => {
+      this.peca = peca;
+      this.pecaForm.patchValue(peca);
+    });
+  }
+
+  getCarros(): void {
+    this.carrosService.getTodosCarros().subscribe(carros => {
+      this.carros = carros;
+    });
+  }
+
   salvarPeca(): void {
-    if (!this.peca.nome || !this.peca.descricao || !this.peca.numeroSerie || !this.peca.fabricante || !this.peca.modeloCarro) {
-      this.showMessage('Todos os campos devem ser preenchidos.');
+    if (this.pecaForm.invalid) {
       return;
     }
 
-    if (this.isEditing) {
+    const formValue = this.pecaForm.value;
 
-      this.pecasService.updatePeca({
-        pecaId: this.peca.pecaId,
-        nome: this.peca.nome,
-        descricao: this.peca.descricao,
-        numeroSerie: this.peca.numeroSerie,
-        fabricante: this.peca.fabricante,
-        modeloCarro: this.peca.modeloCarro,
-        carroId: this.peca.carroId
-      }).subscribe({
+    if (this.isEditing) {
+      const peca = { ...this.peca, ...formValue };
+      this.pecasService.updatePeca(peca).subscribe({
         next: () => {
           this.router.navigate(['/pecas']);
           this.dialog.open(SuccessDialogComponent, {
             width: '300px',
-            data: { message: 'Peça atualizado com sucesso!'}
+            data: { message: 'Peça atualizada com sucesso!' }
           });
+          this.limparCampos();
         },
         error: (error: any) => {
-          // console.error('Erro ao editar o peça:', error);
           alert('Erro ao editar a peça. Por favor, tente novamente mais tarde.');
         }
       });
-
-    } else {
-
-      this.pecasService.createPeca(this.peca).subscribe({
+    }
+     else {
+      this.pecasService.createPeca(formValue).subscribe({
         next: () => {
           this.dialog.open(SuccessDialogComponent, {
             width: '300px',
-            data: { message: 'Peça cadastrado com sucesso!' }
+            data: { message: 'Peça cadastrada com sucesso!' }
           });
           this.limparCampos();
-          this.loadPecas();
+          this.router.navigate(["/pecas"]);
         },
         error: (error: any) => {
           console.error('Erro ao cadastrar a peça:', error);
@@ -102,12 +119,11 @@ export class GerenciaPecasComponent implements OnInit {
     }
   }
 
-  voltarParaPecas() {
+  voltarParaPecas(): void {
     this.router.navigate(['/pecas']);
   }
 
-  limparCampos() {
-    this.peca = {} as Peca;
+  limparCampos(): void {
+    this.pecaForm.reset();
   }
-
 }

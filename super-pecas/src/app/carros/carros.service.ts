@@ -24,6 +24,10 @@ export class CarrosService {
 
   constructor(private http: HttpClient) {}
 
+  getCarro(carroId: number) {
+    return this.http.get<Carro>(`${this.baseUrl}/${carroId}`);
+  }
+
   verificarPecasAssociadas(carroId: number): Observable<boolean> {
     return this.http.get<boolean>(`${this.baseUrl}/${carroId}/verificar-pecas-associadas`);
   }
@@ -37,7 +41,6 @@ export class CarrosService {
     return this.http.get<Carro[]>(`${this.baseUrl}/listaTodos`);
 }
 
-
   getCarrosByTermo(termo: string, page: number = 0, size: number = 10): Observable<CarrosResponse> {
     const url = `${this.baseUrl}/listaTodosPaginado/${termo}?page=${page}&size=${size}`;
     return this.http.get<CarrosResponse>(url);
@@ -47,16 +50,12 @@ export class CarrosService {
     return this.http.post<Carro>(`${this.baseUrl}`, carro);
   }
 
-  updateCarro(carroData: CarroUpdateData): Observable<Carro> {
-    return this.http.put<Carro>(`${this.baseUrl}`, carroData);
+  updateCarro(carro: Carro): Observable<Carro> {
+    return this.http.put<Carro>(`${this.baseUrl}`, carro);
   }
 
   deleteCarro(carroId: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${carroId}`);
-  }
-
-  getCarro(carroId: number): Observable<Carro> {
-    return this.http.get<Carro>(`${this.baseUrl}/${carroId}`);
   }
 
   getTodosFabricantes() {

@@ -8,6 +8,8 @@ import { Peca } from '../models/Pecas';
 import { PecasService } from './pecas.service';
 import { Carros } from './../carros/carro.interface';
 import { ConfirmDialogPecaComponent } from '../ConfirmDialogPeca/ConfirmDialogPeca.component';
+import { ErrorDialogComponent } from '../ErrorDialog/ErrorDialog.component';
+import { SuccessDialogComponent } from '../SuccessDialog/SuccessDialog.component';
 
 @Component({
   selector: 'app-pecas',
@@ -32,15 +34,7 @@ export class PecasComponent implements OnInit {
   totalPages: number = 0;
   hideAddDialog: any;
   Carro!: Carros;
-    novaPeca: Peca = {
-      nome: '',
-      descricao: '',
-      numeroSerie: '',
-      fabricante: '',
-      modeloCarro: '',
-      pecaId: 0,
-      carroId: 0
-    };
+  novaPeca: Peca = {} as Peca;
 
 constructor(
   private pecasService: PecasService,
@@ -103,34 +97,36 @@ salvarPeca() {
     return;
   }
 
-    this.pecasService.createPeca(this.novaPeca)
-    .subscribe({
+    this.pecasService.createPeca(this.novaPeca).subscribe({
       next: () => {
-        console.log('Peça criada com sucesso!');
+        this.dialog.open(SuccessDialogComponent, {
+          width: '400px',
+          data: { message: 'Peça criada com sucesso!' }
+        });
         this.limparCampos();
         this.loadPecas();
       },
       error: (error: any) => {
-        console.error('Erro ao criar a peça:', error);
+        this.dialog.open(ErrorDialogComponent, {
+          width: '400px',
+          data: { message: 'Erro ao criar peça!' }!
+        });
+
       }
     });
 }
 
+voltarParaPecas() {
+  this.router.navigate(['/carros']);
+}
+
 limparCampos() {
-  this.novaPeca = {
-    pecaId: 0,
-    nome: '',
-    descricao: '',
-    numeroSerie: '',
-    fabricante: '',
-    modeloCarro: '',
-    carroId: 0,
-  };
+  this.peca = {} as Peca;
 }
 
 openConfirmDialogPeca(pecaId: number, nome: string): void {
   const dialogRef = this.dialog.open(ConfirmDialogPecaComponent, {
-    width: '600px',
+    width: '400px',
     data: { message: 'Tem certeza de que deseja excluir esta peça?', pecaId: pecaId, nome: nome}
   });
 
@@ -139,10 +135,10 @@ openConfirmDialogPeca(pecaId: number, nome: string): void {
       this.pecasService.deletePeca(pecaId)
         .subscribe({
           next: () => {
-            console.log('Peça excluída com sucesso!');
-            setTimeout(() => {
-              location.reload();
-            }, 1000);
+            this.dialog.open(SuccessDialogComponent, {
+              width: '400px',
+              data: { message: 'Peça excluída com sucesso!' }
+            });
           },
           error: (error) => {
             console.error('Erro ao excluir a peça:', error);

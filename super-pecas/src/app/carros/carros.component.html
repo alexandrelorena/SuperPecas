@@ -1,6 +1,6 @@
     <div class="add-search">
       <div class="add-car">
-        <button mat-stroked-button color="primary" (click)="openAddForm()">Adicionar Carro</button>
+        <button mat-raised-button color="basic" (click)="openAddForm()">Adicionar Carro</button>
       </div>
       <div class="search-car">
         <span class="p-input-icon-left">
@@ -9,7 +9,6 @@
       </span>
       </div>
     </div>
-
     <mat-card class="car-card">
       <div class="dados">
         <p-table [value]="filteredCarros" [paginator]="false" [rows]="rows" [totalRecords]="totalRecords" class="p-datatable">
@@ -28,24 +27,22 @@
                   <td>{{ carro.nomeModelo }}</td>
                   <td>{{ carro.fabricante }}</td>
                   <td>{{ carro.codigoUnico }}</td>
-                  <td>
-                    <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (click)="openEditForm(carro.carroId)">
+                  <td class="acoes">
+                    <p-button icon="pi pi-pencil" [rounded]="true" [raised]="true" [text]="true" severity="primary" (click)="openEditForm(carro.carroId)">
                     </p-button>
-                    <p-button icon="pi pi-trash"  [rounded]="true" [text]="true" severity="danger " (click)="openConfirmDialog(carro.carroId, carro.nomeModelo)">
+                    <p-button icon="pi pi-trash" [rounded]="true" [raised]="true" [text]="true" severity="danger" (click)="openConfirmDialog(carro.carroId, carro.nomeModelo)">
                     </p-button>
                   </td>
               </tr>
           </ng-template>
           <ng-template pTemplate="emptymessage">
             <tr>
-                <td style="text-align: center;" colspan="7">Nenhuma peça foi encontrada com o filtro informado.</td>
+                <td style="text-align: center; color: brown;" colspan="7">Nenhum carro foi encontrado com o filtro informado.</td>
             </tr>
         </ng-template>
         </p-table>
       </div>
-
       <p-paginator [showCurrentPageReport]="true" currentPageReportTemplate="Exibindo {{first + 1}} - {{first + rows}} de {{totalRecords}} registros" (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords"></p-paginator>
-
     </mat-card>
 
 

@@ -45,22 +45,32 @@ public class PecaService {
         return null;
     }
 
-    public Peca editaPeca(Peca pecaPut){
+    // public Peca editaPeca(Peca pecaPut){
+    //     Peca peca = pecaRepository.findById(pecaPut.getPecaId()).orElse(null);
+
+    //     if (peca == null){
+    //         return null;
+    //     }
+
+    //     Peca existeMesmoNome = pecaRepository.findByNomeAndNumeroSerie(pecaPut.getNome(), pecaPut.getNumeroSerie());
+
+    //     if (existeMesmoNome != null && existeMesmoNome.getPecaId()!= pecaPut.getPecaId()){
+    //         return null;
+    //     }
+
+    //     return pecaRepository.save(pecaPut);
+    // }
+
+    public Peca editaPeca(Peca pecaPut) {
         Peca peca = pecaRepository.findById(pecaPut.getPecaId()).orElse(null);
-
-        if (peca == null){
-            return null;
+    
+        if (peca == null) {
+            return null; // Retorna null se a peça não for encontrada
         }
-
-        Peca existeMesmoNome = pecaRepository.findByNomeAndNumeroSerie(pecaPut.getNome(), pecaPut.getNumeroSerie());
-
-        if (existeMesmoNome != null && existeMesmoNome.getPecaId()!= pecaPut.getPecaId()){
-            return null;
-        }
-
-        return pecaRepository.save(pecaPut);
+    
+        return pecaRepository.save(pecaPut); // Atualiza e retorna a peça
     }
-
+    
     public void excluiPeca(int id){
         Peca peca = pecaRepository.findById(id).orElse(null);
         if (peca != null)

@@ -2,45 +2,70 @@
   <mat-card class="pecas-card">
     <div class="card-content">
       <div class="container-header">
-        <!-- <div class="peca-img">
-          <img src="assets/images/pecas2-white.png" alt="peca-img">
-        </div> -->
         <div class="text-container">
-          <h1>{{ isEditing ? 'Editar Peça' : 'Cadastrar Peça' }}</h1>
+          <h1 *ngIf="type === 'adicionar'">Adicionar nova peça</h1>
+          <h1 *ngIf="type === 'editar' && loading == false">Editar peça - {{ peca!.nome }} </h1>
         </div>
       </div>
     </div>
   </mat-card>
 </div>
-
-<form class="p-formgrid">
-    <div class="teste">
-      <!-- <input type="text" name="id" [(ngModel)]="peca.pecaId" pInputText required placeholder="Id" class="custom-input"> -->
-
-      <input type="text" name="nome" [(ngModel)]="peca.nome" pInputText required placeholder="Nome" class="custom-input">
-
-      <input type="text" name="descricao" [(ngModel)]="peca.descricao" pInputText required placeholder="Descrição" class="custom-input">
-
-      <input type="text" name="numeroSerie" [(ngModel)]="peca.numeroSerie" pInputText required placeholder="Número de Série" class="custom-input">
-
-      <input type="text" name="fabricante" [(ngModel)]="peca.fabricante" pInputText required placeholder="Fabricante" class="custom-input">
-
-      <input type="text" name="modeloCarro" [(ngModel)]="peca.modeloCarro" pInputText required placeholder="Modelo do Carro" class="custom-input">
-
-      <input type="text" name="carroId" [(ngModel)]="peca.carroId" pInputText required placeholder="Id do Carro" class="custom-input">
-
+<form [formGroup]="pecaForm" (ngSubmit)="salvarPeca()">
+  <mat-card class="form">
+  <div class="teste">
+      <mat-form-field class="campos">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome">
+        <mat-icon matPrefix fontIcon="construction"></mat-icon>
+        <mat-error *ngIf="f.nome.hasError('required')" class="error">Informe o nome da peça</mat-error>
+      </mat-form-field>
+      <mat-form-field class="campos">
+        <mat-label>Descricao</mat-label>
+        <input matInput formControlName="descricao">
+        <mat-icon matPrefix fontIcon="description"></mat-icon>
+        <mat-error *ngIf="f.descricao.hasError('required')" class="error">Informe a descrição da peça</mat-error>
+      </mat-form-field>
+      <mat-form-field class="campos">
+        <mat-label>Número de série</mat-label>
+        <input matInput formControlName="numeroSerie">
+        <mat-icon matPrefix fontIcon="key"></mat-icon>
+        <mat-error *ngIf="f.numeroSerie.hasError('required')" class="error">Informe o número de série da peça</mat-error>
+      </mat-form-field>
+      <mat-form-field class="campos">
+        <mat-label>Fabricante</mat-label>
+        <input matInput formControlName="fabricante">
+        <mat-icon matPrefix fontIcon="factory"></mat-icon>
+        <mat-error *ngIf="f.fabricante.hasError('required')" class="error">Informe o fabricante da peça</mat-error>
+      </mat-form-field>
+      <mat-form-field class="campos">
+        <mat-label>Carro</mat-label>
+        <mat-select formControlName="carroId">
+            <mat-option *ngFor="let carro of carros" [value]="carro.carroId">
+                {{ carro.fabricante + " - " + carro.nomeModelo}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="f.carroId.hasError('required')">O campo carro é
+            obrigatório.</mat-error>
+    </mat-form-field>
+      <mat-form-field class="campos">
+        <mat-label>Modelo do Carro</mat-label>
+        <input matInput formControlName="modeloCarro">
+        <mat-icon matPrefix fontIcon="directions_car"></mat-icon>
+        <mat-error *ngIf="f.modeloCarro.hasError('required')" class="error">Informe o modelo do carro</mat-error>
+      </mat-form-field>
     </div>
 <div class="limparGravar">
-  <div class="add-peca">
-    <button mat-stroked-button color="accent" (click)="limparCampos()">Limpar</button>
+  <div class="add-car">
+    <button mat-raised-button color="warn" type="button" (click)="limparCampos()">Limpar</button>
   </div>
-  <div class="add-peca">
-    <button mat-stroked-button color="primary" (click)="salvarPeca()">Gravar</button>
+  <div class="add-car">
+    <button mat-raised-button color="primary" type="submit">Gravar</button>
   </div>
 </div>
 <div class="add-search">
-  <div class="add-peca">
-    <button mat-stroked-button color="primary" (click)="voltarParaPecas()">Voltar</button>
+  <div class="add-car">
+    <button mat-raised-button color="basic" (click)="voltarParaPecas()">Voltar</button>
   </div>
 </div>
+</mat-card>
 </form>

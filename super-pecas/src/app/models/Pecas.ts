@@ -1,6 +1,8 @@
 import { Carro } from './Carros';
 
 export interface Peca {
+  // carroFabricante: any;
+  // carroNomeModelo: any;
   carroId: any;
   pecaId: number;
   nome: string;

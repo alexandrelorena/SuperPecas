@@ -5,7 +5,6 @@
   color: #7E7E7E;
 }
 
-
 ::ng-deep .p-datatable-wrapper {
   max-height: 600px;
 }
@@ -23,6 +22,12 @@
 .add-car {
   margin-top: 110px;
   margin-left: 10px;
+}
+
+::ng-deep .search-car input:focus {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 252, 206, 0.87);
+  color: #7E7E7E;
 }
 
 .search-car {
@@ -63,4 +68,8 @@
 
 .dados {
   margin-top: -15px;
+}
+
+.acoes p-button {
+  margin-right: 10px;
 }
