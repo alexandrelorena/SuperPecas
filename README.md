@@ -1,5 +1,7 @@
 
-#### <span style="color:gray;"> Java and Angular mentoring [course](https://masterclasscursos.com.br/) held in the period of 4 weeks. The goal was to develop an application with access to a database of cars and parts.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> [Click here](https://alexandrelorena.github.io/index.html) to access my online resume.
+#### <span style="color:gray;"> Java and Angular mentoring [course](https://masterclasscursos.com.br/) held in the period of 4 weeks. 
+#### <span style="color:gray;"> The goal was to develop an application with access to a database of cars and parts.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+#### [Click here](https://alexandrelorena.github.io/index.html) to access my online resume.
 
 >### Course "Master Class - Starter Java and Angular 17" 
 >
