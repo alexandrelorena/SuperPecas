@@ -5,7 +5,7 @@
 
 >### Course "Master Class - Starter Java and Angular 17" 
 >
-> #### Access the project: [Super-Peças](http://super-pecas.brazilsouth.cloudapp.azure.com/)
+  <!-- > #### Access the project: [Super-Peças](http://super-pecas.brazilsouth.cloudapp.azure.com/) -->
 >
 >### First week (Documentação UML)
 >
